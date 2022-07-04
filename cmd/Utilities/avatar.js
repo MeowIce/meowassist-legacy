@@ -41,10 +41,10 @@ const commandBase = {
 		const targetUser = options.getUser("user") || user;
 
 		const embed = new Discord.MessageEmbed()
-			.setColor("WHITE")
-			.setTitle(`Here is ${targetUser.username}'s thumbnail.`)
-			.setImage(targetUser.displayAvatarURL({ dynamic: true }));
-
+			.setColor("RANDOM")
+			.setTitle(`Avatar của ${targetUser.username}`)
+			.setImage(targetUser.displayAvatarURL({ dynamic: true, size: 1024 }))
+			.setDescription(`[Png](${targetUser.avatarURL({format: 'png'})}) | [Webp](${targetUser.displayAvatarURL({ dynamic: true})}) | [JPG](${targetUser.displayAvatarURL({ format: 'jpg' })})`);
 		return await interaction.reply({
 			embeds: [embed],
 		});

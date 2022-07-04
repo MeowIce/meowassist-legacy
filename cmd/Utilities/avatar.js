@@ -13,7 +13,7 @@ const Discord = require("discord.js");
 /**
  * @typedef CommandOptions
  * @property {Discord.ApplicationCommandData | Discord.ApplicationCommandSubCommandData | Discord.ApplicationCommandSubGroupData} data
- * @property {boolean} [ownerOnly]
+ * @property {boolean} [owners]
  * @property {boolean} [wholeCommand]
  * @property {Discord.PermissionString[]} [permissions]
  * @property {Discord.PermissionString[]} [clientPermissions]

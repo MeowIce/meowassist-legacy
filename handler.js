@@ -108,9 +108,7 @@ module.exports.contextMenuRegister = async (commandOptions) => {
 module.exports.listen = async (client) => {
 	client.on("interactionCreate", async (interaction) => {
 		if (!interaction.isCommand()) return;
-		const intMember = interaction.guild.members.cache.get(
-			interaction.member.user.id
-		);
+		const intMember = interaction.guild.members.cache.get(interaction.member.user.id);
 		const noGuildText = `Vui lòng sử dụng lệnh này trong một server.`;
 		if (!interaction.guild) {
 			return await interaction.reply({

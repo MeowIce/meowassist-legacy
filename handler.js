@@ -2,7 +2,7 @@ const discord = require("discord.js");
 const allCmd = {};
 const { owners } = require("./config.json");
 const contextMenuCmds = {};
-const perms = require("./perms");
+const validPerms = require("./perms");
 
 /**
  *
@@ -10,7 +10,7 @@ const perms = require("./perms");
  */
 function chkPerm(perms) {
 	for (const perm of perms) {
-		if (!perms.includes(perm)) {
+		if (!validPerms.includes(perm)) {
 			throw new Error(`Không rõ permission node: ${perm}`);
 		}
 	}

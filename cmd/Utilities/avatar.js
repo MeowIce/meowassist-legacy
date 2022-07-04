@@ -36,6 +36,7 @@ const commandBase = {
 			},
 		],
 	},
+	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
 		const targetUser = options.getUser("user") || user;
 

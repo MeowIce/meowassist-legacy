@@ -26,12 +26,12 @@ const Discord = require("discord.js");
 const commandBase = {
 	data: {
 		name: "avatar",
-		description: "To get a user's avatar.",
+		description: "Lấy avatar.",
 		options: [
 			{
 				name: "user",
 				type: "USER",
-				description: "The user.",
+				description: "Đối tượng...",
 				required: false,
 			},
 		],

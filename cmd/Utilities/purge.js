@@ -31,7 +31,7 @@ const Discord = require("discord.js");
 		options: [
 			{
 				name: "amount",
-				//type: "string",
+				type: "INTEGER",
 				description: "Số lượng...",
 				required: true,
 			},

@@ -1,20 +1,31 @@
 const { MessageEmbed } = require("discord.js");
 module.exports = {
-    name: 'avatar',
-    description: 'Hiển thị avatar.',
-    options: [{
-        name: 'target',
-        type: 'USER',
-        description: 'Chọn đối tượng...',
-        required: false,
-    }],
-    run: async (client, interaction, options) => {
-        const user = interaction.options.getUser('target') || interaction.user;
-        const embed = new MessageEmbed()
-            .setTitle(`Avatar của ${user.username}`)
-            .setColor("RANDOM")
-            .setImage(user.displayAvatarURL({dynamic: true, size: 1024}))
-            .setDescription(`[Png](${user.avatarURL({format: 'png'})}) | [Webp](${user.displayAvatarURL({ dynamic: true})}) | [JPG](${user.displayAvatarURL({ format: jpg })})`);
-            return interaction.reply({ embed: [embed] });
-        },
-}
+	data: {
+		name: "avatar",
+		description: "To get a user's avatar",
+		options: [
+			{
+				name: "user",
+				type: "USER",
+				description: "The user.",
+				required: false,
+			},
+		],
+	},
+	wholeCommand: false,
+	callback: async ({ interaction, options, user }) => {
+		/**
+		 * @type {import('discord.js').User}
+		 */
+		const targetUser = options.getUser("user") || user;
+
+		const embed = new MessageEmbed()
+			.setColor("WHITE")
+			.setTitle(`Here is ${targetUser.username}'s thumbnail.`)
+			.setImage(targetUser.displayAvatarURL({ dynamic: true }));
+
+		return await interaction.reply({
+			embeds: [embed],
+		});
+	},
+};

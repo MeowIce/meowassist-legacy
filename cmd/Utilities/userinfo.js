@@ -67,7 +67,6 @@ const moment = require("moment");
             .addFields(
                 {
                     name: `Đã vào Discord lúc`,
-                    // Convert output thằng này qua tiếng Việt:
                     value: `${moment(usr.createdAt).format('LLLL')}`
                 }
             )

@@ -12,7 +12,7 @@ const { dir } = require("console");
 
 module.exports = async (client) => {
 	totalCmd = 0;
-	const command = [];
+	const commands = [];
 	const contextMenu = [];
 	await commandHandler.sweepCmds();
 	/**
@@ -42,7 +42,7 @@ module.exports = async (client) => {
 				}
 			}
 			if (data.options.length) {
-				command.push(data);
+				commands.push(data);
 			}
 		}
 	};
@@ -58,7 +58,7 @@ module.exports = async (client) => {
 			);
 			for (const file of contextMenuInGroups) {
 				const command = require(path.join(__dirname, dir, group, file));
-				contextMenu.push(data);
+				contextMenu.push(command.data);
 				commandHandler.contextMenuRegister(command);
 			}
 		}

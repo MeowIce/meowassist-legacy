@@ -164,8 +164,8 @@ module.exports.listen = async (client) => {
 							client: client,
 							guild: interaction.guild,
 							member: intMember,
-							user: user,
-							options: options,
+							user: interaction.user,
+							options: interaction.options,
 						});
 					} catch (e) {
 						console.log(e);

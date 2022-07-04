@@ -67,7 +67,7 @@ const moment = require("moment");
             .addFields(
                 {
                     name: `Đã vào Discord lúc`,
-                    value: `${moment(usr.createdAt).format('LLLL')}`
+                    value: `${moment(usr.createdAt).format('ddd, [Ngày] DD [Tháng] mm [Năm] yy [Lúc] hh[h]mm[p]')}`
                 }
             )
             .addFields(

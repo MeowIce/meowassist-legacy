@@ -47,7 +47,7 @@ const commandBase = {
 			.duration(os.uptime() * 1000)
 			.format("d[ Ngày]・h[ Giờ]・m[ Phút]・s[ Giây]");
 		const embed = new MessageEmbed()
-			.setTitle(`Thông tin của ${client.user.username}`)
+			.setTitle(`Trạng thái của ${client.user.username}`)
 			.setColor("RANDOM")
 			.setDescription(
 				`\`\`\`yml\nTên: ${client.user.username}#${client.user.discriminator} [${client.user.id}]\nĐộ trễ API: ${client.ws.ping}ms\nThời gian chạy: ${uptime}\`\`\``

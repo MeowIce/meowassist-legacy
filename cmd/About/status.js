@@ -30,7 +30,7 @@ const os = require("os");
 const commandBase = {
 	data: {
 		name: "status",
-		description: "Lấy thông tin của bot.",
+		description: "Hiển thị trạng thái của bot.",
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {

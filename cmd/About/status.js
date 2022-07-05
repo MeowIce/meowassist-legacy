@@ -63,7 +63,9 @@ const commandBase = {
 					value: `\`\`\`yml\nOS: ${osVer}\nThời gian chạy: ${sysUptime}\`\`\``,
 				},
 			])
-			.setFooter(`Lệnh được thực thi bởi ${interaction.user.username}`);
+			.setFooter({
+				text: `Lệnh được thực thi bởi ${interaction.user.username}`,
+			});
 		return interaction.reply({
 			embeds: [embed],
 			empheral: true,

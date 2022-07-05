@@ -56,7 +56,7 @@ const commandBase = {
 			.sort((a, b) => b.position - a.position)
 			.map((r) => r)
 			.join(", ");
-		if (rolemap.length > 20) rolemap = "Quá nhiều roles để hiển thị !";
+		if (rolemap.length > 1024) rolemap = "Quá nhiều roles để hiển thị !";
 		if (!rolemap) rolemap = "Người dùng không có role nào.";
 
 		const embed = new MessageEmbed()

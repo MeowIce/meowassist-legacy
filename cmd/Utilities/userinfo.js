@@ -45,11 +45,13 @@ const commandBase = {
 			interaction.options.getUser("target") ||
 			interaction.user ||
 			interaction.guild.members.fetch(interaction.targetId);
-		let rolemap = interaction.guild.roles.cache
+        // Làm sao để nó fetch được role của user chứ không phải all roles của guild.
+        const role = interaction.guild.roles.cache.get(r => r.usr)
+		let rolemap = interaction.guild.member.role.fetch()
 			.sort((a, b) => b.position - a.position)
 			.map((r) => r)
-			.join(",");
-		if (rolemap.length > 1024) rolemap = "Quá nhiều roles để hiển thị !";
+			.join(", ");
+		if (rolemap.length > 20) rolemap = "Quá nhiều roles để hiển thị !";
 		if (!rolemap) rolemap = "Người dùng không có role nào.";
 
 		const embed = new MessageEmbed()

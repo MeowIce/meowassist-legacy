@@ -16,7 +16,7 @@ const Discord = require("discord.js");
  * @property {Discord.ApplicationCommandData | Discord.ApplicationCommandSubCommandData | Discord.ApplicationCommandSubGroupData} data
  * @property {boolean} [owners]
  * @property {boolean} [wholeCommand]
- * @property {Discord.PermissionString[]} [permissions]
+ * @property {Discord.PermissionString[]} [perms]
  * @property {Discord.PermissionString[]} [clientPermissions]
  * @property {(obj: CallbackObject) => any} callback
  */
@@ -24,46 +24,42 @@ const Discord = require("discord.js");
 /**
  * @type {CommandOptions}
  */
- const commandBase = {
+const commandBase = {
 	data: {
 		name: "purge",
 		description: "Xóa nhiều tin nhắn cùng lúc.",
 		options: [
 			{
 				name: "amount",
-				type: "INTEGER",
+				type: "NUMBER",
 				description: "Số lượng...",
 				required: true,
 			},
 		],
 	},
-    wholeCommand: true,
-    callback: async ({ interaction, client, guild, member, user, options }) => {
-        await interaction.deferReply({
-            ephemeral: true,
-        });
-        /**
-         * @type {Discord.GuildMember}
-         */
-        const memberChk = interaction.member;
-        if (!memberChk.permissions.has("MANAGE_MESSAGES")) {
-            return await interaction.editReply({
-                content: `⛔ **Bạn không có quyền để xoá tin nhắn !**`,
-                ephemeral: true,
-            })
-        }
-        const amount = interaction.options.getInteger("amount");
-        const messages = await interaction.channel.messages.fetch({
-            limit: amount,
-        });
-        const { size } = messages;
-        messages.forEach(async (messages) => {
-            if (messages.deletable) await messages.delete();
-        });
-        return await interaction.editReply({
-            content: `✅ **Đã xoá ${size.toLocaleString()} tin nhắn !**`,
-            ephemeral: true,
-        });
-    }
- }
- module.exports = commandBase;
+	wholeCommand: true,
+	callback: async ({ interaction, client, guild, member, user, options }) => {
+		await interaction.deferReply({
+			ephemeral: true,
+		});
+		if (!member.permissions.has("MANAGE_MESSAGES")) {
+			return await interaction.editReply({
+				content: `⛔ **Bạn không có quyền để xoá tin nhắn !**`,
+				ephemeral: true,
+			});
+		}
+		const amount = options.getNumber("amount");
+		const messages = await interaction.channel.messages.fetch({
+			limit: amount,
+		});
+		const { size } = messages;
+		messages.forEach(async (message) => {
+			if (message.deletable) await message.delete();
+		});
+		return await interaction.editReply({
+			content: `✅ **Đã xoá ${size.toLocaleString()} tin nhắn !**`,
+			ephemeral: true,
+		});
+	},
+};
+module.exports = commandBase;

@@ -1,4 +1,5 @@
-const { Discord, MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
+const Discord = require("discord.js");
 
 /**
  * @typedef CallbackObject
@@ -15,7 +16,7 @@ const { Discord, MessageEmbed } = require("discord.js");
  * @property {Discord.ApplicationCommandData | Discord.ApplicationCommandSubCommandData | Discord.ApplicationCommandSubGroupData} data
  * @property {boolean} [owners]
  * @property {boolean} [wholeCommand]
- * @property {Discord.PermissionString[]} [permissions]
+ * @property {Discord.PermissionString[]} [perms]
  * @property {Discord.PermissionString[]} [clientPermissions]
  * @property {(obj: CallbackObject) => any} callback
  */
@@ -23,21 +24,23 @@ const { Discord, MessageEmbed } = require("discord.js");
 /**
  * @type {CommandOptions}
  */
- const commandBase = {
+const commandBase = {
 	data: {
 		name: "servericon",
 		description: "Lấy icon của máy chủ.",
 	},
-    wholeCommand: true,
-    callback: async ({ interaction, client, guild, member, user, options }) => {
-        const iconMsg = new MessageEmbed()
-            .setTitle(`Icon của ${interaction.guild.name}`)
-            .setImage(interaction.guild.iconURL({ dynamic: true, size: 1024 }))
-            .setColor("RANDOM")
-            .setFooter(`Lệnh được thực thi bởi ${interaction.user.username}`)
-            return await interaction.reply({
-                embeds: [iconMsg],
-            });
-        },
- }
- module.exports = commandBase;
+	wholeCommand: true,
+	callback: async ({ interaction, client, guild, member, user, options }) => {
+		const iconMsg = new MessageEmbed()
+			.setTitle(`Icon của ${guild.name}`)
+			.setImage(guild.iconURL({ dynamic: true, size: 1024 }))
+			.setColor("RANDOM")
+			.setFooter({
+				text: `Lệnh được thực thi bởi ${user.username}`,
+			});
+		return await interaction.reply({
+			embeds: [iconMsg],
+		});
+	},
+};
+module.exports = commandBase;

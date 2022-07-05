@@ -1,4 +1,4 @@
-const { Discord, MessageEmbed } = require("discord.js");
+const { Discord, MessageEmbed, Modal } = require("discord.js");
 const moment = require("moment");
 
 /**

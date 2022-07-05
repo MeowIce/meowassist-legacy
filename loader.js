@@ -4,6 +4,7 @@ const discord = require("discord.js");
 const config = require("./config");
 const commandHandler = require("./handler");
 const { dir } = require("console");
+let totalCmd = 0;
 // Commands loader.
 /**
  *
@@ -73,6 +74,9 @@ module.exports = async (client) => {
 				.command.set([...commands, ...contextMenu]);
 		}
 	}
+
+	console.log(`Loaded ${totalCmd.toLocaleString()} commands`);
+
 	client.commands = totalCmd;
 	return totalCmd;
 };

@@ -45,9 +45,14 @@ const commandBase = {
 			interaction.options.getUser("target") ||
 			interaction.user ||
 			interaction.guild.members.fetch(interaction.targetId);
-        // Làm sao để nó fetch được role của user chứ không phải all roles của guild.
-        const role = interaction.guild.roles.cache.get(r => r.usr)
-		let rolemap = interaction.guild.member.role.fetch()
+		const role = guild.members.cache.get(usr.id).roles;
+		// let rolemap = interaction.guild.member.role
+		// 	.fetch()
+		// 	.sort((a, b) => b.position - a.position)
+		// 	.map((r) => r)
+		// 	.join(", ");
+
+		let rolemap = role.cache
 			.sort((a, b) => b.position - a.position)
 			.map((r) => r)
 			.join(", ");

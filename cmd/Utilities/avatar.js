@@ -15,7 +15,7 @@ const Discord = require("discord.js");
  * @property {Discord.ApplicationCommandData | Discord.ApplicationCommandSubCommandData | Discord.ApplicationCommandSubGroupData} data
  * @property {boolean} [owners]
  * @property {boolean} [wholeCommand]
- * @property {Discord.PermissionString[]} [permissions]
+ * @property {Discord.PermissionString[]} [perms]
  * @property {Discord.PermissionString[]} [clientPermissions]
  * @property {(obj: CallbackObject) => any} callback
  */
@@ -44,7 +44,13 @@ const commandBase = {
 			.setColor("RANDOM")
 			.setTitle(`Avatar của ${targetUser.username}`)
 			.setImage(targetUser.displayAvatarURL({ dynamic: true, size: 1024 }))
-			.setDescription(`[Png](${targetUser.avatarURL({format: 'png'})}) | [Webp](${targetUser.displayAvatarURL({ dynamic: true})}) | [JPG](${targetUser.displayAvatarURL({ format: 'jpg' })})`);
+			.setDescription(
+				`[Png](${targetUser.avatarURL({
+					format: "png",
+				})}) | [Webp](${targetUser.displayAvatarURL({
+					dynamic: true,
+				})}) | [JPG](${targetUser.displayAvatarURL({ format: "jpg" })})`
+			);
 		return await interaction.reply({
 			embeds: [embed],
 		});

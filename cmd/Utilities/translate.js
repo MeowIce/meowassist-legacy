@@ -1,8 +1,5 @@
-const {
-	MessageEmbed,
-	Discord,
-	ModalSubmitFieldsResolver,
-} = require("discord.js");
+const { MessageEmbed, ModalSubmitFieldsResolver } = require("discord.js");
+const Discord = require("discord.js");
 const dich = require("@iamtraction/google-translate");
 
 /**
@@ -53,7 +50,7 @@ const commandBase = {
 		const query = options.getString("query");
 		const language = options.getString("language");
 
-		const usr = interaction.user;
+		const usr = user;
 
 		const newEmbed1 = new MessageEmbed()
 			.setColor("RANDOM")

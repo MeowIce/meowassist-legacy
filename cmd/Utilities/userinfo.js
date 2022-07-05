@@ -1,5 +1,7 @@
-const { Discord, MessageEmbed, Modal } = require("discord.js");
+const { MessageEmbed, Modal } = require("discord.js");
+const Discord = require("discord.js");
 const moment = require("moment");
+const locale = require("moment/locale/vi");
 
 /**
  * @typedef CallbackObject
@@ -39,7 +41,6 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
-		const locale = require("moment/locale/vi");
 		const usr =
 			interaction.options.getUser("target") ||
 			interaction.user ||

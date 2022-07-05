@@ -1,4 +1,5 @@
-const { Discord, MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
+const Discord = require("discord.js");
 
 /**
  * @typedef CallbackObject
@@ -32,7 +33,7 @@ const commandBase = {
 	callback: async ({ interaction, client, guild, member, user, options }) => {
 		const iconMsg = new MessageEmbed()
 			.setTitle(`Icon của ${guild.name}`)
-			.setImage(interaction.guild.iconURL({ dynamic: true, size: 1024 }))
+			.setImage(guild.iconURL({ dynamic: true, size: 1024 }))
 			.setColor("RANDOM")
 			.setFooter({
 				text: `Lệnh được thực thi bởi ${user.username}`,

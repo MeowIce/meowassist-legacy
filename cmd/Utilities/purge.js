@@ -31,7 +31,7 @@ const commandBase = {
 		options: [
 			{
 				name: "amount",
-				type: "INTEGER",
+				type: "NUMBER",
 				description: "Số lượng...",
 				required: true,
 			},
@@ -42,23 +42,19 @@ const commandBase = {
 		await interaction.deferReply({
 			ephemeral: true,
 		});
-		/**
-		 * @type {Discord.GuildMember}
-		 */
-		const memberChk = interaction.member;
-		if (!memberChk.permissions.has("MANAGE_MESSAGES")) {
+		if (!member.permissions.has("MANAGE_MESSAGES")) {
 			return await interaction.editReply({
 				content: `⛔ **Bạn không có quyền để xoá tin nhắn !**`,
 				ephemeral: true,
 			});
 		}
-		const amount = interaction.options.getInteger("amount");
+		const amount = options.getNumber("amount");
 		const messages = await interaction.channel.messages.fetch({
 			limit: amount,
 		});
 		const { size } = messages;
-		messages.forEach(async (messages) => {
-			if (messages.deletable) await messages.delete();
+		messages.forEach(async (message) => {
+			if (message.deletable) await message.delete();
 		});
 		return await interaction.editReply({
 			content: `✅ **Đã xoá ${size.toLocaleString()} tin nhắn !**`,

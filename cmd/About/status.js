@@ -1,4 +1,4 @@
-const { Discord, MessageEmbed } = require("discord.js");
+const { Discord, MessageEmbed, version } = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
 const os = require("os");
@@ -55,7 +55,7 @@ const commandBase = {
 					name: "Thông tin software",
 					value: `\`\`\`yml\nGuilds: ${
 						client.guilds.cache.size
-					  } \nNodeJS: ${nodeVer}\`\`\``,
+					  } \nNodeJS: ${nodeVer}\nPhiên bản Discord.JS: ${version}\`\`\``,
 					  inline: true,
 				},
 				{

@@ -31,6 +31,8 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async function ({ interaction, client }) {
+        var d = new Date();
+        console.log(interaction.user.tag, "executed command", commandBase.data.name, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
         const config = require("../../config.json");
         const embed = new MessageEmbed()
             .setTitle("Thông tin về bot...")
@@ -51,7 +53,7 @@ const commandBase = {
             ]);
         return interaction.reply({
             embeds: [embed],
-            empheral: true
+            ephemeral: true
         });
     }
 }

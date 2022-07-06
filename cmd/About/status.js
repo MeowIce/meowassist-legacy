@@ -34,6 +34,8 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
+        var d = new Date();
+        console.log(interaction.user.tag, "executed command", commandBase.data.name, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
 		//OS info
 		const osVer = os.platform() + " " + os.release();
 		//Node ver
@@ -69,7 +71,7 @@ const commandBase = {
 			  });
 		return interaction.reply({
 			embeds: [embed],
-			empheral: true
+			ephemeral: true
 		});
 	},
 };

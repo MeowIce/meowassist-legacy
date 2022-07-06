@@ -35,19 +35,22 @@ const commandBase = {
         const embed = new MessageEmbed()
             .setTitle("Thông tin về bot...")
             .setColor("RANDOM")
-            .setDescription("ameow")
             .setFields([
                 {
                     name: `Người tạo ra bot:`,
-                    value: `${config.owners}`,
+                    value: `<@${config.owners}>`,
                 },
                 {
                     name: `Hỗ trợ phát triển bot:`,
-                    value: `${config.collab}`
+                    value: `<@${config.collab}>`
+                },
+                {
+                    name: `Ngày tạo bot:`,
+                    value: `*Insert time tạo bot here*`
                 }
             ]);
         return interaction.reply({
-            embed: [embed],
+            embeds: [embed],
             empheral: true
         });
     }

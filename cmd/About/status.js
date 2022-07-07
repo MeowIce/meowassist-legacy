@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, version } = require("discord.js");
 const Discord = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
@@ -34,6 +34,14 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
+		var d = new Date();
+		console.log(
+			interaction.user.tag,
+			"executed command",
+			commandBase.data.name,
+			"at",
+			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
+		);
 		//OS info
 		const osVer = os.platform() + " " + os.release();
 		//Node ver
@@ -55,7 +63,7 @@ const commandBase = {
 			.setFields([
 				{
 					name: "Thông tin software",
-					value: `\`\`\`yml\nGuilds: ${client.guilds.cache.size} \nNodeJS: ${nodeVer}\`\`\``,
+					value: `\`\`\`yml\nGuilds: ${client.guilds.cache.size} \nNodeJS: ${nodeVer}\nPhiên bản Discord.JS: ${version}\`\`\``,
 					inline: true,
 				},
 				{
@@ -68,7 +76,7 @@ const commandBase = {
 			});
 		return interaction.reply({
 			embeds: [embed],
-			empheral: true,
+			ephemeral: true,
 		});
 	},
 };

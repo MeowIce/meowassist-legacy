@@ -45,13 +45,9 @@ const commandBase = {
 			interaction.options.getUser("target") ||
 			interaction.user ||
 			interaction.guild.members.fetch(interaction.targetId);
+			var d = new Date();
+			console.log(interaction.user.username + "#" + interaction.user.discriminator, "executed command", commandBase.data.name, "to track", usr.username, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
 		const role = guild.members.cache.get(usr.id).roles;
-		// let rolemap = interaction.guild.member.role
-		// 	.fetch()
-		// 	.sort((a, b) => b.position - a.position)
-		// 	.map((r) => r)
-		// 	.join(", ");
-
 		let rolemap = role.cache
 			.sort((a, b) => b.position - a.position)
 			.map((r) => r)

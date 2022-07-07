@@ -49,9 +49,9 @@ const commandBase = {
 		await interaction.deferReply();
 		const query = options.getString("query");
 		const language = options.getString("language");
-
 		const usr = user;
-
+        var d = new Date();
+        console.log(interaction.user.tag, "executed command", commandBase.data.name, "to translate", "'" + query + "'", "to", language, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
 		const newEmbed1 = new MessageEmbed()
 			.setColor("RANDOM")
 			.setTitle("Dịch thuật")

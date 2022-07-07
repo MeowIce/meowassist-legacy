@@ -1,6 +1,8 @@
 const { MessageEmbed } = require("discord.js");
 const Discord = require("discord.js");
-const config = require("../../config.json");
+const moment = require("moment");
+require("moment-duration-format");
+require("moment-timezone");
 
 /**
  * @typedef CallbackObject
@@ -32,17 +34,39 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async function ({ interaction, client }) {
+		var d = new Date();
+		console.log(
+			interaction.user.tag,
+			"executed command",
+			commandBase.data.name,
+			"at",
+			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
+		);
+		const config = require("../../config.json");
 		const embed = new MessageEmbed()
 			.setTitle("Thông tin về bot...")
 			.setColor("RANDOM")
 			.setFields([
 				{
 					name: `Người tạo ra bot:`,
-					value: `${config.owners.map((id) => `<@${id}>`).join(", ")}`,
+					value: `<@${config.owners}>`,
 				},
 				{
 					name: `Hỗ trợ phát triển bot:`,
-					value: `${config.collab.map((id) => `<@${id}>`).join(", ")}`,
+					value: `<@${config.collab}>`,
+				},
+				{
+					name: `Ngày tạo bot:`,
+					value: `<t:${moment(client.user.createdTimestamp)
+						.tz("Asia/Ho_Chi_Minh")
+						.unix()}:R>`,
+				},
+				{
+					name: `Bạn muốn mời bot vào server bạn ?`,
+					value: `[Click ~](${client.generateInvite({
+						scopes: ["applications.commands"],
+						permissions: "ADMINISTRATOR",
+					})})`,
 				},
 			]);
 		return interaction.reply({

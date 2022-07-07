@@ -8,7 +8,7 @@ async function loadCache() {
 		guildId: config.ownerServer,
 	});
 
-	if (!schema && !schema.boolean) {
+	if (!schema || !schema.boolean) {
 		CACHE = true;
 		return;
 	} else {

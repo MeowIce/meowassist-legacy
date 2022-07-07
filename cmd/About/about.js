@@ -1,6 +1,6 @@
-const { Discord, MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
+const Discord = require("discord.js");
 const config = require("../../config.json");
-
 
 /**
  * @typedef CallbackObject
@@ -32,23 +32,23 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async function ({ interaction, client }) {
-        const embed = new MessageEmbed()
-            .setTitle("Thông tin về bot...")
-            .setColor("RANDOM")
-            .setFields([
-                {
-                    name: `Người tạo ra bot:`,
-                    value: `${config.owners}`
-                },
-                {
-                    name: `Hỗ trợ phát triển bot:`,
-                    value: `${config.collab}`
-                }
-            ]);
-        return interaction.reply({
-            embed: [embed],
-            empheral: true
-        });
-    }
-}
+		const embed = new MessageEmbed()
+			.setTitle("Thông tin về bot...")
+			.setColor("RANDOM")
+			.setFields([
+				{
+					name: `Người tạo ra bot:`,
+					value: `${config.owners.map((id) => `<@${id}>`).join(", ")}`,
+				},
+				{
+					name: `Hỗ trợ phát triển bot:`,
+					value: `${config.collab.map((id) => `<@${id}>`).join(", ")}`,
+				},
+			]);
+		return interaction.reply({
+			embeds: [embed],
+			ephemeral: true,
+		});
+	},
+};
 module.exports = commandBase;

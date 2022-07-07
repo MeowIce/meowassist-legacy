@@ -50,7 +50,7 @@ console.log(interaction.user.tag, "executed command", commandBase.data.name, "to
         if (cooldownSet.has(interaction.user.id)) {
             interaction.reply(
                 {
-                    content: `Ò này anh bạn ${interaction.user}, bạn phải chờ ${cooldown.replace('000', '')}s mới được sử dụng tiếp !`,
+                    content: `Ồ này anh bạn ${interaction.user}, bạn phải chờ ${cooldown.replace('000', '')}s mới được sử dụng tiếp !`,
                     ephemeral: true
                 }
             )

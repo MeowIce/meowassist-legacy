@@ -1,5 +1,7 @@
 const { Discord, MessageEmbed } = require("discord.js");
-
+const moment = require("moment")
+require("moment-duration-format");
+require("moment-timezone");
 
 /**
  * @typedef CallbackObject
@@ -48,7 +50,11 @@ const commandBase = {
                 },
                 {
                     name: `Ngày tạo bot:`,
-                    value: `*Insert time tạo bot here*`
+                    value: `<t:${moment(client.user.createdTimestamp).tz("Asia/Ho_Chi_Minh").unix()}:R>`
+                },
+                {
+                    name: `Bạn muốn mời bot vào server bạn ?`,
+                    value: `[Click ~](https://discord.com/api/oauth2/authorize?client_id=993358970028834927&permissions=8&scope=bot%20applications.commands)`
                 }
             ]);
         return interaction.reply({

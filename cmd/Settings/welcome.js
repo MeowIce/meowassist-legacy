@@ -26,17 +26,17 @@ const { updateBoolean } = require("../../features/welcome");
  */
 const commandBase = {
 	data: {
-		name: "welcome-message",
-		description: "Đây là chương trình để gửi tin nhắn chào mừng.",
+		name: "welcome-toggle",
+		description: "Bật/tắt tính năng tự động chào mừng (welcome).",
 		options: [
 			{
 				name: "enable",
-				description: "Để bật chương trình.",
+				description: "Để bật tính năng welcome.",
 				type: "SUB_COMMAND",
 			},
 			{
 				name: "disable",
-				description: "Để tắt chương trình.",
+				description: "Để tắt tính năng welcome.",
 				type: "SUB_COMMAND",
 			},
 		],
@@ -52,13 +52,13 @@ const commandBase = {
 			await updateBoolean(true);
 
 			return await interaction.editReply({
-				content: "Đã bật chương trình thành công!",
+				content: "Đã bật tính năng `welcome` thành công!",
 			});
 		} else if (subcommand === "disable") {
 			await updateBoolean(false);
 
 			return await interaction.editReply({
-				content: "Đã tắt chương trình thành công!",
+				content: "Đã tắt tính năng `welcome` thành công!",
 			});
 		}
 	},

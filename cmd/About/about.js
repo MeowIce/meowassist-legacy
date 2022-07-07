@@ -1,5 +1,6 @@
-const { Discord, MessageEmbed } = require("discord.js");
-const moment = require("moment")
+const { MessageEmbed } = require("discord.js");
+const Discord = require("discord.js");
+const moment = require("moment");
 require("moment-duration-format");
 require("moment-timezone");
 
@@ -33,34 +34,45 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async function ({ interaction, client }) {
-        var d = new Date();
-        console.log(interaction.user.tag, "executed command", commandBase.data.name, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
-        const config = require("../../config.json");
-        const embed = new MessageEmbed()
-            .setTitle("Thông tin về bot...")
-            .setColor("RANDOM")
-            .setFields([
-                {
-                    name: `Người tạo ra bot:`,
-                    value: `<@${config.owners}>`,
-                },
-                {
-                    name: `Hỗ trợ phát triển bot:`,
-                    value: `<@${config.collab}>`
-                },
-                {
-                    name: `Ngày tạo bot:`,
-                    value: `<t:${moment(client.user.createdTimestamp).tz("Asia/Ho_Chi_Minh").unix()}:R>`
-                },
-                {
-                    name: `Bạn muốn mời bot vào server bạn ?`,
-                    value: `[Click ~](https://discord.com/api/oauth2/authorize?client_id=993358970028834927&permissions=8&scope=bot%20applications.commands)`
-                }
-            ]);
-        return interaction.reply({
-            embeds: [embed],
-            ephemeral: true
-        });
-    }
-}
+		var d = new Date();
+		console.log(
+			interaction.user.tag,
+			"executed command",
+			commandBase.data.name,
+			"at",
+			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
+		);
+		const config = require("../../config.json");
+		const embed = new MessageEmbed()
+			.setTitle("Thông tin về bot...")
+			.setColor("RANDOM")
+			.setFields([
+				{
+					name: `Người tạo ra bot:`,
+					value: `<@${config.owners}>`,
+				},
+				{
+					name: `Hỗ trợ phát triển bot:`,
+					value: `<@${config.collab}>`,
+				},
+				{
+					name: `Ngày tạo bot:`,
+					value: `<t:${moment(client.user.createdTimestamp)
+						.tz("Asia/Ho_Chi_Minh")
+						.unix()}:R>`,
+				},
+				{
+					name: `Bạn muốn mời bot vào server bạn ?`,
+					value: `[Click ~](${client.generateInvite({
+						scopes: ["applications.commands"],
+						permissions: "ADMINISTRATOR",
+					})})`,
+				},
+			]);
+		return interaction.reply({
+			embeds: [embed],
+			ephemeral: true,
+		});
+	},
+};
 module.exports = commandBase;

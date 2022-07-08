@@ -48,7 +48,16 @@ const commandBase = {
 		const reason = options.getString("reason") || "Sẽ trở lại sau !";
 
 		const result = await setAfk(member, reason);
-
+		var d = new Date();
+		console.log(
+			interaction.user.tag,
+			"executed command",
+			commandBase.data.name,
+			"at",
+			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}
+			"with reason",
+			${reason}`
+		);
 		if (result) {
 			return await interaction.reply({
 				content: `Bạn đã AFK với lí do: **${reason}**`,

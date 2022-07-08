@@ -144,5 +144,10 @@ const updateBoolean = async (boolean) => {
 	afkSettingsCache = boolean;
 };
 
+const getBoolean = () => {
+	return afkSettingsCache;
+};
+
 module.exports.updateBoolean = updateBoolean;
 module.exports.setAfk = setAfk;
+module.exports.getBoolean = getBoolean;

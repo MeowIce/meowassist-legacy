@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { updateBoolean } = require("../../features/welcome");
+const { setNick, getBoolean } = require("../../features/nickname");
 
 /**
  * @typedef CallbackObject
@@ -26,41 +26,37 @@ const { updateBoolean } = require("../../features/welcome");
  */
 const commandBase = {
 	data: {
-		name: "welcome-toggle",
-		description: "Bật/tắt tính năng tự động chào mừng (welcome).",
+		name: "nick",
+		description:
+			"Để đổi nickname của bạn (Hãy đọc luật nickname trước khi sử dụng lệnh này).",
 		options: [
 			{
-				name: "enable",
-				description: "Để bật tính năng welcome.",
-				type: "SUB_COMMAND",
-			},
-			{
-				name: "disable",
-				description: "Để tắt tính năng welcome.",
-				type: "SUB_COMMAND",
+				name: "nickname",
+				description: "Biệt danh bạn muốn đổi.",
+				type: "STRING",
+				required: true,
 			},
 		],
 	},
-	perms: ["MANAGE_GUILD"],
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
-		await interaction.deferReply({
-			ephemeral: true,
-		});
+		const nickname = options.getString("nickname");
 
-		const subcommand = options.getSubcommand();
-
-		if (subcommand === "enable") {
-			await updateBoolean(true);
-
-			return await interaction.editReply({
-				content: "Đã bật tính năng `welcome` thành công!",
+		if (!getBoolean())
+			return await interaction.reply({
+				content: "Tính năng `Đổi biệt danh` đã được tắt !",
 			});
-		} else if (subcommand === "disable") {
-			await updateBoolean(false);
 
-			return await interaction.editReply({
-				content: "Đã tắt tính năng `welcome` thành công!",
+		const result = await setNick(member, nickname);
+
+		if (result.result === false) {
+			return await interaction.reply({
+				content: result.error,
+				ephemeral: true,
+			});
+		} else {
+			return await interaction.reply({
+				content: result.error,
 			});
 		}
 	},

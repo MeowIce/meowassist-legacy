@@ -26,7 +26,7 @@ const { updateBoolean } = require("../../features/welcome");
  */
 const commandBase = {
 	data: {
-		name: "welcome-message",
+		name: "welcome-toggle",
 		description: "Bật/tắt tính năng tự động chào mừng (welcome).",
 		options: [
 			{
@@ -44,7 +44,9 @@ const commandBase = {
 	perms: ["MANAGE_GUILD"],
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
-		await interaction.deferReply();
+		await interaction.deferReply({
+			ephemeral: true,
+		});
 
 		const subcommand = options.getSubcommand();
 

@@ -75,7 +75,7 @@ module.exports = async (client) => {
 		}
 	}
 
-	console.log(`Loaded ${totalCmd.toLocaleString()} commands`);
+	console.log(`Loaded ${totalCmd.toLocaleString()} commands.`);
 
 	client.commands = totalCmd;
 	return totalCmd;
@@ -90,6 +90,7 @@ module.exports.getTotalCmds = () => {
  * @param {discord.client} client
  */
 module.exports.feature = async (client) => {
+	totalFeatures = 0;
 	const features = [];
 	const readFeatures = async (dir) => {
 		const files = fs.readdirSync(path.join(__dirname, dir));
@@ -100,9 +101,11 @@ module.exports.feature = async (client) => {
 			} else {
 				const feature = require(path.join(__dirname, dir, file));
 				features.push(feature);
+				totalFeatures += 1;
 				await feature(client);
 			}
 		}
+		console.log(`Loaded ${totalFeatures.toLocaleString()} features.`);
 	};
 	await readFeatures("./features");
 	client.feature = features;

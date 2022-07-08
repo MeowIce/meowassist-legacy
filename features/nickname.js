@@ -49,6 +49,13 @@ const setNick = (member, nickname) => {
 		return returnData;
 	}
 
+	if (nickname.length < 2) {
+		returnData.result = false;
+		returnData.error = "Nickname quá ngắn hoặc không hợp lệ.";
+
+		return returnData;
+	}
+
 	// Check for latin chars
 	const latinMatches = nickname.match(nonLatinExp);
 	const percentage = (latinMatches.length / nickname.length) * 100;

@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { updateBoolean } = require("../../features/welcome");
+const { updateBoolean } = require("../../features/afk");
 
 /**
  * @typedef CallbackObject
@@ -26,23 +26,23 @@ const { updateBoolean } = require("../../features/welcome");
  */
 const commandBase = {
 	data: {
-		name: "welcome-toggle",
-		description: "Bật/tắt tính năng tự động chào mừng (welcome).",
+		name: "afk-toggle",
+		description: "Bật/tắt tính năng AFK.",
 		options: [
 			{
 				name: "enable",
-				description: "Để bật tính năng welcome.",
+				description: "Để bật tính năng AFK.",
 				type: "SUB_COMMAND",
 			},
 			{
 				name: "disable",
-				description: "Để tắt tính năng welcome.",
+				description: "Để tắt tính năng AFK.",
 				type: "SUB_COMMAND",
 			},
 		],
 	},
-	perms: ["MANAGE_GUILD"],
 	wholeCommand: true,
+	perms: ["MANAGE_GUILD"],
 	callback: async ({ interaction, client, guild, member, user, options }) => {
 		await interaction.deferReply({
 			ephemeral: true,
@@ -54,13 +54,13 @@ const commandBase = {
 			await updateBoolean(true);
 
 			return await interaction.editReply({
-				content: "Đã bật tính năng `welcome` thành công!",
+				content: "Đã bật tính năng `AFK` thành công!",
 			});
 		} else if (subcommand === "disable") {
 			await updateBoolean(false);
 
 			return await interaction.editReply({
-				content: "Đã tắt tính năng `welcome` thành công!",
+				content: "Đã tắt tính năng `AFK` thành công!",
 			});
 		}
 	},

@@ -54,9 +54,9 @@ const commandBase = {
 			"executed command",
 			commandBase.data.name,
 			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}
-			"with reason",
-			${reason}`
+			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`,
+			"with reason", "'" +
+			reason + "'"
 		);
 		if (result) {
 			return await interaction.reply({

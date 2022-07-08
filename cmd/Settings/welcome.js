@@ -26,7 +26,7 @@ const { updateBoolean } = require("../../features/welcome");
  */
 const commandBase = {
 	data: {
-		name: "welcome-toggle",
+		name: "welcome-message",
 		description: "Bật/tắt tính năng tự động chào mừng (welcome).",
 		options: [
 			{

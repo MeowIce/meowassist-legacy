@@ -45,20 +45,27 @@ const commandBase = {
 		],
 	},
 	wholeCommand: true,
-	owners: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
-		await interaction.deferReply({
-			ephemeral: true,
-		});
-
 		const subcommand = options.getSubcommand();
+		const config = require("../../config.json");
+		if (interaction.user.id == config.owners) {
+			client.emit(EVENTS[subcommand], member);
 
-		client.emit(EVENTS[subcommand], member);
-
-		return await interaction.editReply({
-			content: "Thành công!",
+			await interaction.reply({
+				content: "Thành công!",
+				ephemeral: true,
 		});
-	},
-};
+			var d = new Date();
+			console.log(interaction.user.tag, "executed command", commandBase.data.name, "at",`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
+		}
+		else {
+			console.log(interaction.user.tag, "tried to execute", commandBase.data.name, "but failed because he has no permission.")
+			return await interaction.reply({
+				content: ":no_entry_sign: Bạn không phải là developer để sử dụng lệnh này !",
+				ephemeral: true,
+			});
+		};
+	}
+	};
 
 module.exports = commandBase;

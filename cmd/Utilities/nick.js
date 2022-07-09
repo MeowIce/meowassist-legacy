@@ -28,7 +28,7 @@ const commandBase = {
 	data: {
 		name: "nick",
 		description:
-			"Để đổi nickname của bạn (Hãy đọc luật nickname trước khi sử dụng lệnh này).",
+			"Để đổi nickname của bạn (hãy đọc luật nickname trước khi sử dụng lệnh này).",
 		options: [
 			{
 				name: "nickname",
@@ -44,7 +44,8 @@ const commandBase = {
 
 		if (!getBoolean())
 			return await interaction.reply({
-				content: "Tính năng `Đổi biệt danh` đã được tắt !",
+				content: "Tính năng `Đổi biệt danh` đã bị tắt ! Hãy bật nó lên lại để sử dụng !",
+				ephemeral: true
 			});
 
 		const result = await setNick(member, nickname);

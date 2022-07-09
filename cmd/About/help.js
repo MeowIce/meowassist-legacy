@@ -106,11 +106,11 @@ const commandBase = {
 		const groups = getAllGroups();
 		const commands = [];
 		for (const group of groups) {
-			const commandFiles = readCommandsInGroup(group.toLowerCase());
+			const commandFiles = readCommandsInGroup(group);
 			for (const cmd of commandFiles) {
 				commands.push({
 					...cmd,
-					groupName: group.toLowerCase(),
+					groupName: group,
 				});
 			}
 		}

@@ -1,6 +1,6 @@
 const discord = require("discord.js");
 const allCmd = {};
-const { owners } = require("./config.json");
+const { owners: validOwners } = require("./config.json");
 const contextMenuCmds = {};
 const validPerms = require("./perms");
 
@@ -27,7 +27,7 @@ function chkPerm(perms) {
 /**
  * @typedef ContextMenuOptions
  * @property {discord.ApplicationCommandData | discord.ApplicationCommandSubCommandData | discord.ApplicationCommandSubGroupData} data
- * @property {boolean} [owner]
+ * @property {boolean} [owners]
  * @property {boolean} [wholeCommand]
  * @property {discord.PermissionString[]} [perms]
  * @property {discord.PermissionString[]} [clientPermissions]
@@ -47,7 +47,7 @@ function chkPerm(perms) {
 /**
  * @typedef CommandOptions
  * @property {discord.ApplicationCommandData | discord.ApplicationCommandSubCommandData | discord.ApplicationCommandSubGroupData} data
- * @property {boolean} [owner]
+ * @property {boolean} [owners]
  * @property {boolean} [wholeCommand]
  * @property {discord.PermissionString[]} [perms]
  * @property {discord.PermissionString[]} [clientPermissions]
@@ -108,7 +108,9 @@ module.exports.contextMenuRegister = async (commandOptions) => {
 module.exports.listen = async (client) => {
 	client.on("interactionCreate", async (interaction) => {
 		if (!interaction.isCommand()) return;
-		const intMember = interaction.guild.members.cache.get(interaction.member.user.id);
+		const intMember = interaction.guild.members.cache.get(
+			interaction.member.user.id
+		);
 		const noGuildText = `Vui lòng sử dụng lệnh này trong một server.`;
 		if (!interaction.guild) {
 			return await interaction.reply({
@@ -123,9 +125,9 @@ module.exports.listen = async (client) => {
 			const cmd = allCmd[name];
 			if (cmd.wholeCommand && cmd.wholeCommand === true) {
 				if (interaction.commandName === cmd.data.name) {
-					const { owner, perms, clientPermissions, callback } = cmd;
-					if (owner === true) {
-						if (!owners.includes(user.id)) {
+					const { owners, perms, clientPermissions, callback } = cmd;
+					if (owners === true) {
+						if (!validOwners.includes(user.id)) {
 							return await interaction.reply({
 								content: `Lệnh này chỉ dành cho ${owners
 									.map((id) => {
@@ -204,11 +206,11 @@ module.exports.listen = async (client) => {
 		 */
 		const command = contextMenuCmds[commandName];
 		if (!command) return;
-		const { owner, perms, clientPermissions, callback } = command;
-		if (owner == true) {
-			if (!owner.includes(user.id)) {
+		const { owners, perms, clientPermissions, callback } = command;
+		if (owners == true) {
+			if (!validOwners.includes(user.id)) {
 				return await interaction.reply({
-					content: `Lệnh này chỉ dành cho ${owners
+					content: `Lệnh này chỉ dành cho ${validOwners
 						.map((id) => {
 							return `${client.users.cache.get(id)}`;
 						})

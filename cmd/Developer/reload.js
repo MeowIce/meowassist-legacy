@@ -29,24 +29,19 @@ const commandBase = {
 		description: "[Dev Only] Khởi động lại bot.",
 	},
 	wholeCommand: true,
+	owners: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
-        const config = require("../../config.json");
-        if (interaction.user.id == config.owners) {
-            await interaction.reply({
-                    content: ":arrows_counterclockwise: System is restarting...",
-                    ephemeral: true,
-        });
-            var d = new Date();
-            console.log("WARNING: System is restarting...", "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
-            process.exit(2);
-        }
-        else {
-            console.log(interaction.user.tag, "tried to execute", commandBase.data.name, "but failed because he has no permission.")
-			return await interaction.reply({
-				content: ":no_entry_sign: Bạn không phải là developer để sử dụng lệnh này !",
-				ephemeral: true,
-			});
-        };
-    },
+		await interaction.reply({
+			content: ":arrows_counterclockwise: System is restarting...",
+			ephemeral: true,
+		});
+		var d = new Date();
+		console.log(
+			"WARNING: System is restarting...",
+			"at",
+			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
+		);
+		process.exit();
+	},
 };
 module.exports = commandBase;

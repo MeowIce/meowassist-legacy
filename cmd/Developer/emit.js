@@ -50,13 +50,12 @@ const commandBase = {
 		const config = require("../../config.json");
 		if (interaction.user.id == config.owners) {
 			client.emit(EVENTS[subcommand], member);
-
+			var d = new Date();
+			console.log(interaction.user.tag, "executed command", commandBase.data.name, "at",`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
 			await interaction.reply({
 				content: "Thành công!",
 				ephemeral: true,
 		});
-			var d = new Date();
-			console.log(interaction.user.tag, "executed command", commandBase.data.name, "at",`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
 		}
 		else {
 			console.log(interaction.user.tag, "tried to execute", commandBase.data.name, "but failed because he has no permission.")

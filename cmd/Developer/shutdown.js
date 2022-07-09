@@ -38,7 +38,7 @@ const commandBase = {
         });
             var d = new Date();
             console.log("WARNING: System is shutting down...", "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
-            process.exit(3);
+            process.exit(1);
         }
         else {
             console.log(interaction.user.tag, "tried to execute", commandBase.data.name, "but failed because he has no permission.")

@@ -55,7 +55,7 @@ const commandBase = {
 		console.log(
 			user.tag,
 			"executed command",
-			this.data.name,
+			commandBase.data.name,
 			"at",
 			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
 		);

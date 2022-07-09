@@ -63,7 +63,7 @@ const { getTotalCommands } = require("../../loader.js");
 		/**
 		 * @type {CommandOptions}
 		 */
-		const command = require(`../cmd/${group}/${file}`);
+		const command = require(`../../cmd/${group}/${file}`);
 
 		commands.push(command);
 	}

@@ -52,6 +52,10 @@ const commandBase = {
 					value: `<@${config.owners}>`,
 				},
 				{
+					name: `Hỗ trợ phát triển bot:`,
+					value: `<@${config.collab}>`,
+				},
+				{
 					name: `Ngày tạo bot:`,
 					value: `<t:${moment(client.user.createdTimestamp)
 						.tz("Asia/Ho_Chi_Minh")

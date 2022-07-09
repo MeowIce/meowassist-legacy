@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const discord = require("discord.js");
-const config = require("./config");
+const Discord = require("discord.js");
+const config = require("./config.json");
 const commandHandler = require("./handler");
 const { dir } = require("console");
 let totalCmd = 0;
@@ -71,7 +71,7 @@ module.exports = async (client) => {
 		for (const guildId of config.testServers) {
 			await client.guilds.cache
 				.get(guildId)
-				.command.set([...commands, ...contextMenu]);
+				.commands.set([...commands, ...contextMenu]);
 		}
 	}
 

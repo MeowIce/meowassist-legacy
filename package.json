@@ -12,6 +12,7 @@
 		"os": "^0.1.2",
 		"path": "^0.12.7",
 		"shelljs": "^0.8.5",
+		"uninstall": "^0.0.0",
 		"vietnamese-badwords": "^1.0.0"
 	},
 	"devDependencies": {

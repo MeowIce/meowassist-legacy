@@ -4,7 +4,7 @@ const config = require("../../config.json");
 const fs = require("fs");
 const path = require("path");
 const selectMenuId = "select-menu";
-const { getTotalCommands } = require("../../loader.js");
+const { getTotalCmds } = require("../../loader.js");
 //const { type } = require("os");
 //const { permissions } = require("../../help");
 //const { Deserializer } = require("v8");
@@ -29,7 +29,7 @@ const { getTotalCommands } = require("../../loader.js");
  * @property {(obj: CallbackObject) => any} callback
  */
 
- const getAllGroups = () => {
+const getAllGroups = () => {
 	const groups = [];
 
 	const files = fs.readdirSync(path.join(__dirname, "../../cmd"));
@@ -51,7 +51,7 @@ const { getTotalCommands } = require("../../loader.js");
  *
  * @param {string} group
  */
- const readCommandsInGroup = (group) => {
+const readCommandsInGroup = (group) => {
 	/**
 	 * @type {CommandOptions[]}
 	 */
@@ -71,7 +71,6 @@ const { getTotalCommands } = require("../../loader.js");
 	return commands;
 };
 
-
 /**
  * @type {CommandOptions}
  */
@@ -79,35 +78,42 @@ const commandBase = {
 	data: {
 		name: "help",
 		description: "Xem các danh mục câu lệnh...",
-        options: [
-            {
-                name: "command",
-                type: "STRING",
-                description: "Lệnh để xem chi tiết hơn...",
-                required: false,
-            },
-        ],
+		options: [
+			{
+				name: "command",
+				type: "STRING",
+				description: "Lệnh để xem chi tiết hơn...",
+				required: false,
+			},
+		],
 	},
 	wholeCommand: true,
-	callback: async function ({ interaction, client, guild, member, user, options }) {
-        /**
+	callback: async function ({
+		interaction,
+		client,
+		guild,
+		member,
+		user,
+		options,
+	}) {
+		/**
 		 * @type {Discord.Message}
 		 */
-        const message = await interaction.deferReply({
-            fetchReply: true,
-        });
-        const command = options.getString("command");
-        const groups = getAllGroups();
-        const commands = [];
-        for (const group of groups) {
-            const commandFiles = readCommandsInGroup(group.toLowerCase());
-            for (const cmd of commandFiles) {
-                commands.push({
-                    ...cmd,
-                    groupName: group.toLowerCase(),
-                });
-            }
-        }
+		const message = await interaction.deferReply({
+			fetchReply: true,
+		});
+		const command = options.getString("command");
+		const groups = getAllGroups();
+		const commands = [];
+		for (const group of groups) {
+			const commandFiles = readCommandsInGroup(group.toLowerCase());
+			for (const cmd of commandFiles) {
+				commands.push({
+					...cmd,
+					groupName: group.toLowerCase(),
+				});
+			}
+		}
 		if (command) {
 			const validCommand = commands.find((element) => {
 				return element.data.name === command.toLowerCase();
@@ -119,31 +125,34 @@ const commandBase = {
 				});
 			}
 
-            const embed = new Discord.MessageEmbed()
-                .setColor("RANDOM")
-                .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
-                .setTitle(validCommand.wholeCommand && validCommand.wholeCommand === true
-                    ? `/${validCommand.data.name}`
-                    : `/${validCommand.groupName} ${validCommand.data.name}`)
-                    .addFields(
-                        {
-                            name: "Mô tả",
-                            value: validCommand.data.description,
-                        },
-                        {
-                            name: "Quyền cần thiết:",
-                            value: validCommand.permissions && validCommand.permissions.length
-                                ? validCommand.permissions
-                                    .map(
-                                        (permissions) =>
-                                        `\`${permission.split("_").join(" ").toUpperCase()}\``
-                                    )
-                                    .join(" ")
-                                    : "Không",
-                        },
-                        {
-                            name: `Quyền cần thiết của ${client.user.tag}:`,
-                            value: 							validCommand.clientPermissions &&
+			const embed = new Discord.MessageEmbed()
+				.setColor("RANDOM")
+				.setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
+				.setTitle(
+					validCommand.wholeCommand && validCommand.wholeCommand === true
+						? `/${validCommand.data.name}`
+						: `/${validCommand.groupName} ${validCommand.data.name}`
+				)
+				.addFields(
+					{
+						name: "Mô tả",
+						value: validCommand.data.description,
+					},
+					{
+						name: "Quyền cần thiết:",
+						value:
+							validCommand.perms && validCommand.perms.length
+								? validCommand.perms
+										.map(
+											(perm) => `\`${perm.split("_").join(" ").toUpperCase()}\``
+										)
+										.join(" ")
+								: "Không",
+					},
+					{
+						name: `Quyền cần thiết của ${client.user.tag}:`,
+						value:
+							validCommand.clientPermissions &&
 							validCommand.clientPermissions.length
 								? validCommand.clientPermissions
 										.map(
@@ -152,113 +161,113 @@ const commandBase = {
 										)
 										.join(" ")
 								: "Không",
-                        }
-                    );
-                
-                return await interaction.editReply({
-                    embeds: [embed],
-                    emepheral: true,
-                });
+					}
+				);
 
-            }
-            
-        const helpDescription= 
-        `Hawwo ~
-        Chắc hẳn cậu đang cần sự giúp đỡ để sử dụng bot <@${client.user.id}> nhỉ ?
+			return await interaction.editReply({
+				embeds: [embed],
+			});
+		}
+
+		const helpDescription = `Hawwo ~
+        Chắc hẳn cậu đang cần sự giúp đỡ để sử dụng bot <@${
+					client.user.id
+				}> nhỉ ?
         Câu có thể sử dụng \`selection menu\` ở dưới để xem tất cả các lệnh mà tớ có !
-        **Tổng số lệnh:** ${getTotalCommands()}`
+        **Tổng số lệnh:** ${getTotalCmds().toLocaleString("vi-VN")}`;
 
-        const embed = new Discord.MessageEmbed()
-            .setColor("RANDOM")
-            .setAuthor({name: `Bảng trợ giúp của ${user.username}.`})
-            .setTitle(`Ồ này ${user.username}, có phải cậu đang lạc lối ?`)
-            .setDescription(helpDescription)
+		const embed = new Discord.MessageEmbed()
+			.setColor("RANDOM")
+			.setAuthor({ name: `Bảng trợ giúp của ${user.username}.` })
+			.setTitle(`Ồ này ${user.username}, có phải cậu đang lạc lối ?`)
+			.setDescription(helpDescription);
 
-        const selectionMenu = new Discord.MessageSelectMenu()
-        .setCustomId(selectMenuId)
-        .setPlaceholder("Vui lòng chọn danh mục lệnh...")
-        .addOptions({
-            label: "Bảng trợ giúp",
-            description: "Về lại bảng trợ giúp",
-            value: "help",
-        });
+		const selectionMenu = new Discord.MessageSelectMenu()
+			.setCustomId(selectMenuId)
+			.setPlaceholder("Vui lòng chọn danh mục lệnh...")
+			.addOptions({
+				label: "Bảng trợ giúp",
+				description: "Về lại bảng trợ giúp",
+				value: "help",
+			});
 
-        for (const group of groups) {
-            const groupName = group[0].toUpperCase() + group.slice(1);
+		for (const group of groups) {
+			const groupName = group[0].toUpperCase() + group.slice(1);
 
-            selectionMenu.addOptions({
-                label: groupName,
-                description: `Đây là danh mục ${groupName}`,
-                value: group.toLowerCase(),
-            });
-        } 
-        
-        await interaction.editReply({
-            embeds: [embed],
-            components: [new Discord.MessageActionRow({ components: [selectionMenu] })],
-        });
+			selectionMenu.addOptions({
+				label: groupName,
+				description: `Đây là danh mục ${groupName}`,
+				value: group.toLowerCase(),
+			});
+		}
 
-        const collector = message.createMessageComponentCollector({
-            filter: (i) => i.user.id === user.id,
-            time: 1000 * 60 * 5,
-            componentType: "SELECT_MENU",
-        });
+		await interaction.editReply({
+			embeds: [embed],
+			components: [
+				new Discord.MessageActionRow({ components: [selectionMenu] }),
+			],
+		});
 
-        collector.on("collect", async (i) => {
-            await i.deferUpdate();
-            const value = i.values[0];
-            if (value === "help") {
-                try {
-                    return await message.edit({ embeds: [embed] })
-                } catch (err) {
-                   console.log("An error has occured:", err)
-                }
-            }
-            
-            const commandsInGroup = readCommandsInGroup(value.toLowerCase());
-            const groupName = value[0].toUpperCase() + value.slice(1);
-            const categoryEmbed = new Discord.MessageEmbed()
-                .setColor("RANDOM")
-                .setDescription(`Để xem chi tiết về một lệnh cụ thẻ, hãy gõ: \`/help command:lenh muon giup\` !\n\n ${groupName} - ${commandsInGroup.length}\n${commandsInGroup
-                    .map((cmd) => `\`${cmd.data.name}\``)
-                    .join(" ")
-                }`)
+		const collector = message.createMessageComponentCollector({
+			filter: (i) => i.user.id === user.id,
+			time: 1000 * 60 * 5,
+			componentType: "SELECT_MENU",
+		});
 
-            try {
-                return await message.edit({
-                    embeds: [categoryEmbed],
-                })
-            } catch (e) {
-                console.log("An error has occured:", e)
-            }
-            
-        
-        });
-        
-        collector.on("end", async() => {
-            try {
-                await message.edit({
-                    components: [
-                        new Discord.MessageActionRow({
-                            components: [selectionMenu.setDisabled(true)],
-                        }),
-                    ],
-                });
-            } catch (e) {
-                return await message.edit({
-                embeds: [
-                    new Discord.MessageEmbed()
-                        .setColor("RED")
-                        .setDescription(`Đã có lỗi xảy ra khi hiển thị bảng này.`),
-                ],
-                components: [
-                    new Discord.MessageActionRow({
-                        components: [selectionMenu.setDisabled(true)],
-                    })
-                ]
-            });
-        }
-        })
-    }
-}
+		collector.on("collect", async (i) => {
+			await i.deferUpdate();
+			const value = i.values[0];
+			if (value === "help") {
+				try {
+					return await message.edit({ embeds: [embed] });
+				} catch (err) {
+					console.log("An error has occured:", err);
+				}
+			}
+
+			const commandsInGroup = readCommandsInGroup(value.toLowerCase());
+			const groupName = value[0].toUpperCase() + value.slice(1);
+			const categoryEmbed = new Discord.MessageEmbed()
+				.setColor("RANDOM")
+				.setDescription(
+					`Để xem chi tiết về một lệnh cụ thẻ, hãy gõ: \`/help command:lenh muon giup\` !\n\n ${groupName} - ${
+						commandsInGroup.length
+					}\n${commandsInGroup.map((cmd) => `\`${cmd.data.name}\``).join(" ")}`
+				);
+
+			try {
+				return await message.edit({
+					embeds: [categoryEmbed],
+				});
+			} catch (e) {
+				console.log("An error has occured:", e);
+			}
+		});
+
+		collector.on("end", async () => {
+			try {
+				await message.edit({
+					components: [
+						new Discord.MessageActionRow({
+							components: [selectionMenu.setDisabled(true)],
+						}),
+					],
+				});
+			} catch (e) {
+				return await message.edit({
+					embeds: [
+						new Discord.MessageEmbed()
+							.setColor("RED")
+							.setDescription(`Đã có lỗi xảy ra khi hiển thị bảng này.`),
+					],
+					components: [
+						new Discord.MessageActionRow({
+							components: [selectionMenu.setDisabled(true)],
+						}),
+					],
+				});
+			}
+		});
+	},
+};
 module.exports = commandBase;

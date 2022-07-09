@@ -21,9 +21,7 @@ client.on("ready", async () => {
 	await loader(client);
 	await loader.feature(client);
 	await handler.listen(client);
-	startDate = new Date();
-	console.log("Bot started up at", moment(startDate).format(
-		"LLLL."
-	))
+	const startDate = new Date();
+	console.log("Bot started up at", moment(startDate).format("LLLL."));
 });
 client.login(config.token);

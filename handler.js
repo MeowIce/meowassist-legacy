@@ -127,16 +127,18 @@ module.exports.listen = async (client) => {
 				if (interaction.commandName === cmd.data.name) {
 					const { owners, perms, clientPermissions, callback } = cmd;
 					if (owners === true) {
-						if (!validOwners.includes(user.id)) {
+						if (!validOwners.includes(interaction.user.id)) {
 							return await interaction.reply({
-								content: `Lệnh này chỉ dành cho ${owners
+								content: `Lệnh này chỉ dành cho ${validOwners
 									.map((id) => {
 										return `${client.users.cache.get(id)}`;
 									})
 									.join(", ")}!`,
+								ephemeral: true,
 							});
 						}
 					}
+
 					for (const permission of perms) {
 						if (!intMember.permissions.has(permission)) {
 							return await interaction.reply({
@@ -148,6 +150,7 @@ module.exports.listen = async (client) => {
 							});
 						}
 					}
+
 					for (const permission of clientPermissions) {
 						if (!interaction.guild.me.permissions.has(permission)) {
 							return await interaction.reply({

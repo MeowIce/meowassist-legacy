@@ -47,22 +47,16 @@ const commandBase = {
 	wholeCommand: true,
 	owners: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
+		await interaction.deferReply({
+			ephemeral: true,
+		});
+
 		const subcommand = options.getSubcommand();
 
 		client.emit(EVENTS[subcommand], member);
 
-		var d = new Date();
-		console.log(
-			user.tag,
-			"executed command",
-			commandBase.data.name,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
-
-		return await interaction.reply({
+		return await interaction.editReply({
 			content: "Thành công!",
-			ephemeral: true,
 		});
 	},
 };

@@ -41,9 +41,7 @@ const commandBase = {
 			"at",
 			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
 		);
-		setTimeout(() => {
-			process.exit(1);
-		}, 2000);
+		process.exit(1);
 	},
 };
 module.exports = commandBase;

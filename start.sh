@@ -3,7 +3,7 @@
 
 node .
 if [ $? == "2" ]; then
-    until reboot; do
+    while true; do
         echo "User executed reboot command. Restarting..." >&2
         sleep 2
         node .
@@ -11,9 +11,5 @@ if [ $? == "2" ]; then
 elif [ $? == "1" ]; then
     exit
 else
-    while true; do
-        echo "Detected an unexpected crash. Restarting..." >&2
-        sleep 2
-        node .
-    done
+    echo "No Crash lmao"
 fi

@@ -1,9 +1,5 @@
 const Discord = require("discord.js");
-const EVENTS = {
-	"guild-member-add": "guildMemberAdd",
-	"guild-member-remove": "guildMemberRemove",
-};
-
+const shell = require("shelljs");
 /**
  * @typedef CallbackObject
  * @property {Discord.CommandInteraction} interaction
@@ -29,43 +25,28 @@ const EVENTS = {
  */
 const commandBase = {
 	data: {
-		name: "emit",
-		description: "[Dev Only] Debug.",
-		options: [
-			{
-				name: "guild-member-add",
-				type: "SUB_COMMAND",
-				description: "guildMemberAdd event.",
-			},
-			{
-				name: "guild-member-remove",
-				type: "SUB_COMMAND",
-				description: "guildMemberRemove event.",
-			},
-		],
+		name: "reload",
+		description: "[Dev Only] Khởi động lại bot.",
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
-		const subcommand = options.getSubcommand();
-		const config = require("../../config.json");
-		if (interaction.user.id == config.owners) {
-			client.emit(EVENTS[subcommand], member);
-
-			return await interaction.reply({
-				content: "Thành công!",
-				ephemeral: true,
-		})
-			var d = new Date();
-			console.log(interaction.user.tag, "executed command", commandBase.data.name, "at",`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
-		}
-		else {
-			console.log(interaction.user.tag, "tried to execute", commandBase.data.name, "but failed because he has no permission.")
+        const config = require("../../config.json");
+        if (interaction.user.id == config.owners) {
+            await interaction.reply({
+                    content: ":arrows_counterclockwise: System is restarting...",
+                    ephemeral: true,
+        });
+            var d = new Date();
+            console.log("WARNING: System is restarting...", "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
+            process.exit(2);
+        }
+        else {
+            console.log(interaction.user.tag, "tried to execute", commandBase.data.name, "but failed because he has no permission.")
 			return await interaction.reply({
 				content: ":no_entry_sign: Bạn không phải là developer để sử dụng lệnh này !",
 				ephemeral: true,
 			});
-		};
-	}
-	};
-
+        };
+    },
+};
 module.exports = commandBase;

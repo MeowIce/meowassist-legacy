@@ -79,7 +79,7 @@ const commandBase = {
 				});
 			} else if (typeof result === "string") {
 				return await interaction.editReply({
-					content: `Bạn đã tạo tài khoản thành công !\nSố tài khoản: **${result}**\n\nHãy đưa số tài khoản này tới người bạn muốn giao dịch hoặc xem thông tin về tài khoản của bạn bằng lệnh: \`/account information\` !`,
+					content: `Bạn đã tạo tài khoản thành công !\nSố tài khoản: **${result}**\n\nHãy đưa số tài khoản này tới người bạn muốn giao dịch hoặc xem thông tin về tài khoản của bạn bằng lệnh: \`/account info\` !`,
 				});
 			}
 		} else if (subcommand === "info") {

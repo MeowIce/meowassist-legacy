@@ -225,12 +225,12 @@ const commandBase = {
 				}
 			}
 
-			const commandsInGroup = readCommandsInGroup(value.toLowerCase());
 			const groupName = value[0].toUpperCase() + value.slice(1);
+			const commandsInGroup = readCommandsInGroup(groupName);
 			const categoryEmbed = new Discord.MessageEmbed()
 				.setColor("RANDOM")
 				.setDescription(
-					`Để xem chi tiết về một lệnh cụ thẻ, hãy gõ: \`/help command:lenh muon giup\` !\n\n ${groupName} - ${
+					`Để xem chi tiết về một lệnh cụ thể, hãy gõ: \`/help command:lenh muon giup\` !\n\n ${groupName} - ${
 						commandsInGroup.length
 					}\n${commandsInGroup.map((cmd) => `\`${cmd.data.name}\``).join(" ")}`
 				);

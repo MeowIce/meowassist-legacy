@@ -30,7 +30,7 @@ const commandBase = {
 		description: "Chuyển tiền vào tài khoản khác !",
 		options: [
 			{
-				name: "account-number",
+				name: "account",
 				type: "STRING",
 				description: "Số tài khoản bạn muốn chuyển tiền vào.",
 				required: true,
@@ -42,7 +42,7 @@ const commandBase = {
 				required: true,
 			},
 			{
-				name: "noi-dung-chuyen-tien",
+				name: "content",
 				type: "STRING",
 				description: "Nội dung của cuộc chuyển tiền.",
 				required: false,
@@ -53,10 +53,10 @@ const commandBase = {
 	callback: async ({ interaction, client, guild, member, user, options }) => {
 		await interaction.deferReply();
 
-		const accountNumber = options.getString("account-number");
+		const accountNumber = options.getString("account");
 		const money = options.getNumber("money");
 		const noiDung =
-			options.getString("noi-dung-chuyen-tien") || "Không có nội dung.";
+			options.getString("content") || "Không có nội dung.";
 
 		const targetAccount = getMoney("", accountNumber);
 		const userAccount = getMoney(user.id);

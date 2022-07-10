@@ -39,7 +39,7 @@ const commandBase = {
 				description: "Tạo tài khoản.",
 			},
 			{
-				name: "information",
+				name: "info",
 				type: "SUB_COMMAND",
 				description: "Xem thông tin về tài khoản.",
 				options: [
@@ -50,7 +50,7 @@ const commandBase = {
 						type: "USER",
 					},
 					{
-						name: "account-number",
+						name: "account",
 						description: "Số tài khoản của người bạn muốn xem.",
 						required: false,
 						type: "STRING",
@@ -82,9 +82,9 @@ const commandBase = {
 					content: `Bạn đã tạo tài khoản thành công !\nSố tài khoản: **${result}**\n\nHãy đưa số tài khoản này tới người bạn muốn giao dịch hoặc xem thông tin về tài khoản của bạn bằng lệnh: \`/account information\` !`,
 				});
 			}
-		} else if (subcommand === "information") {
+		} else if (subcommand === "info") {
 			const targetUser = options.getUser("user") || user;
-			const accountNumber = options.getString("account-number");
+			const accountNumber = options.getString("account");
 
 			const account = getMoney(targetUser.id, targetUser ? "" : accountNumber);
 

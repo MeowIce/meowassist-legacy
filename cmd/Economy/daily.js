@@ -27,7 +27,7 @@ const { daily } = require("../../features/economy");
 const commandBase = {
 	data: {
 		name: "daily",
-		description: "Để nhận phần thưởng hằng ngày từ bot.",
+		description: "Nhận phần thưởng hằng ngày từ bot.",
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {

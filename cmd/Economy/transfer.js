@@ -27,7 +27,7 @@ const { addMoney, removeMoney, getMoney } = require("../../features/economy");
 const commandBase = {
 	data: {
 		name: "transfer",
-		description: "Để chuyển tiền vào tài khoản khác !",
+		description: "Chuyển tiền vào tài khoản khác !",
 		options: [
 			{
 				name: "account-number",
@@ -63,13 +63,13 @@ const commandBase = {
 
 		if (!targetAccount) {
 			return await interaction.editReply({
-				content: `Tài khoản bạn đã nêu không tồn tại !`,
+				content: `Tài khoản bạn đã ghi không tồn tại !`,
 			});
 		}
 
 		if (!userAccount) {
 			return await interaction.editReply({
-				content: `Bạn chưa có tài khoản !\n\nHãy tạo một tài khoản bằng cách: **/account create** !`,
+				content: `Bạn chưa có tài khoản !\n\nHãy tạo một tài khoản bằng lệnh: \`/account create\` !`,
 			});
 		}
 
@@ -98,7 +98,7 @@ const commandBase = {
 		return await interaction.editReply({
 			content: `Bạn đã chuyển **${money.toLocaleString([
 				"vi-VN",
-			])} VND** cho tài khoản **${targetAccount.accountId}** thành công !`,
+			])} MeowCoin** cho tài khoản **${targetAccount.accountId}** thành công !`,
 		});
 	},
 };

@@ -28,21 +28,21 @@ const baucua = new BauCua();
 const commandBase = {
 	data: {
 		name: "baucua",
-		description: "Để chơi Bầu Cua cùng với mọi người trong server.",
+		description: "Chơi Bầu Cua cùng với mọi người trong server.",
 		options: [
 			{
 				name: "start",
 				type: "SUB_COMMAND",
-				description: "Để bắt đầu một game Bầu Cua mới.",
+				description: "Bắt đầu ván Bầu Cua mới.",
 			},
 			{
 				name: "bet",
 				type: "SUB_COMMAND",
-				description: "Để đặt cược.",
+				description: "Đặt cược...",
 				options: [
 					{
 						name: "choice",
-						description: "Linh vật bạn muốn đặt cược.",
+						description: "Linh vật bạn muốn đặt cược...",
 						required: true,
 						type: "STRING",
 						choices: [
@@ -76,7 +76,7 @@ const commandBase = {
 						name: "money",
 						type: "NUMBER",
 						description:
-							"Số tiền bạn muốn đặt cược (phải từ 5.000 VND trở lên).",
+							"Số tiền bạn muốn đặt cược (phải từ 5.000 MeowCoin trở lên).",
 						required: true,
 						minValue: 5000,
 					},
@@ -84,12 +84,12 @@ const commandBase = {
 			},
 			{
 				name: "roll",
-				description: "Để lăn xúc xắc.",
+				description: "Lăn xúc xắc.",
 				type: "SUB_COMMAND",
 			},
 			{
 				name: "end",
-				description: "Để kết thúc game Bầu Cua.",
+				description: "Kết thúc ván Bầu Cua.",
 				type: "SUB_COMMAND",
 			},
 		],

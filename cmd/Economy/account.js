@@ -31,21 +31,21 @@ const {
 const commandBase = {
 	data: {
 		name: "account",
-		description: "Để xem các thông tin về tài khoản của bạn.",
+		description: "Xem các thông tin về tài khoản của bạn.",
 		options: [
 			{
 				name: "create",
 				type: "SUB_COMMAND",
-				description: "Để tạo tài khoản.",
+				description: "Tạo tài khoản.",
 			},
 			{
 				name: "information",
 				type: "SUB_COMMAND",
-				description: "Để xem thông tin về tài khoản.",
+				description: "Xem thông tin về tài khoản.",
 				options: [
 					{
 						name: "user",
-						description: "Tài khoản của người dùng bạn muốn xem.",
+						description: "Tài khoản của người bạn muốn xem.",
 						required: false,
 						type: "USER",
 					},
@@ -60,7 +60,7 @@ const commandBase = {
 			{
 				name: "delete",
 				type: "SUB_COMMAND",
-				description: "Để xoá tài khoản của bạn.",
+				description: "Xoá tài khoản của bạn.",
 			},
 		],
 	},
@@ -75,11 +75,11 @@ const commandBase = {
 
 			if (result === false) {
 				return await interaction.editReply({
-					content: `Bạn đã có tài khoản rồi !`,
+					content: `Bạn đã có tài khoản rồi, không cần phải tạo nữa !`,
 				});
 			} else if (typeof result === "string") {
 				return await interaction.editReply({
-					content: `Bạn đã tạo tài khoản thành công !\nSố tài khoản của bạn: **${result}**\n\nHãy đưa số tài khoản này tới người bạn muốn để giao dịch hoặc xem thông tin về tài khoản của bạn bằng cách: **/account information** !`,
+					content: `Bạn đã tạo tài khoản thành công !\nSố tài khoản: **${result}**\n\nHãy đưa số tài khoản này tới người bạn muốn giao dịch hoặc xem thông tin về tài khoản của bạn bằng lệnh: \`/account information\` !`,
 				});
 			}
 		} else if (subcommand === "information") {
@@ -90,7 +90,7 @@ const commandBase = {
 
 			if (!account) {
 				return await interaction.editReply({
-					content: `Bạn hoặc người bạn đã nêu chưa có tài khoản !\n\nHãy tạo một tài khoản bằng cách: **/account create** !`,
+					content: `Bạn hoặc người bạn đã tag chưa có tài khoản !\n\nHãy yêu cầu họ tạo một tài khoản bằng lệnh: \`/account create\` !`,
 				});
 			}
 
@@ -102,7 +102,7 @@ const commandBase = {
 						.setDescription(
 							`Số dư hiện tại: **${account.money.toLocaleString([
 								"vi-VN",
-							])} VND**`
+							])} MeowCoin**`
 						),
 				],
 			});

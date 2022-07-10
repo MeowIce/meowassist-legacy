@@ -65,7 +65,7 @@ class BauCua {
 				),
 			});
 
-			const text = `<@${interaction.user.id}> đã bắt đầu một game Bầu Cua mới !\nBạn có thể tham gia đặt cược bằng cách: **/baucua bet** !`;
+			const text = `<@${interaction.user.id}> đã bắt đầu một ván Bầu Cua mới !\nBạn có thể tham gia đặt cược bằng lệnh: \`/baucua bet\` !`;
 
 			const embed = new Discord.MessageEmbed()
 				.setColor("WHITE")
@@ -79,7 +79,7 @@ class BauCua {
 			await interaction.editReply({
 				content: `<@${
 					this.baucuaCache.get(interaction.guild.id).author
-				}> đã bắt đầu một game khác rồi !`,
+				}> đã bắt đầu một ván khác rồi !`,
 				allowedMentions: {
 					users: [],
 				},
@@ -96,7 +96,7 @@ class BauCua {
 	async bet(interaction, animal, money) {
 		if (!this.baucuaCache.get(interaction.guild.id)) {
 			return await interaction.editReply({
-				content: `Vui lòng bắt đầu một game Bầu Cua bằng cách: **/baucua start** !`,
+				content: `Vui lòng bắt đầu một ván Bầu Cua bằng lệnh: \`/baucua start\` !`,
 			});
 		}
 
@@ -114,7 +114,7 @@ class BauCua {
 
 		if (money < 5000) {
 			return await interaction.editReply({
-				content: `Số tiền đặt cược ít nhất phải là **5.000 VND** !`,
+				content: `Số tiền đặt cược ít nhất phải là **5.000 MeowCoins** !`,
 			});
 		}
 
@@ -138,7 +138,7 @@ class BauCua {
 			return await interaction.editReply({
 				content: `Bạn đã đặt cược cho **${
 					animal[0].toUpperCase() + animal.slice(1)
-				}** rồi ! Mỗi người chỉ được đặt cược cho 1 linh vật 1 lần !`,
+				}** rồi ! Mỗi người chỉ được đặt cược cho 1 linh vật trong một lần !`,
 			});
 		}
 
@@ -153,7 +153,7 @@ class BauCua {
 		return await interaction.editReply({
 			content: `Bạn đã đặt cược cho **${
 				animal[0].toUpperCase() + animal.slice(1)
-			}** với số tiền là **${money.toLocaleString(["vi-VN"])} VND** !`,
+			}** với số tiền là **${money.toLocaleString(["vi-VN"])} MeowCoins** !`,
 		});
 	}
 
@@ -167,19 +167,19 @@ class BauCua {
 
 		if (!gameSession) {
 			return await interaction.editReply({
-				content: `Vui lòng bắt đầu một game Bầu Cua bằng cách: **/baucua start** !`,
+				content: `Vui lòng bắt đầu một ván Bầu Cua bằng lệnh: \`/baucua start\` !`,
 			});
 		}
 
 		if (interaction.user.id !== gameSession.author) {
 			return await interaction.editReply({
-				content: `Bạn không phải là người host nên không có quyền lăn xúc xắc !`,
+				content: `Bạn không phải là người tổ chức nên không có quyền lăn xúc xắc !`,
 			});
 		}
 
 		if (!gameSession.bets.length) {
 			return await interaction.editReply({
-				content: `Chưa có ai đặt cược ! Hãy đặt cược bằng cách: **/baucua bet** !`,
+				content: `Chưa có ai đặt cược ! Hãy đặt cược bằng lệnh: \`/baucua bet\` !`,
 			});
 		}
 
@@ -300,7 +300,7 @@ class BauCua {
 								money,
 								getMoney(bet.id).accountId,
 								client,
-								`${client.user.username} tự động thêm tiền vào tài khoản host do người chơi thua Bầu Cua.`
+								`${client.user.username} tự động thêm tiền vào tài khoản của người tổ chức do người chơi thua Bầu Cua.`
 							);
 
 							bet.haveBeenPaidBack = true;
@@ -318,7 +318,7 @@ class BauCua {
 								money,
 								getMoney(bet.id).accountId,
 								client,
-								`${client.user.username} tự động thêm tiền vào tài khoản host do người chơi thua Bầu Cua.`
+								`${client.user.username} tự động thêm tiền vào tài khoản của người tổ chức do người chơi thua Bầu Cua.`
 							);
 
 							const losersFetched = losersName.find(
@@ -353,7 +353,7 @@ class BauCua {
 					winner.id
 				}> đã thắng với số tiền **${winner.money.toLocaleString([
 					"vi-VN",
-				])} VND** !\n`;
+				])} MeowCoins** !\n`;
 			}
 		}
 
@@ -367,7 +367,7 @@ class BauCua {
 					loser.id
 				}> đã thua với số tiền **${loser.money.toLocaleString([
 					"vi-VN",
-				])} VND** !\n`;
+				])} MeowCoins** !\n`;
 			}
 		}
 
@@ -401,20 +401,20 @@ class BauCua {
 
 		if (!gameSession) {
 			return await interaction.editReply({
-				content: `Chưa có game nào đã bắt đầu để kết thúc !`,
+				content: `Chưa có ván Bầu Cua nào đã bắt đầu để kết thúc !`,
 			});
 		}
 
 		if (interaction.user.id !== gameSession.author) {
 			return await interaction.editReply({
-				content: `Bạn không phải là host nên không có quyền kết thúc game !`,
+				content: `Bạn không phải là người tổ chức nên không có quyền kết thúc game !`,
 			});
 		}
 
 		this.baucuaCache.delete(interaction.guild.id);
 
 		return await interaction.editReply({
-			content: `Đã kết thúc game Bầu Cua do <@${interaction.user.id}> host !`,
+			content: `Đã kết thúc ván Bầu Cua do <@${interaction.user.id}> tổ chức !`,
 			allowedMentions: {
 				users: {},
 			},

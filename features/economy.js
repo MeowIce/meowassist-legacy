@@ -62,9 +62,9 @@ const generateTransactionText = (
 		addOrSubstract === "add" ? "+" : "-"
 	}${transactionMoney.toLocaleString([
 		"vi-VN",
-	])} VND**\nSố dư hiện tại: **${currentMoney.toLocaleString([
+	])} MeowCoin(s)**\nSố dư hiện tại: **${currentMoney.toLocaleString([
 		"vi-VN",
-	])} VND**\nNội dung giao dịch: **${reason}**`;
+	])} MeowCoin(s)**\nNội dung giao dịch: **${reason}**`;
 };
 
 const accountIdGenerator = () => {
@@ -160,7 +160,7 @@ const addMoney = async (
 				new Discord.MessageEmbed()
 					.setColor("WHITE")
 					.setDescription(
-						`Bạn hoặc người bạn đã nêu chưa có tài khoản nên bot không thể thêm tiền vào tài khoản đã nêu !\n\nHãy tạo một tài khoản bằng cách: **/account create** !`
+						`Bạn hoặc người bạn đã tag chưa có tài khoản nên không thể thêm tiền vào tài khoản đã tag !\n\nHãy tạo một tài khoản bằng lệnh: \`/account create\` !`
 					),
 			],
 		});
@@ -205,7 +205,7 @@ const addMoney = async (
 const daily = async (interaction, client) => {
 	if (claimedCache.includes(interaction.user.id)) {
 		return await interaction.editReply({
-			content: "Bạn đã nhận phần thưởng hằng ngày rồi !",
+			content: "Bạn đã nhận phần thưởng hằng ngày rồi, hãy quay lại vào ngày hôm sau !",
 		});
 	}
 
@@ -226,7 +226,7 @@ const daily = async (interaction, client) => {
 			claimedCache.push(interaction.user.id);
 
 			return await interaction.editReply({
-				content: "Bạn đã nhận phần thưởng hằng ngày rồi !",
+				content: "Bạn đã nhận phần thưởng hằng ngày rồi, hãy quay lại vào ngày hôm sau !",
 			});
 		}
 	}
@@ -246,7 +246,7 @@ const daily = async (interaction, client) => {
 	return await interaction.editReply({
 		content: `Bạn đã nhận phần thưởng hằng ngày là **${config.dailyRewardsMoney.toLocaleString(
 			["vi-VN"]
-		)} VND** thành công !`,
+		)} MeowCoin** thành công !`,
 	});
 };
 
@@ -286,7 +286,7 @@ const removeMoney = async (userId, money, accountId, client, reason) => {
 				new Discord.MessageEmbed()
 					.setColor("WHITE")
 					.setDescription(
-						`Bạn hoặc người bạn đã nêu chưa có tài khoản nên bot không thể thêm tiền vào tài khoản đã nêu !\n\nHãy tạo một tài khoản bằng cách: **/account create** !`
+						`Bạn hoặc người bạn đã tag chưa có tài khoản nên không thể thêm tiền vào tài khoản đã tag !\n\nHãy tạo một tài khoản bằng lệnh: \`/account create\` !`
 					),
 			],
 		});

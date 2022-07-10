@@ -102,7 +102,7 @@ const commandBase = {
 						.setDescription(
 							`Số dư hiện tại: **${account.money.toLocaleString([
 								"vi-VN",
-							])} MeowCoin**`
+							])} MeowCoin(s)**`
 						),
 				],
 			});

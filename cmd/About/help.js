@@ -196,7 +196,7 @@ const commandBase = {
 
 			selectionMenu.addOptions({
 				label: groupName,
-				description: `Đây là danh mục ${groupName}`,
+				description: `Xem các câu lệnh cho danh mục ${groupName}`,
 				value: group.toLowerCase(),
 			});
 		}

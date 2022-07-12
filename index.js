@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
+ * Tệp này là một phần của dự án MeowAssist. 
+ * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
+ */
+
+
 const discord = require("discord.js");
 const config = require("./config.json");
 const client = new discord.Client({ intents: 32767 });

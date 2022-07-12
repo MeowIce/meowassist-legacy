@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
+ * Tệp này là một phần của dự án MeowAssist. 
+ * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
+ */
+
 const { MessageEmbed, version } = require("discord.js");
 const Discord = require("discord.js");
 const moment = require("moment");
@@ -54,6 +60,8 @@ const commandBase = {
 		var sysUptime = moment
 			.duration(os.uptime() * 1000)
 			.format("d[ Ngày]・h[ Giờ]・m[ Phút]・s[ Giây]");
+		//Bot version
+		const package = require("../../package.json");
 		const embed = new MessageEmbed()
 			.setTitle(`Trạng thái của ${client.user.username}`)
 			.setColor("RANDOM")
@@ -63,7 +71,7 @@ const commandBase = {
 			.setFields([
 				{
 					name: "Thông tin software",
-					value: `\`\`\`yml\nGuilds: ${client.guilds.cache.size} \nNodeJS: ${nodeVer}\nPhiên bản Discord.JS: ${version}\`\`\``,
+					value: `\`\`\`yml\nGuilds: ${client.guilds.cache.size} \nNodeJS: ${nodeVer}\nPhiên bản Discord.JS: ${version}\nPhiên bản MeowAssist: ${package.version}\`\`\``,
 					inline: true,
 				},
 				{

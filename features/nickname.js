@@ -10,11 +10,11 @@ const filter = new Filter({
 
 // Regular expressions
 const nonLatinExp =
-	/^(([aeiouy]\u0308)|[\u0300-\u036f\u0489])|[\u0000-\u007f]|[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]|[^\x00-\x7F]|[ ]/gi;
+	/^(([aeiouy]\u0308)|[\u0300-\u036f\u0489])|[^\u0000-\u007F]+|[^\x00-\x7F]+|[âäëîïœûüÿçÄÊËÎÏŒÛÜŸÇ]+|[bʍǝɹʇʎnᴉodɐspɟƃɥɾʞlzxɔʌquɯꝹMƎᖈ⊥⅄ՈIOԀ∀SᗡℲ⅁Hſﻼ⅂ZXƆΛ𐐒NW⇂ᘔƐ𝗁𝖲𝟿ረ𝟾𝟼𝟶]+|[pwɘɿɈγυioqɒƨbʇϱʜįʞlzxɔvdnmϘWƎЯTYUIOꟼAƧႧꟻӘHႱﻼ⅃ZXƆV𐐒ИM⥜𝖲Ꮛᖸटმ٢৪♇𝙾]+|[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]|[^\x00-\x7F]|[ ]/gi;
 const websiteExp =
 	/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,}|(?:www\.|(?!www))[a-zA-Z0-9][(.)][^\s]{2,}|(?:www\.|(?!www))[a-zA-Z0-9[(][^\s][)]{2,}|(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][(][^\s][)]){2,}|(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][[][^\s][]]){2,}|(?:www\.|(?!www))[a-zA-Z0-9][[.]][^\s]{2,})/gi;
 const specialCharsExp = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g;
-
+//const specialUnicodeExp = //
 async function loadCache() {
 	const result = await nicknameToggleSchema.findOne({
 		guildId: config.ownerServer,
@@ -63,7 +63,7 @@ const setNick = (member, nickname) => {
 	if (percentage < 80) {
 		returnData.result = false;
 		returnData.error =
-			"Nickname phải có 80% là ký tự latin (chữ bình thường), không teen code, không tàng hình.";
+			"Nickname phải là ký tự latin (chữ bình thường), không ký tự đặc biệt, không teencode.";
 
 		return returnData;
 	}
@@ -83,7 +83,7 @@ const setNick = (member, nickname) => {
 	const linkMatches = nickname.match(websiteExp);
 	if (linkMatches && linkMatches.length) {
 		returnData.result = false;
-		returnData.error = "Không được chèn link vào nickname.";
+		returnData.error = "Không được chèn link, URL vào nickname.";
 
 		return returnData;
 	}
@@ -96,7 +96,7 @@ const setNick = (member, nickname) => {
 	) {
 		returnData.result = false;
 		returnData.error =
-			'Nickname không được đặt nhằm mục đích đứng đầu list Online (như đặt dấu "!" trước nick hay tương tự).';
+			'Nickname không được phép chứa ký tự đặc biệt (như dấu "!" hay "?") ở đầu.';
 
 		return returnData;
 	}

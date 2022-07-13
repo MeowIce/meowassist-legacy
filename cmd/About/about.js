@@ -69,10 +69,7 @@ const commandBase = {
 				},
 				{
 					name: `Bạn muốn mời bot vào server bạn ?`,
-					value: `[Click ~](${client.generateInvite({
-						scopes: ["applications.commands"],
-						permissions: "ADMINISTRATOR",
-					})})`,
+					value: `[Click ~](https://bit.ly/3Rxo4cm)`,
 				},
 			]);
 		return interaction.reply({

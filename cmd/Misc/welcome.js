@@ -55,9 +55,7 @@ const commandBase = {
 		options,
 	}) {
 		const targetUser = options.getUser("user") || user;
-		// 60000 = 60s = 1 phut
 		const cooldown = "60000";
-		//        const seconds = cooldown.replace('000', '');
 		var d = new Date();
 		console.log(
 			interaction.user.tag,
@@ -70,9 +68,7 @@ const commandBase = {
 		);
 		if (cooldownSet.has(interaction.user.id)) {
 			interaction.reply({
-				content: `Ồ này anh bạn ${
-					interaction.user
-				}, bạn phải chờ ${cooldown.replace(
+				content: `Ồ này, cậu phải chờ ${cooldown.replace(
 					"000",
 					""
 				)}s mới được sử dụng tiếp !`,

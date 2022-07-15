@@ -33,7 +33,7 @@ const child = require("child_process");
 const commandBase = {
 	data: {
 		name: "shell",
-		description: "[Dev Only] Run a command in Linux shell.",
+		description: "[Dev Only] Chạy lệnh trong môi trường hệ thống.",
         options: [
             {
                 name: "exec",

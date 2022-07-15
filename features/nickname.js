@@ -14,7 +14,7 @@ const nonLatinExp =
 const websiteExp =
 	/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,}|(?:www\.|(?!www))[a-zA-Z0-9][(.)][^\s]{2,}|(?:www\.|(?!www))[a-zA-Z0-9[(][^\s][)]{2,}|(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][(][^\s][)]){2,}|(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][[][^\s][]]){2,}|(?:www\.|(?!www))[a-zA-Z0-9][[.]][^\s]{2,})/gi;
 const specialCharsExp = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/g;
-//const specialUnicodeExp = //
+
 async function loadCache() {
 	const result = await nicknameToggleSchema.findOne({
 		guildId: config.ownerServer,
@@ -60,10 +60,10 @@ const setNick = (member, nickname) => {
 	const latinMatches = nickname.match(nonLatinExp);
 	const percentage = (latinMatches.length / nickname.length) * 100;
 
-	if (percentage < 60) {
+	if (percentage > 75) {
 		returnData.result = false;
 		returnData.error =
-			"Nickname phải có hơn 60% là ký tự latin (chữ bình thường), không ký tự đặc biệt, không teencode.";
+			"Nickname phải chứa 75% là chữ Latin (chữ bình thường, không dấu), không ký tự đặc biệt, không teencode.";
 
 		return returnData;
 	}
@@ -71,7 +71,7 @@ const setNick = (member, nickname) => {
 	// Check for bad words
 	const badWords =
 		filter.isProfane(nickname) ||
-		nickname.match(new RegExp(vietnameseBadWords.join("|"), "g"));
+		nickname.match(new RegExp(`[?=${vietnameseBadWords.join("|")}][ ]`, 'im'))
 	if (badWords) {
 		returnData.result = false;
 		returnData.error = "Cấm nickname thô tục, kích động, nhạy cảm.";

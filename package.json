@@ -5,6 +5,7 @@
 	"dependencies": {
 		"@iamtraction/google-translate": "^1.1.2",
 		"bad-words": "^3.0.4",
+		"child_process": "^1.0.2",
 		"discord.js": "^13.8.1",
 		"fs": "^0.0.1-security",
 		"moment": "^2.29.3",

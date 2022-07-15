@@ -5,7 +5,6 @@
  */
 
 const Discord = require("discord.js");
-const shell = require("shelljs");
 /**
  * @typedef CallbackObject
  * @property {Discord.CommandInteraction} interaction

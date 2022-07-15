@@ -54,6 +54,7 @@ const commandBase = {
 		const embed = new MessageEmbed()
 			.setTitle(`Thông tin thời tiết (BETA*)`)
 			.setColor("RANDOM")
+			.setThumbnail(`${data.current.weather_icons}`)
 			.addField(`Khu vực`, `${data.location.name}`, true)
 			.addField(`Giờ địa phương`, `${data.location.localtime}`, true)
 			//.addField(`Cập nhật lúc`, `${data.request.lastupdate}`)

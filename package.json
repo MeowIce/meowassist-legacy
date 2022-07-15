@@ -17,6 +17,7 @@
 		"ms": "^2.1.3",
 		"os": "^0.1.2",
 		"path": "^0.12.7",
+		"shelljs": "^0.8.5",
 		"vietnamese-badwords": "^1.0.0"
 	},
 	"devDependencies": {

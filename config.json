@@ -9,5 +9,6 @@
 	"registerCommandsGlobally": true,
 	"testServers": ["955458891662110751"],
 	"collab": ["754982406393430098"],
-	"dailyRewardsMoney": 50000
+	"dailyRewardsMoney": 50000,
+	"weatherKey": "a96d5ab49e4b92c0107ef044030a3eba"
 }

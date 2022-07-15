@@ -219,11 +219,7 @@ module.exports.listen = async (client) => {
 		if (owners == true) {
 			if (!validOwners.includes(user.id)) {
 				return await interaction.reply({
-					content: `Lệnh này chỉ dành cho ${validOwners
-						.map((id) => {
-							return `${client.users.cache.get(id)}`;
-						})
-						.join(", ")}!`,
+					content: `Lệnh này chỉ dành cho Developers !`,
 				});
 			}
 		}

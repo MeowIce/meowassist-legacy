@@ -11,9 +11,6 @@ const fs = require("fs");
 const path = require("path");
 const selectMenuId = "select-menu";
 const { getTotalCmds } = require("../../loader.js");
-//const { type } = require("os");
-//const { permissions } = require("../../help");
-//const { Deserializer } = require("v8");
 
 /**
  * @typedef CallbackObject

@@ -10,6 +10,8 @@ const moment = require("moment");
 const locale = require("moment/locale/vi");
 const config = require("./../../config.json");
 const fetch = require("axios");
+const cooldownSet = new Set();
+const cooldown = "60000";
 /**
  * @typedef CallbackObject
  * @property {Discord.CommandInteraction} interaction
@@ -40,8 +42,20 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
+        var d = new Date();
+        console.log(interaction.user.tag, "executed command", commandBase.data.name, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
 		let res = await fetch(`https://disease.sh/v2/countries/vietnam`)
         let data = res.data
+        if (cooldownSet.has(interaction.user.id)) {
+            interaction.reply({
+                content: `Ồ này cậu phải chờ ${cooldown.replace(
+                    "000",
+                    ""
+                )}s mới được sử dụng tiếp !`,
+                ephemeral: true,
+            })
+        }
+        else {
         const embed = new MessageEmbed()
             .setTitle(`Tình hình dịch Covid-19 ở Việt Nam`)
             .setColor("RANDOM")
@@ -55,11 +69,15 @@ const commandBase = {
             .addField(`Nguy cấp`, `${data.critical}`, true)
             .addField(`Đã test`, `${data.tests}`, true)
             .setFooter({text: `Dữ liệu được lấy từ disease.sh`})
-
+            cooldownSet.add(interaction.user.id);
+			setTimeout(() => {
+				cooldownSet.delete(interaction.user.id);
+			}, cooldown);
         interaction.reply({
             embeds: [embed],
             ephemeral: false
         })
+    }
     }
 }
 module.exports = commandBase;

@@ -66,7 +66,7 @@ const commandBase = {
 		}
 		else {
 			const embed = new MessageEmbed()
-				.setTitle(`Thông tin thời tiết (BETA)`)
+				.setTitle(`Thông tin thời tiết`)
 				.setColor("RANDOM")
 				.setThumbnail(`${data.current.weather_icons}`)
 				.addField(`Khu vực`, `${data.location.name}`, true)

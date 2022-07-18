@@ -1,6 +1,6 @@
 /*
  * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
- * Tệp này là một phần của dự án MeowAssist. 
+ * Tệp này là một phần của dự án MeowAssist.
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
@@ -37,8 +37,14 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
-        var d = new Date();
-        console.log(interaction.user.tag, "executed command", commandBase.data.name, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
+		var d = new Date();
+		console.log(
+			interaction.user.tag,
+			"executed command",
+			commandBase.data.name,
+			"at",
+			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
+		);
 		const iconMsg = new MessageEmbed()
 			.setTitle(`Icon của ${guild.name}`)
 			.setImage(guild.iconURL({ dynamic: true, size: 1024 }))

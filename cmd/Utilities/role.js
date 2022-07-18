@@ -28,24 +28,24 @@ const commandBase = {
 	data: {
 		name: "role",
 		description:
-			"Để thêm role cho 1 người dùng trong khoảng thời gian nhất định.",
+			"Thêm role cho người nào đó trong một khoảng thời gian.",
 		options: [
 			{
 				name: "user",
-				description: "Người dùng bạn muốn thêm role.",
+				description: "Người để thêm role...",
 				type: "USER",
 				required: true,
 			},
 			{
 				name: "role",
 				type: "ROLE",
-				description: "Role bạn muốn thêm.",
+				description: "Role để muốn thêm...",
 				required: true,
 			},
 			{
 				name: "time",
 				type: "NUMBER",
-				description: "Thời gian bạn muốn thêm role cho người dùng đó (giây).",
+				description: "Thời gian thêm role cho người dùng đó (phút).",
 				required: true,
 			},
 		],
@@ -71,6 +71,7 @@ const commandBase = {
 		} catch (e) {
 			return await interaction.editReply({
 				content: `Không thể thêm role này vào người dùng đó, vui lòng thử lại sau !`,
+				ephemeral: true
 			});
 		}
 

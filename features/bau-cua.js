@@ -1,6 +1,6 @@
 /*
  * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
- * Tệp này là một phần của dự án MeowAssist. 
+ * Tệp này là một phần của dự án MeowAssist.
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu bản quyền - MeowIce.
  */
 

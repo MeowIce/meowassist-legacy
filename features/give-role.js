@@ -77,27 +77,6 @@ module.exports = async (client) => {
 		});
 	};
 
-	client.on("guildMemberAdd", async (member) => {
-		const { guild, user } = member;
-
-		const currentRole = cache.find(
-			(e) => e.userId === user.id,
-			e.hasRole === true,
-			e.expires < new Date().getMinutes()
-		);
-
-		if (!currentRole) return;
-
-		const targetRole = guild.roles.cache.get(currentRole.roleId);
-		if (!targetRole) return;
-
-		try {
-			await member.roles.add(targetRole);
-		} catch (e) {
-			return;
-		}
-	});
-
 	setInterval(async () => {
 		await checkRoles();
 	}, 1000 * 15);

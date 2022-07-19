@@ -1,11 +1,12 @@
 /*
  * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
- * Tệp này là một phần của dự án MeowAssist. 
+ * Tệp này là một phần của dự án MeowAssist.
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
 const Discord = require("discord.js");
 const { setNick, getBoolean } = require("../../features/nickname");
+const config = require("../../config.json");
 
 /**
  * @typedef CallbackObject
@@ -50,9 +51,17 @@ const commandBase = {
 
 		if (!getBoolean())
 			return await interaction.reply({
-				content: "Tính năng `Đổi biệt danh` đã bị tắt ! Hãy bật nó lên lại để sử dụng !",
-				ephemeral: true
+				content:
+					"Tính năng `Đổi biệt danh` đã bị tắt ! Hãy bật nó lên lại để sử dụng !",
+				ephemeral: true,
 			});
+
+		if (interaction.channel.id !== config.nicknameChannel) {
+			return await interaction.reply({
+				content: `Bạn vui lòng vào kênh <#${config.nicknameChannel}> để đổi nickname !`,
+				ephemeral: true,
+			});
+		}
 
 		const result = await setNick(member, nickname);
 

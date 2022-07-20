@@ -39,7 +39,7 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
-        interaction.deferReply();
+		interaction.deferReply();
 		var d = new Date();
 		console.log(
 			interaction.user.tag,
@@ -52,14 +52,14 @@ const commandBase = {
 			`https://api.ultrax-yt.com/v1/random/meme?key=${config.ultraX_key}`
 		);
 		let data = res.data;
+		console.log(data);
 		const cooldown = "60000";
 		if (cooldownSet.has(interaction.user.id)) {
-			interaction.reply({
+			interaction.editReply({
 				content: `Ồ này cậu phải chờ ${cooldown.replace(
 					"000",
 					""
 				)}s mới được sử dụng tiếp !`,
-				ephemeral: true,
 			});
 		} else {
 			const embed = new MessageEmbed()
@@ -73,8 +73,8 @@ const commandBase = {
 			cooldownSet.add(interaction.user.id);
 			setTimeout(() => {
 				cooldownSet.delete(interaction.user.id);
-			}, cooldown);
-			interaction.reply({
+			}, parseInt(cooldown));
+			await interaction.editReply({
 				embeds: [embed],
 				ephemeral: false,
 			});

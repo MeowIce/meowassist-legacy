@@ -1,11 +1,15 @@
 {
-	"token": "OTkzMzU4OTcwMDI4ODM0OTI3.Gl7Wau.iDYLPdTiN-QAbuijjvY4cfgNVDOWkVGVChCthM",
+	"token": "OTk5MTI3MDY5MTcyNzAzMzUz.GjXK0V.OnnX_D103W1iP4cGVU6pNlkviJlCxczt3HfoSk",
 	"owners": ["666824403216105483"],
 	"ownerServer": "708718758616760339",
 	"mongoUrl": "mongodb+srv://Jason:620521@icybot.bcikm.mongodb.net/MeowAssist?retryWrites=true&w=majority",
 	"welcomeChannel": "804216172760399911",
 	"embedColor": "",
+<<<<<<< HEAD
 	"nicknameChannel": "994195342641877002",
+=======
+	"nickRequestChannel": "882919238875099146",
+>>>>>>> 561a3297800eefab029666ec8ccf16ffdfc44f8e
 	"registerCommandsGlobally": true,
 	"testServers": ["955458891662110751"],
 	"collab": ["754982406393430098"],

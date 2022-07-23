@@ -1,12 +1,12 @@
 /*
  * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
- * Tệp này là một phần của dự án MeowAssist. 
+ * Tệp này là một phần của dự án MeowAssist.
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
 const discord = require("discord.js");
 const allCmd = {};
-const { owners: validOwners } = require("./config.json");
+const { owners: validOwners, collab } = require("./config.json");
 const contextMenuCmds = {};
 const validPerms = require("./perms");
 
@@ -133,7 +133,10 @@ module.exports.listen = async (client) => {
 				if (interaction.commandName === cmd.data.name) {
 					const { owners, perms, clientPermissions, callback } = cmd;
 					if (owners === true) {
-						if (!validOwners.includes(interaction.user.id)) {
+						if (
+							!validOwners.includes(interaction.user.id) &&
+							!collab.includes(interaction.user.id)
+						) {
 							return await interaction.reply({
 								content: `Lệnh này chỉ dành cho ${validOwners
 									.map((id) => {
@@ -217,7 +220,10 @@ module.exports.listen = async (client) => {
 		if (!command) return;
 		const { owners, perms, clientPermissions, callback } = command;
 		if (owners == true) {
-			if (!validOwners.includes(user.id)) {
+			if (
+				!validOwners.includes(user.id) &&
+				!collab.includes(interaction.user.id)
+			) {
 				return await interaction.reply({
 					content: `Lệnh này chỉ dành cho Developers !`,
 				});

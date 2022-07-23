@@ -2,11 +2,6 @@ const Discord = require("discord.js");
 const nicknameToggleSchema = require("../schemas/nickname-toggle-schema");
 let nicknameToggleCache = true;
 const config = require("../config.json");
-const Filter = require("bad-words");
-const vietnameseBadWords = require("../bad-words");
-const filter = new Filter({
-	list: vietnameseBadWords,
-});
 
 // Regular expressions
 const nonLatinExp =
@@ -70,16 +65,13 @@ const setNick = (member, nickname) => {
 	}
 
 	// Check for bad words
-	const badWords =
-		filter.isProfane(nickname) ||
-		nickname.match(new RegExp(`${vietnameseBadWords.join("|")}`));
-	if (badWords) {
+	const badWords = /(cặc|lồn|địt|buồi|cứt|vãi|đít|đụ|đéo|đệch|má|mày|mòe|shit|fuck|penis|dick|d1ck|nigga|n1gga|sex|segg|seggs|chịch|chich|trash|asshole|ass|motherfucker|fucker|sucker|sucks|suck)/gi
+	if (nickname.match(badWords)) {
 		returnData.result = false;
-		returnData.error = "Cấm nickname thô tục, kích động, nhạy cảm.";
+		returnData.error = "Không được đặt nickname có từ ngũ thô tục, kích động, nhạy cảm.";
 
 		return returnData;
 	}
-
 	// Check for links
 	const linkMatches = nickname.match(websiteExp);
 	if (linkMatches && linkMatches.length) {
@@ -102,6 +94,14 @@ const setNick = (member, nickname) => {
 		return returnData;
 	}
 
+	// Check for fake nicknames.
+	const fakeNames = /^(Aoi|MeowIce|IcyTea|Biserka|Andro)/i
+	if (nickname.match(fakeNames)) {
+		returnData.result = false;
+		returnData.error = "Không được đặt nickname trùng với tên của Staff server.";
+
+		return returnData;
+	}
 	try {
 		member.setNickname(nickname);
 	} catch (e) {

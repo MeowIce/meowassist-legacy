@@ -71,7 +71,10 @@ const commandBase = {
 					name: `Bạn muốn mời bot vào server bạn ?`,
 					value: `[Click ~](https://bit.ly/3Rxo4cm)`,
 				},
-			]);
+			])
+			.setFooter({
+				text: `(C) Copyright 2007 - 2022 MeowIce - All rights reserved.`,
+			});
 		return interaction.reply({
 			embeds: [embed],
 			ephemeral: true,

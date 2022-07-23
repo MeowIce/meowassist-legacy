@@ -1,4 +1,4 @@
-# MeowAssist - Indev 1.0 Beta 5
+# MeowAssist - Release 1.0
 ## Giới thiệu
 
 Đây chính là repo chính thức cũng như là để push các bản cập nhật (update) lên cho bot.

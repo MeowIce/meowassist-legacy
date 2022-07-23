@@ -52,7 +52,7 @@ const commandBase = {
 			},
 			{
 				name: "clear",
-				description: "Để xoá nickname của bạn.",
+				description: "Xoá nickname của bạn.",
 				type: "SUB_COMMAND",
 			},
 		],
@@ -96,12 +96,12 @@ const commandBase = {
 				return await interaction.reply({
 					ephemeral: true,
 					content:
-						"Đã có lỗi khi xoá nickname của bạn, vui lòng liên hệ nhân viên đễ được hỗ trợ !",
+						"Đã có lỗi khi xoá nickname của bạn, vui lòng liên hệ Staff đễ được hỗ trợ !",
 				});
 			}
 
 			return await interaction.reply({
-				content: "Đã xoá nickname của bạn thành công !",
+				content: "Đã xoá nickname của bạn !",
 			});
 		}
 	},

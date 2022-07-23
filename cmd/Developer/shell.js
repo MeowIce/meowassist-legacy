@@ -46,10 +46,11 @@ const commandBase = {
 	wholeCommand: true,
 	owners: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
+        interaction.deferReply();
         const execute = options.getString("exec");
         child.exec(execute, (err, res) => {
             if (err) return console.log(err);
-            interaction.reply({
+            interaction.editReply({
                 content: `\`\`\`js\n${res.slice(0, 2000)}\`\`\``,
                 ephemeral: true,
     })});

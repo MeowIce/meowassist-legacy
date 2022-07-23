@@ -54,7 +54,7 @@ const commandBase = {
 		let data = res.data;
 		const cooldown = "60000";
 		if (cooldownSet.has(interaction.user.id)) {
-			interaction.reply({
+			interaction.editReply({
 				content: `Ồ này cậu phải chờ ${cooldown.replace(
 					"000",
 					""
@@ -73,8 +73,8 @@ const commandBase = {
 			cooldownSet.add(interaction.user.id);
 			setTimeout(() => {
 				cooldownSet.delete(interaction.user.id);
-			}, cooldown);
-			interaction.reply({
+			}, parseInt(cooldown));
+			await interaction.editReply({
 				embeds: [embed],
 				ephemeral: false,
 			});

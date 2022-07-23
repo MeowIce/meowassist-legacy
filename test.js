@@ -1,14 +1,12 @@
-const vietnameseBadWords = require("./bad-words");
-const exp = new RegExp(
-	`${vietnameseBadWords.map((w) => `\\B${w}\\B`).join("|")}`,
-	"gi"
-);
-console.log(exp);
+const Filter = require("bad-words");
+const filter = new Filter({
+	list: require("vietnamese-badwords").array,
+});
 
-const name = "Má tính";
-console.log(name.match(exp));
+const name = "máy tính";
+console.log(filter.isProfane(name));
 
-const secondExp = /\Bcặc\B|\Bmá\B/g;
+const secondExp = /cặc|má/;
 console.log(secondExp);
-const text = "má tính";
+const text = "máy tính";
 console.log(text.match(secondExp));

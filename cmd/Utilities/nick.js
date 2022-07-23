@@ -7,7 +7,8 @@
 const Discord = require("discord.js");
 const { setNick, getBoolean } = require("../../features/nickname");
 const config = require("../../config.json");
-
+const cooldownSet = new Set();
+const cooldown = "1800000";
 /**
  * @typedef CallbackObject
  * @property {Discord.CommandInteraction} interaction
@@ -61,8 +62,14 @@ const commandBase = {
 	callback: async ({ interaction, client, guild, member, user, options }) => {
 		const nickname = options.getString("nickname");
 		const subcommand = options.getSubcommand();
-
 		if (subcommand === "set") {
+			if (cooldownSet.has(interaction.user.id)) {
+				interaction.reply({
+					content: `Ồ này cậu phải chờ 30 phút mới được sử dụng tiếp !`,
+					ephemeral: true,
+				});
+			}
+			else {
 			if (!getBoolean())
 				return await interaction.reply({
 					content:
@@ -70,9 +77,9 @@ const commandBase = {
 					ephemeral: true,
 				});
 
-			if (interaction.channel.id !== config.nicknameChannel) {
+			if (interaction.channel.id !== config.nickRequestChannel) {
 				return await interaction.reply({
-					content: `Bạn vui lòng vào kênh <#${config.nicknameChannel}> để đổi nickname !`,
+					content: `Bạn vui lòng vào kênh <#${config.nickRequestChannel}> để đổi nickname !`,
 					ephemeral: true,
 				});
 			}
@@ -85,11 +92,23 @@ const commandBase = {
 					ephemeral: true,
 				});
 			} else {
-				return await interaction.reply({
+				await interaction.reply({
 					content: result.error,
 				});
 			}
+			cooldownSet.add(interaction.user.id);
+			setTimeout(() => {
+				cooldownSet.delete(interaction.user.id);
+			}, cooldown);
+			}
 		} else if (subcommand === "clear") {
+			if (cooldownSet.has(interaction.user.id)) {
+				interaction.reply({
+					content: `Ồ này cậu phải chờ 30 phút mới được sử dụng tiếp !`,
+					ephemeral: true,
+				});
+			}
+			else {
 			try {
 				await member.setNickname("");
 			} catch (e) {
@@ -100,10 +119,15 @@ const commandBase = {
 				});
 			}
 
-			return await interaction.reply({
+			await interaction.reply({
 				content: "Đã xoá nickname của bạn !",
 			});
-		}
+			cooldownSet.add(interaction.user.id);
+			setTimeout(() => {
+				cooldownSet.delete(interaction.user.id);
+			}, cooldown);
+			}
+		};
 	},
 };
 

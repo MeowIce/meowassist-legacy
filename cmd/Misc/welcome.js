@@ -79,11 +79,11 @@ const commandBase = {
 				content: `
 ⊱⇱⊶⊷⊶⊷⊶⊷⊶⊷⊰⌍
 Xin chào ${targetUser} đã đến với MeowHouse ! <:MH_waving:842762533853069322>
-> <#994249518298173510> **để xem luật server nha;**
+> <#774852148784922644> **để xem luật server nha;**
             
-> <#994249518298173510> **để lấy roles bạn thích nhé ~**
+> <#769450498046165023> **để lấy roles bạn thích nhé ~**
             
-> <#994249518298173510> **kênh chat chính ở đây nèk ^^**
+> <#766518745635225620> **kênh chat chính ở đây nèk ^^**
             
 <:MH_ngaingung2:986844286496698438> Mong bạn có một khoảng thời gian vui vẻ tại Nhà Mèo nhe !
 #meowhouseloveu

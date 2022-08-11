@@ -54,12 +54,16 @@ const commandBase = {
 			.setColor("RANDOM")
 			.setFields([
 				{
-					name: `Người tạo ra bot:`,
+					name: `Lead Developer:`,
 					value: `<@${config.owners}>`,
 				},
 				{
-					name: `Hỗ trợ phát triển bot:`,
+					name: `Collaborator:`,
 					value: `<@${config.collab}>`,
+				},
+				{
+					name: `Tester:`,
+					value: `<@775939295298322453>`
 				},
 				{
 					name: `Ngày tạo bot:`,

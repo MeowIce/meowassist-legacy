@@ -5,6 +5,7 @@
  */
 
 const { MessageEmbed, version } = require("discord.js");
+const process = require("process");
 const Discord = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
@@ -55,28 +56,30 @@ const commandBase = {
 		//Bot uptime
 		const uptime = moment
 			.duration(client.uptime)
-			.format("d[ Ngày]・h[ Giờ]・m[ Phút]・s[ Giây]");
+			.format("d[d]・h[h]・m[m]・s[s]");
 		//System uptime
 		var sysUptime = moment
 			.duration(os.uptime() * 1000)
-			.format("d[ Ngày]・h[ Giờ]・m[ Phút]・s[ Giây]");
+			.format("d[d]・h[h]・m[m]・s[s]");
+		var sysMemTotal = Math.round(os.totalmem / (1024 * 1024));
+		var sysMemFree = Math.round(os.freemem / (1024 * 1024));
 		//Bot version
 		const package = require("../../package.json");
 		const embed = new MessageEmbed()
 			.setTitle(`Trạng thái của ${client.user.username}`)
 			.setColor("RANDOM")
 			.setDescription(
-				`\`\`\`yml\nTên: ${client.user.username}#${client.user.discriminator} [${client.user.id}]\nĐộ trễ API: ${client.ws.ping}ms\nThời gian chạy: ${uptime}\`\`\``
+				`\`\`\`yml\nUsername: ${client.user.username}#${client.user.discriminator} [${client.user.id}]\nAPI Latency: ${client.ws.ping}ms\nUptime: ${uptime}\`\`\``
 			)
 			.setFields([
 				{
 					name: "Thông tin software",
-					value: `\`\`\`yml\nGuilds: ${client.guilds.cache.size} \nNodeJS: ${nodeVer}\nPhiên bản Discord.JS: ${version}\nPhiên bản MeowAssist: ${package.version}\`\`\``,
+					value: `\`\`\`yml\nGuilds: ${client.guilds.cache.size}\nNodeJS version: ${nodeVer}\nDiscord.JS version: ${version}\nMeowAssist version: ${package.version}\`\`\``,
 					inline: true,
 				},
 				{
 					name: "Thông tin hệ thống",
-					value: `\`\`\`yml\nOS: ${osVer}\nThời gian chạy: ${sysUptime}\`\`\``,
+					value: `\`\`\`yml\nOS: ${osVer}\nUptime: ${sysUptime}\nMemory: ${sysMemFree}MB free out of ${sysMemTotal}MB\`\`\``,
 				},
 			])
 			.setFooter({

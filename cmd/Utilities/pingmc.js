@@ -49,21 +49,30 @@ const commandBase = {
 		const address = options.getString("address");
 		let res = await fetch(`https://api.mcsrvstat.us/2/${address}`);
 		let data = res.data;
+		let hasSRV = data.debug.srv
+		let ipinsrv = data.debug.ipinsrv
+		let cnameinsrv = data.debug.cnameinsrv
+		if (hasSRV == false) hasSRV = "Không có"
+		else hasSRV = "Có"
+		if (ipinsrv == false) ipinsrv = "Không có"
+		else ipinsrv = "Có"
+		if (cnameinsrv == false) cnameinsrv = "Không có"
+		else cnameinsrv = "Có"
 
 		const embed = new MessageEmbed()
 			.setTitle(`Trạng thái của ${address}`)
 			.setColor("RANDOM")
 			.addField(`IP`, data.ip?.toString() || "Không biết", true)
 			.addField(`Port`, data.port?.toString() || "Không biết", true)
-			.addField(`Có SRV`, data.debug.srv?.toString() || "Không biết", true)
+			.addField(`Có SRV`, `${hasSRV}`, true)
 			.addField(
 				`Có IP trong SRV`,
-				data.debug.ipinsrv?.toString() || "Không biết",
+				ipinsrv,
 				true
 			)
 			.addField(
 				`Có CNAME trong SRV`,
-				data.debug.cnameinsrv?.toString() || "Không biết",
+				cnameinsrv,
 				true
 			)
 			.addField(

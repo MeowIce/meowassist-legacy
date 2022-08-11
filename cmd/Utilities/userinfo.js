@@ -60,16 +60,22 @@ const commandBase = {
 			.join(", ");
 		if (rolemap.length > 1024) rolemap = "Quá nhiều roles để hiển thị !";
 		if (!rolemap) rolemap = "Người dùng không có role nào.";
-
+		let isBot = usr.bot
+		if (isBot == true) isBot = "Đúng"
+		else isBot = "Sai"
+		let isSystem = usr.system
+		if (isSystem == true) isSystem = "Đúng"
+		else isSystem = "Sai"
 		const embed = new MessageEmbed()
+			.setColor("RANDOM")
 			.setAuthor({
 				name: usr.tag,
 				iconURL: usr.displayAvatarURL(),
 			})
 			.setThumbnail(`${usr.displayAvatarURL({ dynamic: true, size: 512 })}`)
 			.addFields({
-				name: `Ping`,
-				value: `<@${usr.id}>`,
+				name: `Username`,
+				value: `${usr.username}`,
 			})
 			.addFields({
 				name: `ID người dùng`,
@@ -77,13 +83,25 @@ const commandBase = {
 			})
 			.addFields({
 				name: `Đã vào Discord lúc`,
-				value: `${moment(usr.createdAt).format(
-					"ddd, [Ngày] DD [Tháng] mm [Năm] yy [Lúc] hh[h]mm[p]"
-				)}`,
+				value: `<t:${moment(usr.createdTimestamp)
+					.tz("Asia/Ho_Chi_Minh")
+					.unix()}:R>`,
 			})
 			.addFields({
-				name: `Vai trò`,
+				name: `Vai trò của người dùng`,
 				value: rolemap,
+			})
+			.addFields({
+				name: `Người dùng là bot...`,
+				value: isBot,
+			})
+			.addFields({
+				name: `Người dùng là hệ thống...`,
+				value: isSystem,
+			})
+			.addFields({
+				name: `Số tag:`,
+				value: `#${usr.discriminator}`,
 			})
 			.setFooter({
 				text: `Lệnh được thực thi bởi ${interaction.user.username}`,

@@ -46,14 +46,11 @@ const commandBase = {
             .setTitle(`Thông tin máy chủ cho ${interaction.guild.name}`)
             .addField(`👑 Chủ server`, `<@${interaction.guild.ownerId}>`, true)
             .addField(`🧍 Tổng số thành viên`, `${interaction.guild.memberCount}`, true)
-            .addField(`🟢 Thành viên đang trực tuyến`, `${interaction.guild.members.cache.filter(mem => member.presence.status == "online").size}`, true)
-            .addField(`🟡 Thành viên đang treo máy`, `${interaction.guild.members.cache.filter(mem => member.presence.status == "idle").size}`, true)
-            .addField(`⚫ Thành viên đang ngoại tuyến`, `${interaction.guild.members.cache.filter(mem => member.presence.status == "offline").size}`, true)
             .addField(`😃 Tổng số Emoji(s)`, `${interaction.guild.emojis.cache.size}`, true)
             .addField(`🪐 Tổng số Role(s)`, `${interaction.guild.roles.cache.size}`, true)
             .addField(`🤝 Có partner với Discord`, `${isPartnered}`, true)
             .addField(`✌ Tổng số Sticker(s)`, `${interaction.guild.stickers.cache.size}`, true)
-            .addField(`✅ Máy chủ đã được xác  minh`, `${isVerified}`, true)
+            .addField(`✅ Máy chủ đã được xác minh`, `${isVerified}`, true)
 
         return interaction.reply({
             embeds: [embed],

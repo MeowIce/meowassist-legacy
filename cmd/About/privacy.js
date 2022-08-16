@@ -33,7 +33,7 @@ const commandBase = {
         const embed = new MessageEmbed()
             .setColor("RED")
             .setTitle("Thông tin về quyền riêng tư và bảo mật dữ liệu")
-            .setDescription("Chúng tôi - những người phát triển bot **KHÔNG** lưu trữ bất kỳ thông tin cá nhân nào về bạn như số điện thoại, Email, hay tin nhắn của bạn trên Discord. Tất cả những dữ liệu như Username, ảnh đại diện profile, ID,v.v sẽ bị xóa sau khi hệ thống khởi động lại. Chúng tôi tuân theo tất cả Điều khoản dịch vụ và Nguyên tắc cộng đồng của Discord.")
+            .setDescription("Chúng tôi - những người phát triển bot **KHÔNG** lưu trữ bất kỳ thông tin cá nhân nào về bạn như số điện thoại, Email, hay tin nhắn của bạn trên Discord. Tất cả những dữ liệu công khai như Username, ảnh đại diện profile, ID,v.v sẽ bị xóa sau khi hệ thống khởi động lại. Chúng tôi tuân theo tất cả Điều khoản dịch vụ và Nguyên tắc cộng đồng của Discord.")
 
         return interaction.reply({
             embeds: [embed],

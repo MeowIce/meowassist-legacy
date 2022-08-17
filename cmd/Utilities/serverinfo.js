@@ -1,9 +1,9 @@
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
-const moment = require("moment");
-const { on } = require("nodemon");
-require("moment-duration-format");
-require("moment-timezone");
+/*
+ * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
+ * Tệp này là một phần của dự án MeowAssist. 
+ * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
+ */
+const { MessageEmbed, Discord } = require("discord.js");
 
 /**
  * @typedef CallbackObject

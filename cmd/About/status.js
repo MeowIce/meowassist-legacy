@@ -61,8 +61,8 @@ const commandBase = {
 		var sysUptime = moment
 			.duration(os.uptime() * 1000)
 			.format("d[d]・h[h]・m[m]・s[s]");
+		var sysMemUsed = Math.round(process.memoryUsage().rss / 1024 / 1024)
 		var sysMemTotal = Math.round(os.totalmem / (1024 * 1024));
-		var sysMemFree = Math.round(os.freemem / (1024 * 1024));
 		//Bot version
 		const package = require("../../package.json");
 		const embed = new MessageEmbed()
@@ -79,7 +79,7 @@ const commandBase = {
 				},
 				{
 					name: "Thông tin hệ thống",
-					value: `\`\`\`yml\nOS: ${osVer}\nUptime: ${sysUptime}\nMemory: ${sysMemFree}MB free out of ${sysMemTotal}MB\`\`\``,
+					value: `\`\`\`yml\nOS: ${osVer}\nUptime: ${sysUptime}\nMemory: ${sysMemUsed}MB/${sysMemTotal}MB\`\`\``,
 				},
 			])
 			.setFooter({

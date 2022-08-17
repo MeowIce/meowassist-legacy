@@ -1,6 +1,6 @@
 {
 	"name": "meowassist",
-	"version": "1.0R1-220816003-stable",
+	"version": "1.0R1-220817001-debug",
 	"description": "Một bot để hỗ trợ MeowHouse.",
 	"dependencies": {
 		"@iamtraction/google-translate": "^1.1.2",

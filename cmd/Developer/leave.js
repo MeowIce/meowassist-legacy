@@ -3,7 +3,7 @@
  * Tệp này là một phần của dự án MeowAssist. 
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
-const { MessageEmbed, Discord }= require("discord.js");
+const { MessageEmbed, Discord, MessageActionRow, MessageButton, ButtonInteraction } = require("discord.js");
 
 /**
 * @typedef CallbackObject
@@ -37,24 +37,44 @@ const commandBase = {
 	wholeCommand: true,
     owners: true,
 	callback: async function ({ interaction, client, guild }) {
+        const row = new MessageActionRow().addComponents(
+            new MessageButton()
+                .setStyle("DANGER")
+                .setEmoji("<:winlogon:811225897536454679>")
+                .setCustomId('confirm'),
+            new MessageButton()
+                .setStyle("SUCCESS")
+                .setEmoji("<:blocked:810858844665675786>")
+                .setCustomId('cancel')
+        );
         const embed = new MessageEmbed()
             .setColor("RED")
-            .setDescription("<:Icon_0426:810858844921659424> Bạn có chắc muốn cho bot thoát máy chủ này ? Nhập 'XAC NHAN' để xác nhận, 'HUY' để hủy")
-
-        interaction.reply({
-		    embeds: [embed],
-			ephemeral: false,
-		});
-        client.on('messageCreate', async (message) => {
-             if (message.content.toLowerCase() === 'xac nhan') {
-                message.channel.send("<:winlogon:811225897536454679> Thao tác thành công, bot đang thoát...")
-                await new Promise(r => setTimeout(r, 3000));
-                message.guild.leave()
-             }
-            if (message.content.toLowerCase() === 'huy') {
-                message.channel.send("<:Icon_0277:810858844925591562> Thao tác đã bị hủy.")
-            }
-    });
-    }
-}
+            .setDescription("<:Icon_0426:810858844921659424> Bạn có chắc muốn cho bot thoát máy chủ này ? Bấm <:winlogon:811225897536454679> để xác nhận, <:blocked:810858844665675786> để hủy.")
+        
+        client.on('interactionCreate', async ButtonInteraction => {
+            if (!ButtonInteraction.isButton) return;
+            if (ButtonInteraction.customId === 'confirm') {
+                const embedConfirmed = new MessageEmbed()
+                    .setColor("GREEN")
+                    .setDescription("<:winlogon:811225897536454679> Thao tác thành công, bot đang thoát...")
+                ButtonInteraction.reply({
+                    embeds: [embedConfirmed],
+                });
+                await guild.leave();
+            };
+            if (ButtonInteraction.customId === "cancel") {
+                const embedCanceled = new MessageEmbed()
+                    .setColor("RED")
+                    .setDescription("<:Icon_0277:810858844925591562> Thao tác đã bị hủy")
+                ButtonInteraction.reply({
+                    embeds: [embedCanceled],
+                });
+            };
+        });
+        return interaction.reply({
+            embeds: [embed],
+            components: [row],
+        });
+    },
+};
 module.exports = commandBase;

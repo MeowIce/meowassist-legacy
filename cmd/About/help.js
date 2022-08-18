@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { EmbedBuilder, Discord, ApplicationCommandOptionType, ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
+const { EmbedBuilder, Discord, ApplicationCommandOptionType, ActionRowBuilder, SelectMenuBuilder, SelectMenuComponent } = require("discord.js");
 const config = require("../../config.json");
 const fs = require("fs");
 const path = require("path");
@@ -128,7 +128,7 @@ const commandBase = {
 			}
 
 			const embed = new EmbedBuilder()
-				.setColor("RANDOM")
+				.setColor("Random")
 				.setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
 				.setTitle(
 					validCommand.wholeCommand && validCommand.wholeCommand === true
@@ -179,7 +179,7 @@ const commandBase = {
         **Tổng số lệnh:** ${getTotalCmds().toLocaleString("vi-VN")}`;
 
 		const embed = new EmbedBuilder()
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setAuthor({ name: `Bảng trợ giúp của ${user.username}.` })
 			.setTitle(`Ồ này ${user.username}, có phải cậu đang lạc lối ?`)
 			.setDescription(helpDescription);
@@ -226,11 +226,10 @@ const commandBase = {
 					console.log("An error has occured:", err);
 				}
 			}
-
 			const groupName = value[0].toUpperCase() + value.slice(1);
 			const commandsInGroup = readCommandsInGroup(groupName);
 			const categoryEmbed = new EmbedBuilder()
-				.setColor("RANDOM")
+				.setColor("Random")
 				.setDescription(
 					`Để xem chi tiết về một lệnh cụ thể, hãy gõ: \`/help command:lenh muon giup\` !\n\n ${groupName} - ${
 						commandsInGroup.length
@@ -259,7 +258,7 @@ const commandBase = {
 				return await message.edit({
 					embeds: [
 						new EmbedBuilder()
-							.setColor("RED")
+							.setColor("Red")
 							.setDescription(`Đã có lỗi xảy ra khi hiển thị bảng này.`),
 					],
 					components: [

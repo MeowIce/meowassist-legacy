@@ -66,7 +66,7 @@ const commandBase = {
 		if (isSystem == true) isSystem = "Đúng"
 		else isSystem = "Sai"
 		const embed = new EmbedBuilder()
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setAuthor({
 				name: usr.tag,
 				iconURL: usr.displayAvatarURL(),

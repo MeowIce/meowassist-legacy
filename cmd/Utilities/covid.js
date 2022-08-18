@@ -62,7 +62,7 @@ const commandBase = {
 		} else {
 			const embed = new EmbedBuilder()
 				.setTitle(`Tình hình dịch Covid-19 ở Việt Nam`)
-				.setColor("RANDOM")
+				.setColor("Random")
 				.addField(`Tổng số ca nhiễm`, `${data.cases}`, true)
 				.addField(`Tổng số ca nhiễm trong hôm nay`, `${data.todayCases}`, true)
 				.addField(`Tổng số ca phục hồi hôm nay`, `${data.todayRecovered}`, true)

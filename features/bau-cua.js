@@ -74,7 +74,7 @@ class BauCua {
 			const text = `<@${interaction.user.id}> đã bắt đầu một ván Bầu Cua mới !\nBạn có thể tham gia đặt cược bằng lệnh: \`/baucua bet\` !`;
 
 			const embed = new EmbedBuilder()
-				.setColor("WHITE")
+				.setColor("White")
 				.setDescription(text)
 				.setTimestamp();
 
@@ -383,7 +383,7 @@ class BauCua {
 					["vi-VN"]
 				)} !`
 			)
-			.setColor("WHITE")
+			.setColor("White")
 			.setDescription(generalText)
 			.setFooter({
 				text: `Lần lăn xúc xắc thứ ${gameSession.numberOfRolls.toLocaleString([

@@ -49,7 +49,7 @@ const commandBase = {
         console.log(interaction.user.tag, "executed command", commandBase.data.name, "on", targetUser.username, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
 
 		const embed = new EmbedBuilder()
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setTitle(`Avatar của ${targetUser.username}`)
 			.setImage(targetUser.displayAvatarURL({ dynamic: true, size: 1024 }))
 			.setDescription(

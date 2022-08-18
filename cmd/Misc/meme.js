@@ -64,7 +64,7 @@ const commandBase = {
 			const embed = new EmbedBuilder()
 				.setTitle(`Random memes trên Reddit`)
 				.addField(`Tiêu đề`, `${data.title}`)
-				.setColor("RANDOM")
+				.setColor("Random")
 				.setImage(`${data.image}`)
 				.addField(`Lượt upvotes`, `${data.up_votes}`, true)
 				.addField(`Lượt downvotes`, `${data.down_votes}`, true)

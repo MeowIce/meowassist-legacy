@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
+const { EmbedBuilder, Discord } = require("discord.js");
 
 /**
  * @typedef CallbackObject
@@ -45,7 +44,7 @@ const commandBase = {
 			"at",
 			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
 		);
-		const iconMsg = new MessageEmbed()
+		const iconMsg = new EmbedBuilder()
 			.setTitle(`Icon của ${guild.name}`)
 			.setImage(guild.iconURL({ dynamic: true, size: 1024 }))
 			.setColor("RANDOM")

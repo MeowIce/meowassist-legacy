@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType } = require("discord.js");
 const { addRole } = require("../../features/give-role");
 
 /**
@@ -33,18 +33,18 @@ const commandBase = {
 			{
 				name: "user",
 				description: "Người để thêm role...",
-				type: "USER",
+				type: ApplicationCommandOptionType.User,
 				required: true,
 			},
 			{
 				name: "role",
-				type: "ROLE",
+				type: ApplicationCommandOptionType.Role,
 				description: "Role để muốn thêm...",
 				required: true,
 			},
 			{
 				name: "time",
-				type: "NUMBER",
+				type: ApplicationCommandOptionType.Number,
 				description: "Thời gian thêm role cho người dùng đó (phút).",
 				required: true,
 			},

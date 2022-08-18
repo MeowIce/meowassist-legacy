@@ -5,7 +5,7 @@
  */
 
 const ms = require("ms");
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType } = require("discord.js");
 
 /**
  * @typedef CallbackObject
@@ -37,7 +37,7 @@ const commandBase = {
 		options: [
 			{
 				name: "amount",
-				type: "NUMBER",
+				type: ApplicationCommandOptionType.Number,
 				description: "Số lượng...",
 				required: true,
 			},

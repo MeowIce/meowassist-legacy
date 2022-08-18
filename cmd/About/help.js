@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
+const { EmbedBuilder, Discord, ApplicationCommandOptionType, ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
 const config = require("../../config.json");
 const fs = require("fs");
 const path = require("path");
@@ -84,7 +83,7 @@ const commandBase = {
 		options: [
 			{
 				name: "command",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "Lệnh để xem chi tiết hơn...",
 				required: false,
 			},
@@ -128,7 +127,7 @@ const commandBase = {
 				});
 			}
 
-			const embed = new Discord.MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor("RANDOM")
 				.setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
 				.setTitle(
@@ -179,13 +178,13 @@ const commandBase = {
         Câu có thể sử dụng \`selection menu\` ở dưới để xem tất cả các lệnh mà tớ có !
         **Tổng số lệnh:** ${getTotalCmds().toLocaleString("vi-VN")}`;
 
-		const embed = new Discord.MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setColor("RANDOM")
 			.setAuthor({ name: `Bảng trợ giúp của ${user.username}.` })
 			.setTitle(`Ồ này ${user.username}, có phải cậu đang lạc lối ?`)
 			.setDescription(helpDescription);
 
-		const selectionMenu = new Discord.MessageSelectMenu()
+		const selectionMenu = new SelectMenuBuilder()
 			.setCustomId(selectMenuId)
 			.setPlaceholder("Vui lòng chọn danh mục lệnh...")
 			.addOptions({
@@ -207,7 +206,7 @@ const commandBase = {
 		await interaction.editReply({
 			embeds: [embed],
 			components: [
-				new Discord.MessageActionRow({ components: [selectionMenu] }),
+				new ActionRowBuilder({ components: [selectionMenu] }),
 			],
 		});
 
@@ -230,7 +229,7 @@ const commandBase = {
 
 			const groupName = value[0].toUpperCase() + value.slice(1);
 			const commandsInGroup = readCommandsInGroup(groupName);
-			const categoryEmbed = new Discord.MessageEmbed()
+			const categoryEmbed = new EmbedBuilder()
 				.setColor("RANDOM")
 				.setDescription(
 					`Để xem chi tiết về một lệnh cụ thể, hãy gõ: \`/help command:lenh muon giup\` !\n\n ${groupName} - ${
@@ -251,7 +250,7 @@ const commandBase = {
 			try {
 				await message.edit({
 					components: [
-						new Discord.MessageActionRow({
+						new ActionRowBuilder({
 							components: [selectionMenu.setDisabled(true)],
 						}),
 					],
@@ -259,12 +258,12 @@ const commandBase = {
 			} catch (e) {
 				return await message.edit({
 					embeds: [
-						new Discord.MessageEmbed()
+						new EmbedBuilder()
 							.setColor("RED")
 							.setDescription(`Đã có lỗi xảy ra khi hiển thị bảng này.`),
 					],
 					components: [
-						new Discord.MessageActionRow({
+						new Discord.ActionRowBuilder({
 							components: [selectionMenu.setDisabled(true)],
 						}),
 					],

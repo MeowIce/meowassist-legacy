@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, Modal } = require("discord.js");
-const Discord = require("discord.js");
+const { EmbedBuilder, Discord, ApplicationCommandOptionType } = require("discord.js");
 const moment = require("moment");
 const locale = require("moment/locale/vi");
 
@@ -39,7 +38,7 @@ const commandBase = {
 		options: [
 			{
 				name: "target",
-				type: "USER",
+				type: ApplicationCommandOptionType.User,
 				description: "Đối tượng...",
 				required: false,
 			},
@@ -66,7 +65,7 @@ const commandBase = {
 		let isSystem = usr.system
 		if (isSystem == true) isSystem = "Đúng"
 		else isSystem = "Sai"
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setColor("RANDOM")
 			.setAuthor({
 				name: usr.tag,

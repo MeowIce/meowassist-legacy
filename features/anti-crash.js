@@ -23,9 +23,9 @@ module.exports = (client) => {
 		console.log(code);
 	});
 
-	process.on("multipleResolves", (type, promise, reason) => {
-		console.log(reason);
-	});
+	// process.on("multipleResolves", (type, promise, reason) => {
+	// 	console.log(reason);
+	// });
 
 	client.on("error", (error) => {
 		console.log(error.stack);

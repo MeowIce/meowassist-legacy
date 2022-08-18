@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu bản quyền - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, Collection, Client} = require("discord.js");
 const config = require("../config.json");
 
 /**
@@ -16,7 +16,7 @@ const config = require("../config.json");
 /**
  * @type {Discord.Collection<Discord.Snowflake, CacheConfig>}
  */
-const afkCache = new Discord.Collection();
+const afkCache = new Collection();
 let afkSettingsCache = true;
 const afkSchema = require("../schemas/afk-schema");
 const afkSettingsSchema = require("../schemas/afk-settings-schema");
@@ -42,7 +42,7 @@ async function loadCache() {
 
 /**
  *
- * @param {Discord.Client} client
+ * @param {Client} client
  */
 module.exports = async (client) => {
 	await loadCache();

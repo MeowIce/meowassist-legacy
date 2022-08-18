@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu bản quyền - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, EmbedBuilder, Collection } = require("discord.js");
 const { addMoney, removeMoney, getMoney } = require("./economy");
 
 module.exports = () => {};
@@ -47,7 +47,7 @@ class BauCua {
 		/**
 		 * @type {Discord.Collection<Discord.Snowflake, BaucuaCache>}
 		 */
-		this.baucuaCache = new Discord.Collection();
+		this.baucuaCache = new Collection();
 	}
 
 	/**
@@ -73,7 +73,7 @@ class BauCua {
 
 			const text = `<@${interaction.user.id}> đã bắt đầu một ván Bầu Cua mới !\nBạn có thể tham gia đặt cược bằng lệnh: \`/baucua bet\` !`;
 
-			const embed = new Discord.MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor("WHITE")
 				.setDescription(text)
 				.setTimestamp();
@@ -377,7 +377,7 @@ class BauCua {
 			}
 		}
 
-		const rollEmbed = new Discord.MessageEmbed()
+		const rollEmbed = new EmbedBuilder()
 			.setTitle(
 				`Kết quả lần lăn xúc xắc thứ ${gameSession.numberOfRolls.toLocaleString(
 					["vi-VN"]

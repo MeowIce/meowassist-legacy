@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, ModalSubmitFieldsResolver } = require("discord.js");
-const Discord = require("discord.js");
+const { EmbedBuilder, Discord, ApplicationCommandOptionType } = require("discord.js");
 const dich = require("@iamtraction/google-translate");
 
 /**
@@ -38,13 +37,13 @@ const commandBase = {
 		options: [
 			{
 				name: "query",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "nhập dữ liệu đầu vào...",
 				required: true,
 			},
 			{
 				name: "language",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "sang ngôn ngữ...",
 				required: true,
 			},
@@ -58,7 +57,7 @@ const commandBase = {
 		const usr = user;
         var d = new Date();
         console.log(interaction.user.tag, "executed command", commandBase.data.name, "to translate", "'" + query + "'", "to", language, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
-		const newEmbed1 = new MessageEmbed()
+		const newEmbed1 = new EmbedBuilder()
 			.setColor("RANDOM")
 			.setTitle("Dịch thuật")
 			.setThumbnail("https://static.thenounproject.com/png/987-200.png")
@@ -76,7 +75,7 @@ const commandBase = {
 		} catch (e) {
 			return await interaction.editReply({
 				embeds: [
-					new MessageEmbed()
+					new EmbedBuilder()
 						.setColor("RANDOM")
 						.setDescription(
 							`⛔ **Ngôn ngữ không hợp lệ. Hãy sử dụng bảng mã ISO 639-1.**`
@@ -85,7 +84,7 @@ const commandBase = {
 			});
 		}
 
-		const done = new MessageEmbed()
+		const done = new EmbedBuilder()
 			.setColor("RANDOM")
 			.setTitle("Dịch thuật")
 			.addFields(

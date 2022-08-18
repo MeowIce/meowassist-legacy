@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu bản quyền - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, EmbedBuilder } = require("discord.js");
 const profileSchema = require("../schemas/profile-schema");
 const dailyRewardsSchema = require("../schemas/daily-rewards-schema");
 const config = require("../config.json");
@@ -163,7 +163,7 @@ const addMoney = async (
 
 		return await user.send({
 			embeds: [
-				new Discord.MessageEmbed()
+				new EmbedBuilder()
 					.setColor("WHITE")
 					.setDescription(
 						`Bạn hoặc người bạn đã tag chưa có tài khoản nên không thể thêm tiền vào tài khoản đã tag !\n\nHãy tạo một tài khoản bằng lệnh: \`/account create\` !`
@@ -199,7 +199,7 @@ const addMoney = async (
 	);
 
 	return await user.send({
-		embeds: [new Discord.MessageEmbed().setColor("WHITE").setDescription(text)],
+		embeds: [new Discord.EmbedBuilder().setColor("WHITE").setDescription(text)],
 	});
 };
 
@@ -289,7 +289,7 @@ const removeMoney = async (userId, money, accountId, client, reason) => {
 
 		return await user.send({
 			embeds: [
-				new Discord.MessageEmbed()
+				new EmbedBuilder()
 					.setColor("WHITE")
 					.setDescription(
 						`Bạn hoặc người bạn đã tag chưa có tài khoản nên không thể thêm tiền vào tài khoản đã tag !\n\nHãy tạo một tài khoản bằng lệnh: \`/account create\` !`
@@ -325,7 +325,7 @@ const removeMoney = async (userId, money, accountId, client, reason) => {
 	);
 
 	return await user.send({
-		embeds: [new Discord.MessageEmbed().setColor("WHITE").setDescription(text)],
+		embeds: [new EmbedBuilder().setColor("WHITE").setDescription(text)],
 	});
 };
 

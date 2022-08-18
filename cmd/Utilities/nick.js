@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType } = require("discord.js");
 const { setNick, getBoolean } = require("../../features/nickname");
 const config = require("../../config.json");
 const cooldownSet = new Set();
@@ -41,12 +41,12 @@ const commandBase = {
 			{
 				name: "set",
 				description: "Để đặt nickname của bạn.",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 				options: [
 					{
 						name: "nickname",
 						description: "Biệt danh bạn muốn đổi.",
-						type: "STRING",
+						type: ApplicationCommandOptionType.String,
 						required: true,
 					},
 				],
@@ -54,7 +54,7 @@ const commandBase = {
 			{
 				name: "clear",
 				description: "Xoá nickname của bạn.",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 			},
 		],
 	},

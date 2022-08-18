@@ -4,9 +4,8 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, version } = require("discord.js");
+const { EmbedBuilder, version, Discord } = require("discord.js");
 const process = require("process");
-const Discord = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
 const os = require("os");
@@ -40,7 +39,7 @@ const commandBase = {
 		description: "Hiển thị trạng thái của bot.",
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, client, guild }) => {
 		var d = new Date();
 		console.log(
 			interaction.user.tag,
@@ -65,7 +64,7 @@ const commandBase = {
 		var sysMemTotal = Math.round(os.totalmem / (1024 * 1024));
 		//Bot version
 		const package = require("../../package.json");
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setTitle(`Trạng thái của ${client.user.username}`)
 			.setColor("RANDOM")
 			.setDescription(

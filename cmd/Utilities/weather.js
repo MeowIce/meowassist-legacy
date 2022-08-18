@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, User } = require("discord.js");
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType, EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 const locale = require("moment/locale/vi");
 const config = require("./../../config.json");
@@ -41,7 +40,7 @@ const commandBase = {
 		options: [
 			{
 				name: "location",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "Vị trí...",
 				required: true,
 			},
@@ -72,7 +71,7 @@ const commandBase = {
 				ephemeral: true,
 			});
 		} else {
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setTitle(`Thông tin thời tiết`)
 				.setColor("RANDOM")
 				.setThumbnail(`${data.current.weather_icons}`)

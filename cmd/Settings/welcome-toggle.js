@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType } = require("discord.js");
 const { updateBoolean } = require("../../features/welcome");
 
 /**
@@ -38,12 +38,12 @@ const commandBase = {
 			{
 				name: "enable",
 				description: "Để bật tính năng welcome.",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 			},
 			{
 				name: "disable",
 				description: "Để tắt tính năng welcome.",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 			},
 		],
 	},

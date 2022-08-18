@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, Discord } = require("discord.js");
+const { EmbedBuilder, Discord, ApplicationCommandOptionType } = require("discord.js");
 const fetch = require("axios");
 
 /**
@@ -37,7 +37,7 @@ const commandBase = {
 		options: [
 			{
 				name: "address",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "Địa chỉ server Minecraft Java...",
 				required: true,
 			},
@@ -59,7 +59,7 @@ const commandBase = {
 		if (cnameinsrv == false) cnameinsrv = "Không có"
 		else cnameinsrv = "Có"
 
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setTitle(`Trạng thái của ${address}`)
 			.setColor("RANDOM")
 			.addField(`IP`, data.ip?.toString() || "Không biết", true)

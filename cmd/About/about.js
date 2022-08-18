@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
+const { Discord, EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
 require("moment-timezone");
@@ -49,7 +48,7 @@ const commandBase = {
 			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
 		);
 		const config = require("../../config.json");
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setTitle("Thông tin về bot...")
 			.setColor("RANDOM")
 			.setFields([

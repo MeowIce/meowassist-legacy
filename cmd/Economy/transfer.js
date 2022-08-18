@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType, ApplicationCommand } = require("discord.js");
 const { addMoney, removeMoney, getMoney } = require("../../features/economy");
 
 /**
@@ -37,19 +37,19 @@ const commandBase = {
 		options: [
 			{
 				name: "account",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "Số tài khoản bạn muốn chuyển tiền vào.",
 				required: true,
 			},
 			{
 				name: "money",
-				type: "NUMBER",
+				type: ApplicationCommandOptionType.Number,
 				description: "Số tiền bạn muốn chuyển cho tài khoản đó.",
 				required: true,
 			},
 			{
 				name: "content",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "Nội dung của cuộc chuyển tiền.",
 				required: false,
 			},

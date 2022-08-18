@@ -3,7 +3,8 @@
  * Tệp này là một phần của dự án MeowAssist. 
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
-const { MessageEmbed, Discord, MessageActionRow, MessageButton, ButtonInteraction } = require("discord.js");
+const { MessageEmbed, Discord, MessageActionRow, MessageButton, ButtonInteraction, Collector } = require("discord.js");
+const { Collection } = require("mongoose");
 
 /**
 * @typedef CallbackObject
@@ -51,29 +52,32 @@ const commandBase = {
             .setColor("RED")
             .setDescription("<:Icon_0426:810858844921659424> Bạn có chắc muốn cho bot thoát máy chủ này ? Bấm <:winlogon:811225897536454679> để xác nhận, <:blocked:810858844665675786> để hủy.")
         
-        client.on('interactionCreate', async ButtonInteraction => {
-            if (!ButtonInteraction.isButton) return;
-            if (ButtonInteraction.customId === 'confirm') {
-                const embedConfirmed = new MessageEmbed()
-                    .setColor("GREEN")
-                    .setDescription("<:winlogon:811225897536454679> Thao tác thành công, bot đang thoát...")
-                ButtonInteraction.reply({
-                    embeds: [embedConfirmed],
-                });
-                await guild.leave();
-            };
-            if (ButtonInteraction.customId === "cancel") {
-                const embedCanceled = new MessageEmbed()
-                    .setColor("RED")
-                    .setDescription("<:Icon_0277:810858844925591562> Thao tác đã bị hủy")
-                ButtonInteraction.reply({
-                    embeds: [embedCanceled],
-                });
-            };
-        });
+            client.on('interactionCreate', async ButtonInteraction => {
+                if (!ButtonInteraction.isButton) return;
+                if (ButtonInteraction.customId === 'confirm' || user.id === interaction.user.id) {
+                    const embedConfirmed = new MessageEmbed()
+                        .setColor("GREEN")
+                        .setDescription("<:winlogon:811225897536454679> Thao tác thành công, bot đang thoát...")
+                    ButtonInteraction.reply({
+                        embeds: [embedConfirmed],
+                        ephemeral: true,
+                    });
+                    await guild.leave();
+                };
+                if (ButtonInteraction.customId === "cancel") {
+                    const embedCanceled = new MessageEmbed()
+                        .setColor("RED")
+                        .setDescription("<:Icon_0277:810858844925591562> Thao tác đã bị hủy")
+                    ButtonInteraction.reply({
+                        embeds: [embedCanceled],
+                        ephemeral: true,
+                    });
+                };
+            });
         return interaction.reply({
             embeds: [embed],
             components: [row],
+            ephemeral: true,
         });
     },
 };

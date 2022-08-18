@@ -33,7 +33,7 @@ const child = require("child_process");
 const commandBase = {
 	data: {
 		name: "shell",
-		description: "[Dev Only] Chạy lệnh trong môi trường hệ thống.",
+		description: "[Dev Only] Chạy lệnh trong môi trường Linux.",
         options: [
             {
                 name: "exec",
@@ -45,7 +45,7 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	owners: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, client, options }) => {
         const execute = options.getString("exec");
         child.exec(execute, (err, res) => {
             if (err) return console.log(err);

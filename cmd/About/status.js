@@ -66,7 +66,7 @@ const commandBase = {
 		const package = require("../../package.json");
 		const embed = new EmbedBuilder()
 			.setTitle(`Trạng thái của ${client.user.username}`)
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setDescription(
 				`\`\`\`yml\nUsername: ${client.user.username}#${client.user.discriminator} [${client.user.id}]\nAPI Latency: ${client.ws.ping}ms\nUptime: ${uptime}\`\`\``
 			)

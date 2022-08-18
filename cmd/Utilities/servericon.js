@@ -47,7 +47,7 @@ const commandBase = {
 		const iconMsg = new EmbedBuilder()
 			.setTitle(`Icon của ${guild.name}`)
 			.setImage(guild.iconURL({ dynamic: true, size: 1024 }))
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setFooter({
 				text: `Lệnh được thực thi bởi ${user.username}`,
 			});

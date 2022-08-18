@@ -50,7 +50,7 @@ const commandBase = {
 		const config = require("../../config.json");
 		const embed = new EmbedBuilder()
 			.setTitle("Thông tin về bot...")
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setFields([
 				{
 					name: `Lead Developer:`,

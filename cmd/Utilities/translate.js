@@ -76,7 +76,7 @@ const commandBase = {
 			return await interaction.editReply({
 				embeds: [
 					new EmbedBuilder()
-						.setColor("RANDOM")
+						.setColor("Random")
 						.setDescription(
 							`⛔ **Ngôn ngữ không hợp lệ. Hãy sử dụng bảng mã ISO 639-1.**`
 						),
@@ -85,7 +85,7 @@ const commandBase = {
 		}
 
 		const done = new EmbedBuilder()
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setTitle("Dịch thuật")
 			.addFields(
 				{

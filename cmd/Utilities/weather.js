@@ -73,7 +73,7 @@ const commandBase = {
 		} else {
 			const embed = new EmbedBuilder()
 				.setTitle(`Thông tin thời tiết`)
-				.setColor("RANDOM")
+				.setColor("Random")
 				.setThumbnail(`${data.current.weather_icons}`)
 				.addField(`Khu vực`, `${data.location.name}`, true)
 				.addField(`Giờ địa phương`, `${data.location.localtime}`, true)

@@ -42,7 +42,7 @@ const commandBase = {
         if (isVerified == true) isVerified = "Đúng"
         else isVerified = "Sai"
         const embed = new EmbedBuilder()
-            .setColor("RANDOM")
+            .setColor("Random")
             .setTitle(`Thông tin máy chủ cho ${interaction.guild.name}`)
             .addField(`👑 Chủ server`, `<@${interaction.guild.ownerId}>`, true)
             .addField(`🧍 Tổng số thành viên`, `${interaction.guild.memberCount}`, true)

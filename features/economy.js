@@ -164,7 +164,7 @@ const addMoney = async (
 		return await user.send({
 			embeds: [
 				new EmbedBuilder()
-					.setColor("WHITE")
+					.setColor("White")
 					.setDescription(
 						`Bạn hoặc người bạn đã tag chưa có tài khoản nên không thể thêm tiền vào tài khoản đã tag !\n\nHãy tạo một tài khoản bằng lệnh: \`/account create\` !`
 					),
@@ -199,7 +199,7 @@ const addMoney = async (
 	);
 
 	return await user.send({
-		embeds: [new Discord.EmbedBuilder().setColor("WHITE").setDescription(text)],
+		embeds: [new Discord.EmbedBuilder().setColor("White").setDescription(text)],
 	});
 };
 
@@ -290,7 +290,7 @@ const removeMoney = async (userId, money, accountId, client, reason) => {
 		return await user.send({
 			embeds: [
 				new EmbedBuilder()
-					.setColor("WHITE")
+					.setColor("White")
 					.setDescription(
 						`Bạn hoặc người bạn đã tag chưa có tài khoản nên không thể thêm tiền vào tài khoản đã tag !\n\nHãy tạo một tài khoản bằng lệnh: \`/account create\` !`
 					),
@@ -325,7 +325,7 @@ const removeMoney = async (userId, money, accountId, client, reason) => {
 	);
 
 	return await user.send({
-		embeds: [new EmbedBuilder().setColor("WHITE").setDescription(text)],
+		embeds: [new EmbedBuilder().setColor("White").setDescription(text)],
 	});
 };
 

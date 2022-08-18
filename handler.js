@@ -199,7 +199,7 @@ module.exports.listen = async (client) => {
 		}
 	});
 	client.on("interactionCreate", async (interaction) => {
-		if (!interaction.isContextMenu()) return;
+		if (!interaction.isContextMenuCommand()) return;
 		const { guild, member, user } = interaction;
 		const intMember = guild.members.cache.get(member.user.id);
 		const noGuildText = `Bạn vui lòng chạy lệnh này bên trong một server nhé!`;

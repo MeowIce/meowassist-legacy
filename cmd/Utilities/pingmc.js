@@ -61,7 +61,7 @@ const commandBase = {
 
 		const embed = new EmbedBuilder()
 			.setTitle(`Trạng thái của ${address}`)
-			.setColor("RANDOM")
+			.setColor("Random")
 			.addField(`IP`, data.ip?.toString() || "Không biết", true)
 			.addField(`Port`, data.port?.toString() || "Không biết", true)
 			.addField(`Có SRV`, `${hasSRV}`, true)

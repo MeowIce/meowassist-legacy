@@ -36,7 +36,7 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	owners: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, client, guild }) => {
 		await interaction.reply({
 			content: ":electric_plug: System is shutting down...",
 			ephemeral: true,

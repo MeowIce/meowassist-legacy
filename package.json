@@ -1,13 +1,13 @@
 {
 	"name": "meowassist",
-	"version": "1.0R1-220818001-stable",
+	"version": "1.1.0-beta",
 	"description": "Một bot để hỗ trợ MeowHouse.",
 	"dependencies": {
 		"@iamtraction/google-translate": "^1.1.2",
 		"axios": "^0.27.2",
 		"bad-words": "^3.0.4",
 		"child_process": "^1.0.2",
-		"discord.js": "^13.8.1",
+		"discord.js": "^14.2.0",
 		"fs": "^0.0.1-security",
 		"http-utils": "^0.0.99",
 		"moment": "^2.29.3",

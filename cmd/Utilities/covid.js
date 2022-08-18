@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
+const { Discord, EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 const locale = require("moment/locale/vi");
 const config = require("./../../config.json");
@@ -61,7 +60,7 @@ const commandBase = {
 				ephemeral: true,
 			});
 		} else {
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setTitle(`Tình hình dịch Covid-19 ở Việt Nam`)
 				.setColor("RANDOM")
 				.addField(`Tổng số ca nhiễm`, `${data.cases}`, true)

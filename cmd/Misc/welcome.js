@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, User } = require("discord.js");
-const Discord = require("discord.js");
+const { User, Discord, ApplicationCommandOptionType } = require("discord.js")
 const moment = require("moment");
 const cooldownSet = new Set();
 
@@ -40,7 +39,7 @@ const commandBase = {
 			{
 				name: "user",
 				description: "Đối tượng để chào mừng...",
-				type: "USER",
+				type: ApplicationCommandOptionType.User,
 				required: true,
 			},
 		],

@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
+const { EmbedBuilder, Discord } = require("discord.js");
 const config = require("./../../config.json");
 const fetch = require("axios");
 const cooldownSet = new Set();
@@ -62,7 +61,7 @@ const commandBase = {
 				)}s mới được sử dụng tiếp !`,
 			});
 		} else {
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setTitle(`Random memes trên Reddit`)
 				.addField(`Tiêu đề`, `${data.title}`)
 				.setColor("RANDOM")

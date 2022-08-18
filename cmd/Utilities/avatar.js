@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType, EmbedBuilder } = require("discord.js");
 
 /**
  * @typedef CallbackObject
@@ -36,7 +36,7 @@ const commandBase = {
 		options: [
 			{
 				name: "user",
-				type: "USER",
+				type: ApplicationCommandOptionType.User,
 				description: "Đối tượng...",
 				required: false,
 			},
@@ -48,7 +48,7 @@ const commandBase = {
         var d = new Date();
         console.log(interaction.user.tag, "executed command", commandBase.data.name, "on", targetUser.username, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
 
-		const embed = new Discord.MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setColor("RANDOM")
 			.setTitle(`Avatar của ${targetUser.username}`)
 			.setImage(targetUser.displayAvatarURL({ dynamic: true, size: 1024 }))

@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType } = require("discord.js");
 const { setAfk, getBoolean } = require("../../features/afk");
 
 /**
@@ -37,7 +37,7 @@ const commandBase = {
 		options: [
 			{
 				name: "reason",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "Lời nhắn.",
 				required: false,
 			},

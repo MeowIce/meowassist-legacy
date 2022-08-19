@@ -6,7 +6,13 @@ Vui lòng tham khảo changelogs, diff và commit history để biết những g
 
 ## Tại sao Beta 1.1 ?
 
-Phiên bản Beta 1.1 bao gồm các nâng cấp và sửa đổi cho MeowAssist. Bản cập nhật này nâng câp thư viện Discord.JS lên v14.
+Phiên bản Beta 1.1 bao gồm các nâng cấp và sửa đổi cho MeowAssist. Bản cập nhật này nâng cấp thư viện Discord.JS lên v14 và dọn dẹp/tối ưu code để bot vận hành tốt hơn.
+
+## Những vấn đề đã biết:
+
++ Một số chức năng có thể  không hoạt động bình thường.
++ Lệnh `/help` không hoạt động với Selection Menu.
+
 ## Bản quyền
 
 Copyright (C) MeowIce - All Rights Reserved

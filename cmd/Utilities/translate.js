@@ -58,7 +58,7 @@ const commandBase = {
         var d = new Date();
         console.log(interaction.user.tag, "executed command", commandBase.data.name, "to translate", "'" + query + "'", "to", language, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
 		const newEmbed1 = new EmbedBuilder()
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setTitle("Dịch thuật")
 			.setThumbnail("https://static.thenounproject.com/png/987-200.png")
 			.addFields({

@@ -76,7 +76,7 @@ const commandBase = {
 				},
 			])
 			.setFooter({
-				text: `(C) Copyright 2007 - 2022 MeowIce - All rights reserved.`,
+				text: `(C) Copyright 2022 MeowIce - All rights reserved.`,
 			});
 		return interaction.reply({
 			embeds: [embed],

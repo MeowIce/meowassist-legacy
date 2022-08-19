@@ -51,7 +51,6 @@ const commandBase = {
 			`https://api.ultrax-yt.com/v1/random/meme?key=${config.ultraX_key}`
 		);
 		let data = res.data;
-		console.log(data);
 		const cooldown = "60000";
 		if (cooldownSet.has(interaction.user.id)) {
 			interaction.editReply({
@@ -63,11 +62,12 @@ const commandBase = {
 		} else {
 			const embed = new EmbedBuilder()
 				.setTitle(`Random memes trên Reddit`)
-				.addField(`Tiêu đề`, `${data.title}`)
-				.setColor("Random")
+				// .addField(`Tiêu đề`, `${data.title}`)
+				.addFields({ name: "Tiêu đề", value: `${data.title}`, inline: true})
+				 .setColor("Random")
 				.setImage(`${data.image}`)
-				.addField(`Lượt upvotes`, `${data.up_votes}`, true)
-				.addField(`Lượt downvotes`, `${data.down_votes}`, true)
+				.addFields({ name: "Lượt upvotes", value: `${data.up_votes}`, inline: true})
+				.addFields({ name: "Lượt downvotes", value: `${data.down_votes}`, inline: true})
 				.setDescription(`[Link bài post](${data.url})`);
 			cooldownSet.add(interaction.user.id);
 			setTimeout(() => {

@@ -49,14 +49,14 @@ const commandBase = {
                 .setCustomId('cancel')
         );
         const embed = new EmbedBuilder()
-            .setColor("RED")
+            .setColor("Red")
             .setDescription("<:Icon_0426:810858844921659424> Bạn có chắc muốn cho bot thoát máy chủ này ? Bấm <:winlogon:811225897536454679> để xác nhận, <:blocked:810858844665675786> để hủy.")
         
             client.on('interactionCreate', async ButtonInteraction => {
                 if (!ButtonInteraction.isButton) return;
                 if (ButtonInteraction.customId === 'confirm' || user.id === interaction.user.id) {
                     const embedConfirmed = new EmbedBuilder()
-                        .setColor("GREEN")
+                        .setColor("Green")
                         .setDescription("<:winlogon:811225897536454679> Thao tác thành công, bot đang thoát...")
                     ButtonInteraction.reply({
                         embeds: [embedConfirmed],
@@ -66,7 +66,7 @@ const commandBase = {
                 };
                 if (ButtonInteraction.customId === "cancel") {
                     const embedCanceled = new EmbedBuilder()
-                        .setColor("RED")
+                        .setColor("Red")
                         .setDescription("<:Icon_0277:810858844925591562> Thao tác đã bị hủy")
                     ButtonInteraction.reply({
                         embeds: [embedCanceled],

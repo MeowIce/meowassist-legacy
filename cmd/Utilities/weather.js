@@ -75,18 +75,18 @@ const commandBase = {
 				.setTitle(`Thông tin thời tiết`)
 				.setColor("Random")
 				.setThumbnail(`${data.current.weather_icons}`)
-				.addField(`Khu vực`, `${data.location.name}`, true)
-				.addField(`Giờ địa phương`, `${data.location.localtime}`, true)
-				.addField(`Nhiệt độ:`, `${data.current.temperature}°C`, true)
-				.addField(`Cảm thấy như`, `${data.current.feelslike}°C`, true)
-				.addField(`Tốc độ gió`, `${data.current.wind_speed}km/h`, true)
-				.addField(`Hướng gió`, `${data.current.wind_dir}`, true)
-				.addField(`Áp suất không khí`, `${data.current.pressure}mb`, true)
-				.addField(`Lượng mưa`, `${data.current.precip}mm`, true)
-				.addField(`Độ ẩm không khí`, `${data.current.humidity}%`, true)
-				.addField(`Chỉ số tia UV`, `${data.current.uv_index}`, true)
-				.addField(`Góc gió`, `${data.current.wind_degree}°`, true)
-				.addField(`Lượng mây`, `${data.current.cloudcover}%`, true);
+				.addFields({ name: `Khu vực`, value: `${data.location.name}`, inline: true })
+				.addFields({ name: `Giờ địa phương`, value: `${data.location.localtime}`, inline: true })
+				.addFields({ name: `Nhiệt độ:`, value: `${data.current.temperature}°C`, inline: true })
+				.addFields({ name: `Cảm thấy như`, value: `${data.current.feelslike}°C`, inline: true })
+				.addFields({ name: `Tốc độ gió`, value: `${data.current.wind_speed}km/h`, inline: true })
+				.addFields({ name: `Hướng gió`, value: `${data.current.wind_dir}`, inline: true })
+				.addFields({ name: `Áp suất không khí`, value: `${data.current.pressure}mb`, inline: true })
+				.addFields({ name: `Lượng mưa`, value: `${data.current.precip}mm`, inline: true })
+				.addFields({ name: `Độ ẩm không khí`, value: `${data.current.humidity}%`, inline: true })
+				.addFields({ name: `Chỉ số tia UV`, value: `${data.current.uv_index}`, inline: true })
+				.addFields({ name: `Góc gió`, value: `${data.current.wind_degree}°`, inline: true })
+				.addFields({ name: `Lượng mây`, value: `${data.current.cloudcover}%`, inline: true });
 			cooldownSet.add(interaction.user.id);
 			setTimeout(() => {
 				cooldownSet.delete(interaction.user.id);

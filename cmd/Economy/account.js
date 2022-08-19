@@ -103,7 +103,7 @@ const commandBase = {
 			return await interaction.editReply({
 				embeds: [
 					new EmbedBuilder()
-						.setColor("WHITE")
+						.setColor("White")
 						.setTitle(`Thông tin của tài khoản ${account.accountId}`)
 						.setDescription(
 							`Số dư hiện tại: **${account.money.toLocaleString([

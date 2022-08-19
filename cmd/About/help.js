@@ -262,7 +262,7 @@ const commandBase = {
 							.setDescription(`Đã có lỗi xảy ra khi hiển thị bảng này.`),
 					],
 					components: [
-						new Discord.ActionRowBuilder({
+						new ActionRowBuilder({
 							components: [selectionMenu.setDisabled(true)],
 						}),
 					],

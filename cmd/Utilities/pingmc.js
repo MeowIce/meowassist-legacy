@@ -62,27 +62,15 @@ const commandBase = {
 		const embed = new EmbedBuilder()
 			.setTitle(`Trạng thái của ${address}`)
 			.setColor("Random")
-			.addField(`IP`, data.ip?.toString() || "Không biết", true)
-			.addField(`Port`, data.port?.toString() || "Không biết", true)
-			.addField(`Có SRV`, `${hasSRV}`, true)
-			.addField(
-				`Có IP trong SRV`,
-				ipinsrv,
-				true
-			)
-			.addField(
-				`Có CNAME trong SRV`,
-				cnameinsrv,
-				true
-			)
-			.addField(
-				`Phiên bản máy chủ`,
-				data.version?.toString() || "Không biết",
-				true
-			)
-			.addField(`Online`, data.online?.toString() || "Không biết", true)
-			.addField(`Hostname`, data.hostname?.toString() || "Không biết", true)
-			.addField(`Protocol ID`, data.protocol?.toString() || "Không biết", true);
+			.addFields({ name: `IP`, value: data.ip?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Port`, value: data.port?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Có SRV`, value: `${hasSRV}`, inline: true })
+			.addFields({ name: `Có IP trong SRV`, value: ipinsrv, inline: true })
+			.addFields({ name: `Có CNAME trong SRV`, value: cnameinsrv, inline: true })
+			.addFields({ name: `Phiên bản máy chủ`, value: data.version?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Online`, value: data.online?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Hostname`, value: data.hostname?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Protocol ID`, value: data.protocol?.toString() || "Không biết", inline: true });
 
 		interaction
 			.editReply({

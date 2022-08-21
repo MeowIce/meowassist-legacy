@@ -35,7 +35,7 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	owners: true,
-	callback: async ({ interaction, client, guild }) => {
+	callback: async ({ interaction, guild }) => {
 		await interaction.reply({
 			content: ":arrows_counterclockwise: System is restarting...",
 			ephemeral: true,

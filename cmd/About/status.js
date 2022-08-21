@@ -39,15 +39,7 @@ const commandBase = {
 		description: "Hiển thị trạng thái của bot.",
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild }) => {
-		var d = new Date();
-		console.log(
-			interaction.user.tag,
-			"executed command",
-			commandBase.data.name,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
+	callback: async ({ interaction, client, guild, user }) => {
 		//OS info
 		const osVer = os.platform() + " " + os.release();
 		//Node ver
@@ -82,7 +74,7 @@ const commandBase = {
 				},
 			])
 			.setFooter({
-				text: `Lệnh được thực thi bởi ${interaction.user.username}`,
+				text: `Lệnh được thực thi bởi ${user.username}`,
 			});
 		return interaction.reply({
 			embeds: [embed],

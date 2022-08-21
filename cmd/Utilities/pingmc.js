@@ -44,7 +44,7 @@ const commandBase = {
 		],
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, options }) => {
 		interaction.deferReply();
 		const address = options.getString("address");
 		let res = await fetch(`https://api.mcsrvstat.us/2/${address}`);

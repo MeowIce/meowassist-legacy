@@ -35,20 +35,20 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async function ({ interaction, client, guild, member }) {
-        let isPartnered = interaction.guild.partnered;
+        let isPartnered = guild.partnered;
         if (isPartnered == true) isPartnered = "Có"
         else isPartnered = "Không"
-        let isVerified = interaction.guild.verified;
+        let isVerified = guild.verified;
         if (isVerified == true) isVerified = "Có"
         else isVerified = "Không"
         const embed = new EmbedBuilder()
             .setColor("Random")
-            .setTitle(`Thông tin của máy chủ ${interaction.guild.name}`)
-            .addFields({ name: "👑 Chủ server", value: `<@${interaction.guild.ownerId}>`, inline: true})
-            .addFields({ name: "🧍 Tổng số thành viên", value: `${interaction.guild.memberCount}`, inline: true})
-            .addFields({ name: "😃 Tổng số Emoji(s)", value: `${interaction.guild.emojis.cache.size}`, inline: true})
-            .addFields({ name: "🪐 Tổng số Role(s)", value: `${interaction.guild.roles.cache.size}`, inline: true})
-            .addFields({ name: "✌ Tổng số Sticker(s)", value: `${interaction.guild.stickers.cache.size}`, inline: true})
+            .setTitle(`Thông tin của máy chủ ${guild.name}`)
+            .addFields({ name: "👑 Chủ server", value: `<@${guild.ownerId}>`, inline: true})
+            .addFields({ name: "🧍 Tổng số thành viên", value: `${guild.memberCount}`, inline: true})
+            .addFields({ name: "😃 Tổng số Emoji(s)", value: `${guild.emojis.cache.size}`, inline: true})
+            .addFields({ name: "🪐 Tổng số Role(s)", value: `${guild.roles.cache.size}`, inline: true})
+            .addFields({ name: "✌ Tổng số Sticker(s)", value: `${guild.stickers.cache.size}`, inline: true})
             .addFields({ name: "✅ Máy chủ đã được xác minh", value: `${isVerified}`, inline: true})
             .addFields({ name: "🤝 Có partner với Discord", value: `${isPartnered}`, inline: true})
 

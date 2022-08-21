@@ -29,7 +29,7 @@ const commandBase = {
 		description: "Thông tin về quyền riêng tư...",
 	},
 	wholeCommand: true,
-	callback: async function ({ interaction, client }) {
+	callback: async function ({ interaction }) {
         const embed = new EmbedBuilder()
             .setColor("Red")
             .setTitle("Thông tin về quyền riêng tư và bảo mật dữ liệu")

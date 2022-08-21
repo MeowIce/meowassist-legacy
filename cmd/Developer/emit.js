@@ -60,7 +60,7 @@ const commandBase = {
 			client.emit(EVENTS[subcommand], member);
 			var d = new Date();
 			console.log(
-				interaction.user.tag,
+				user.tag,
 				"executed command",
 				commandBase.data.name,
 				"at",
@@ -72,7 +72,7 @@ const commandBase = {
 			});
 		} else {
 			console.log(
-				interaction.user.tag,
+				user.tag,
 				"tried to execute",
 				commandBase.data.name,
 				"but failed because he has no permission."

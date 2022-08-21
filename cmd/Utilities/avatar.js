@@ -43,11 +43,8 @@ const commandBase = {
 		],
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, user, options }) => {
 		const targetUser = options.getUser("user") || user;
-        var d = new Date();
-        console.log(interaction.user.tag, "executed command", commandBase.data.name, "on", targetUser.username, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
-
 		const embed = new EmbedBuilder()
 			.setColor("Random")
 			.setTitle(`Avatar của ${targetUser.username}`)

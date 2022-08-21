@@ -52,7 +52,7 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	perms: ["MANAGE_GUILD"],
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, guild, member, user, options }) => {
 		await interaction.deferReply({
 			ephemeral: true,
 		});

@@ -45,7 +45,7 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	owners: true,
-	callback: async ({ interaction, client, options }) => {
+	callback: async ({ interaction, options }) => {
         const execute = options.getString("exec");
         child.exec(execute, (err, res) => {
             if (err) return console.log(err);

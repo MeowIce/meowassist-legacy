@@ -50,22 +50,10 @@ const commandBase = {
 		],
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, user, options }) => {
 		await interaction.deferReply();
 		const query = options.getString("query");
 		const language = options.getString("language");
-		const usr = user;
-        var d = new Date();
-        console.log(interaction.user.tag, "executed command", commandBase.data.name, "to translate", "'" + query + "'", "to", language, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
-		const newEmbed1 = new EmbedBuilder()
-			.setColor("Random")
-			.setTitle("Dịch thuật")
-			.setThumbnail("https://static.thenounproject.com/png/987-200.png")
-			.addFields({
-				name: "Lỗi:",
-				value: "Hãy nhập 1 từ cụ thể",
-			});
-
 		let dichxong;
 
 		try {
@@ -98,7 +86,7 @@ const commandBase = {
 				}
 			)
 			.setFooter({
-				text: `Lệnh được thực thi bởi ${usr.tag}`,
+				text: `Lệnh được thực thi bởi ${user.tag}`,
 			})
 			.setThumbnail("https://static.thenounproject.com/png/987-200.png")
 			.setTimestamp();

@@ -35,15 +35,7 @@ const commandBase = {
 		description: "Lấy icon của máy chủ.",
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
-		var d = new Date();
-		console.log(
-			interaction.user.tag,
-			"executed command",
-			commandBase.data.name,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
+	callback: async ({ interaction, guild, user, options }) => {
 		const iconMsg = new EmbedBuilder()
 			.setTitle(`Icon của ${guild.name}`)
 			.setImage(guild.iconURL({ dynamic: true, size: 1024 }))

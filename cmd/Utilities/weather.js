@@ -47,22 +47,10 @@ const commandBase = {
 		],
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
-		var d = new Date();
-		console.log(
-			interaction.user.tag,
-			"executed command",
-			commandBase.data.name,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
+	callback: async ({ interaction, user, options }) => {
 		let loc = options.getString("location");
-		let res = await fetch(
-			`http://api.weatherstack.com/current?access_key=${config.weatherKey}&query=${loc}`
-		);
-		let data = res.data;
 		const cooldown = "60000";
-		if (cooldownSet.has(interaction.user.id)) {
+		if (cooldownSet.has(user.id)) {
 			interaction.reply({
 				content: `Ồ này cậu phải chờ ${cooldown.replace(
 					"000",
@@ -71,6 +59,11 @@ const commandBase = {
 				ephemeral: true,
 			});
 		} else {
+			interaction.deferReply();
+			let res = await fetch(
+				`http://api.weatherstack.com/current?access_key=${config.weatherKey}&query=${loc}`
+			);
+			let data = res.data;
 			const embed = new EmbedBuilder()
 				.setTitle(`Thông tin thời tiết`)
 				.setColor("Random")
@@ -87,11 +80,11 @@ const commandBase = {
 				.addFields({ name: `Chỉ số tia UV`, value: `${data.current.uv_index}`, inline: true })
 				.addFields({ name: `Góc gió`, value: `${data.current.wind_degree}°`, inline: true })
 				.addFields({ name: `Lượng mây`, value: `${data.current.cloudcover}%`, inline: true });
-			cooldownSet.add(interaction.user.id);
+			cooldownSet.add(user.id);
 			setTimeout(() => {
-				cooldownSet.delete(interaction.user.id);
+				cooldownSet.delete(user.id);
 			}, cooldown);
-			interaction.reply({ embeds: [embed], ephemeral: false });
+			interaction.editReply({ embeds: [embed], ephemeral: false });
 		}
 	},
 };

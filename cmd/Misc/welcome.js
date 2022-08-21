@@ -47,25 +47,12 @@ const commandBase = {
 	wholeCommand: true,
 	callback: async function ({
 		interaction,
-		client,
-		guild,
-		member,
 		user,
 		options,
 	}) {
 		const targetUser = options.getUser("user") || user;
 		const cooldown = "60000";
-		var d = new Date();
-		console.log(
-			interaction.user.tag,
-			"executed command",
-			commandBase.data.name,
-			"to welcome",
-			targetUser.username,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
-		if (cooldownSet.has(interaction.user.id)) {
+		if (cooldownSet.has(user.id)) {
 			interaction.reply({
 				content: `Ồ này, cậu phải chờ ${cooldown.replace(
 					"000",
@@ -90,9 +77,9 @@ Xin chào ${targetUser} đã đến với MeowHouse ! <:MH_waving:84276253385306
 ⌎⊱⊶⊷⊶⊷⊶⊷⊶⊷⇲⊰⌏`,
 				ephemeral: false,
 			});
-			cooldownSet.add(interaction.user.id);
+			cooldownSet.add(user.id);
 			setTimeout(() => {
-				cooldownSet.delete(interaction.user.id);
+				cooldownSet.delete(user.id);
 			}, cooldown);
 		}
 	},

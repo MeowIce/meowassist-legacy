@@ -45,13 +45,11 @@ const commandBase = {
 		],
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, user, guild, options }) => {
 		const usr =
-			interaction.options.getUser("target") ||
-			interaction.user ||
-			interaction.guild.members.fetch(interaction.targetId);
-			var d = new Date();
-			console.log(interaction.user.username + "#" + interaction.user.discriminator, "executed command", commandBase.data.name, "to track", usr.username, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
+			options.getUser("target") ||
+			user ||
+			guild.members.fetch(interaction.targetId);
 		const role = guild.members.cache.get(usr.id).roles;
 		let rolemap = role.cache
 			.sort((a, b) => b.position - a.position)
@@ -103,7 +101,7 @@ const commandBase = {
 				value: `#${usr.discriminator}`,
 			})
 			.setFooter({
-				text: `Lệnh được thực thi bởi ${interaction.user.username}`,
+				text: `Lệnh được thực thi bởi ${user.username}`,
 			});
 		return interaction.reply({ embeds: [embed] });
 	},

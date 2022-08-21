@@ -63,7 +63,7 @@ const commandBase = {
 		const nickname = options.getString("nickname");
 		const subcommand = options.getSubcommand();
 		if (subcommand === "set") {
-			if (cooldownSet.has(interaction.user.id)) {
+			if (cooldownSet.has(user.id)) {
 				interaction.reply({
 					content: `Ồ này cậu phải chờ 30 phút mới được sử dụng tiếp !`,
 					ephemeral: true,
@@ -96,13 +96,13 @@ const commandBase = {
 					content: result.error,
 				});
 			}
-			cooldownSet.add(interaction.user.id);
+			cooldownSet.add(user.id);
 			setTimeout(() => {
-				cooldownSet.delete(interaction.user.id);
+				cooldownSet.delete(user.id);
 			}, cooldown);
 			}
 		} else if (subcommand === "clear") {
-			if (cooldownSet.has(interaction.user.id)) {
+			if (cooldownSet.has(user.id)) {
 				interaction.reply({
 					content: `Ồ này cậu phải chờ 30 phút mới được sử dụng tiếp !`,
 					ephemeral: true,
@@ -122,9 +122,9 @@ const commandBase = {
 			await interaction.reply({
 				content: "Đã xoá nickname của bạn !",
 			});
-			cooldownSet.add(interaction.user.id);
+			cooldownSet.add(user.id);
 			setTimeout(() => {
-				cooldownSet.delete(interaction.user.id);
+				cooldownSet.delete(user.id);
 			}, cooldown);
 			}
 		};

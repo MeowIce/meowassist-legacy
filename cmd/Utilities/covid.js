@@ -50,8 +50,6 @@ const commandBase = {
 			"at",
 			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
 		);
-		let res = await fetch(`https://disease.sh/v2/countries/vietnam`);
-		let data = res.data;
 		if (cooldownSet.has(interaction.user.id)) {
 			interaction.reply({
 				content: `Ồ này cậu phải chờ ${cooldown.replace(
@@ -61,6 +59,9 @@ const commandBase = {
 				ephemeral: true,
 			});
 		} else {
+			interaction.deferReply();
+			let res = await fetch(`https://disease.sh/v2/countries/vietnam`);
+			let data = res.data;
 			const embed = new MessageEmbed()
 				.setTitle(`Tình hình dịch Covid-19 ở Việt Nam`)
 				.setColor("RANDOM")
@@ -78,7 +79,7 @@ const commandBase = {
 			setTimeout(() => {
 				cooldownSet.delete(interaction.user.id);
 			}, cooldown);
-			interaction.reply({
+			interaction.editReply({
 				embeds: [embed],
 				ephemeral: false,
 			});

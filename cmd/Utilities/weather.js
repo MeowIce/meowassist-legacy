@@ -58,10 +58,6 @@ const commandBase = {
 			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
 		);
 		let loc = options.getString("location");
-		let res = await fetch(
-			`http://api.weatherstack.com/current?access_key=${config.weatherKey}&query=${loc}`
-		);
-		let data = res.data;
 		const cooldown = "60000";
 		if (cooldownSet.has(interaction.user.id)) {
 			interaction.reply({
@@ -72,6 +68,11 @@ const commandBase = {
 				ephemeral: true,
 			});
 		} else {
+			interaction.deferReply();
+			let res = await fetch(
+				`http://api.weatherstack.com/current?access_key=${config.weatherKey}&query=${loc}`
+			);
+			let data = res.data;
 			const embed = new MessageEmbed()
 				.setTitle(`Thông tin thời tiết`)
 				.setColor("RANDOM")
@@ -92,7 +93,7 @@ const commandBase = {
 			setTimeout(() => {
 				cooldownSet.delete(interaction.user.id);
 			}, cooldown);
-			interaction.reply({ embeds: [embed], ephemeral: false });
+			interaction.editReply({ embeds: [embed], ephemeral: false });
 		}
 	},
 };

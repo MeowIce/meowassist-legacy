@@ -39,7 +39,6 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async ({ interaction, client, guild, member, user, options }) => {
-		interaction.deferReply();
 		var d = new Date();
 		console.log(
 			interaction.user.tag,
@@ -48,20 +47,21 @@ const commandBase = {
 			"at",
 			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
 		);
-		let res = await fetch(
-			`https://api.ultrax-yt.com/v1/random/meme?key=${config.ultraX_key}`
-		);
-		let data = res.data;
-		console.log(data);
 		const cooldown = "60000";
 		if (cooldownSet.has(interaction.user.id)) {
-			interaction.editReply({
+			await interaction.reply({
 				content: `Ồ này cậu phải chờ ${cooldown.replace(
 					"000",
 					""
 				)}s mới được sử dụng tiếp !`,
+				ephemeral: true,
 			});
 		} else {
+			interaction.deferReply();
+			let res = await fetch(
+				`https://api.ultrax-yt.com/v1/random/meme?key=${config.ultraX_key}`
+			);
+			let data = res.data;
 			const embed = new MessageEmbed()
 				.setTitle(`Random memes trên Reddit`)
 				.addField(`Tiêu đề`, `${data.title}`)
@@ -78,6 +78,7 @@ const commandBase = {
 				embeds: [embed],
 				ephemeral: false,
 			});
+			return
 		}
 	},
 };

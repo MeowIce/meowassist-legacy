@@ -1,4 +1,5 @@
-const { Discord, ApplicationCommandOptionType } = require("discord.js");
+const { ApplicationCommandOptionType } = require("discord.js");
+const Discord = require("discord.js");
 const { addRole } = require("../../features/give-role");
 
 /**
@@ -16,8 +17,8 @@ const { addRole } = require("../../features/give-role");
  * @property {Discord.ApplicationCommandData | Discord.ApplicationCommandSubCommandData | Discord.ApplicationCommandSubGroupData} data
  * @property {boolean} [owners]
  * @property {boolean} [wholeCommand]
- * @property {Discord.PermissionString[]} [perms]
- * @property {Discord.PermissionString[]} [clientPermissions]
+ * @property {Discord.PermissionsString[]} [perms]
+ * @property {Discord.PermissionsString[]} [clientPermissions]
  * @property {(obj: CallbackObject) => any} callback
  */
 
@@ -27,8 +28,7 @@ const { addRole } = require("../../features/give-role");
 const commandBase = {
 	data: {
 		name: "role",
-		description:
-			"Thêm role cho người nào đó trong một khoảng thời gian.",
+		description: "Thêm role cho người nào đó trong một khoảng thời gian.",
 		options: [
 			{
 				name: "user",
@@ -51,7 +51,7 @@ const commandBase = {
 		],
 	},
 	wholeCommand: true,
-	perms: ["MANAGE_GUILD"],
+	perms: ["ManageGuild"],
 	callback: async ({ interaction, guild, member, user, options }) => {
 		await interaction.deferReply({
 			ephemeral: true,
@@ -71,7 +71,7 @@ const commandBase = {
 		} catch (e) {
 			return await interaction.editReply({
 				content: `Không thể thêm role này vào người dùng đó, vui lòng thử lại sau !`,
-				ephemeral: true
+				ephemeral: true,
 			});
 		}
 

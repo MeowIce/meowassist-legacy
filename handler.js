@@ -8,19 +8,7 @@ const discord = require("discord.js");
 const allCmd = {};
 const { owners: validOwners, collab } = require("./config.json");
 const contextMenuCmds = {};
-const validPerms = require("./perms");
 
-/**
- *
- * @param {discord.permissionString[]} perms
- */
-function chkPerm(perms) {
-	for (const perm of perms) {
-		if (!validPerms.includes(perm)) {
-			throw new Error(`Không rõ permission node: ${perm}`);
-		}
-	}
-}
 /**
  * @typedef ContextMenuCallbackObject
  * @property {discord.ContextMenuInteraction} interaction
@@ -74,12 +62,6 @@ async function sweepCmds() {
 
 module.exports = async (cmdOptions, groupName) => {
 	let { data, perms = [], clientPermissions = [] } = cmdOptions;
-	if (perms.length) {
-		chkPerm(perms);
-	}
-	if (clientPermissions.length) {
-		chkPerm(clientPermissions);
-	}
 
 	allCmd[`${groupName.toLowerCase()}+${data.name}`] = {
 		...cmdOptions,
@@ -95,12 +77,6 @@ module.exports = async (cmdOptions, groupName) => {
 
 module.exports.contextMenuRegister = async (commandOptions) => {
 	let { data, perms = [], clientPermissions = [] } = commandOptions;
-	if (perms.length) {
-		chkPerm(perms);
-	}
-	if (clientPermissions.length) {
-		chkPerm(clientPermissions);
-	}
 	contextMenuCmds[data.name] = {
 		...commandOptions,
 		perms,

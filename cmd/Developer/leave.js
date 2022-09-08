@@ -3,7 +3,7 @@
  * Tệp này là một phần của dự án MeowAssist. 
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
-const { MessageEmbed, Discord, MessageActionRow, MessageButton, ButtonInteraction, Collector } = require("discord.js");
+const { EmbedBuilder, Discord, ActionRowBuilder, ButtonBuilder, ButtonStyle, ButtonInteraction, Embed } = require("discord.js");
 const { Collection } = require("mongoose");
 
 /**
@@ -38,25 +38,25 @@ const commandBase = {
 	wholeCommand: true,
     owners: true,
 	callback: async function ({ interaction, client, guild }) {
-        const row = new MessageActionRow().addComponents(
-            new MessageButton()
+        const row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
                 .setStyle("DANGER")
                 .setEmoji("<:winlogon:811225897536454679>")
                 .setCustomId('confirm'),
-            new MessageButton()
+            new ButtonBuilder()
                 .setStyle("SUCCESS")
                 .setEmoji("<:blocked:810858844665675786>")
                 .setCustomId('cancel')
         );
-        const embed = new MessageEmbed()
-            .setColor("RED")
+        const embed = new EmbedBuilder()
+            .setColor("Red")
             .setDescription("<:Icon_0426:810858844921659424> Bạn có chắc muốn cho bot thoát máy chủ này ? Bấm <:winlogon:811225897536454679> để xác nhận, <:blocked:810858844665675786> để hủy.")
         
             client.on('interactionCreate', async ButtonInteraction => {
                 if (!ButtonInteraction.isButton) return;
                 if (ButtonInteraction.customId === 'confirm' || user.id === interaction.user.id) {
-                    const embedConfirmed = new MessageEmbed()
-                        .setColor("GREEN")
+                    const embedConfirmed = new EmbedBuilder()
+                        .setColor("Green")
                         .setDescription("<:winlogon:811225897536454679> Thao tác thành công, bot đang thoát...")
                     ButtonInteraction.reply({
                         embeds: [embedConfirmed],
@@ -65,8 +65,8 @@ const commandBase = {
                     await guild.leave();
                 };
                 if (ButtonInteraction.customId === "cancel") {
-                    const embedCanceled = new MessageEmbed()
-                        .setColor("RED")
+                    const embedCanceled = new EmbedBuilder()
+                        .setColor("Red")
                         .setDescription("<:Icon_0277:810858844925591562> Thao tác đã bị hủy")
                     ButtonInteraction.reply({
                         embeds: [embedCanceled],

@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
+const { Discord, EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
 require("moment-timezone");
@@ -40,18 +39,10 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async function ({ interaction, client }) {
-		var d = new Date();
-		console.log(
-			interaction.user.tag,
-			"executed command",
-			commandBase.data.name,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
 		const config = require("../../config.json");
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setTitle("Thông tin về bot...")
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setFields([
 				{
 					name: `Lead Developer:`,
@@ -77,7 +68,7 @@ const commandBase = {
 				},
 			])
 			.setFooter({
-				text: `(C) Copyright 2007 - 2022 MeowIce - All rights reserved.`,
+				text: `(C) Copyright 2022 MeowIce - All rights reserved.`,
 			});
 		return interaction.reply({
 			embeds: [embed],

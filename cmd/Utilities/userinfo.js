@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, Modal } = require("discord.js");
-const Discord = require("discord.js");
+const { EmbedBuilder, Discord, ApplicationCommandOptionType } = require("discord.js");
 const moment = require("moment");
 const locale = require("moment/locale/vi");
 
@@ -39,20 +38,18 @@ const commandBase = {
 		options: [
 			{
 				name: "target",
-				type: "USER",
+				type: ApplicationCommandOptionType.User,
 				description: "Đối tượng...",
 				required: false,
 			},
 		],
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, user, guild, options }) => {
 		const usr =
-			interaction.options.getUser("target") ||
-			interaction.user ||
-			interaction.guild.members.fetch(interaction.targetId);
-			var d = new Date();
-			console.log(interaction.user.username + "#" + interaction.user.discriminator, "executed command", commandBase.data.name, "to track", usr.username, "at", `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`)
+			options.getUser("target") ||
+			user ||
+			guild.members.fetch(interaction.targetId);
 		const role = guild.members.cache.get(usr.id).roles;
 		let rolemap = role.cache
 			.sort((a, b) => b.position - a.position)
@@ -66,8 +63,8 @@ const commandBase = {
 		let isSystem = usr.system
 		if (isSystem == true) isSystem = "Đúng"
 		else isSystem = "Sai"
-		const embed = new MessageEmbed()
-			.setColor("RANDOM")
+		const embed = new EmbedBuilder()
+			.setColor("Random")
 			.setAuthor({
 				name: usr.tag,
 				iconURL: usr.displayAvatarURL(),
@@ -104,7 +101,7 @@ const commandBase = {
 				value: `#${usr.discriminator}`,
 			})
 			.setFooter({
-				text: `Lệnh được thực thi bởi ${interaction.user.username}`,
+				text: `Lệnh được thực thi bởi ${user.username}`,
 			});
 		return interaction.reply({ embeds: [embed] });
 	},

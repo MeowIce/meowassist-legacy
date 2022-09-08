@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType, EmbedBuilder, Application } = require("discord.js");
 const {
 	createAccount,
 	deleteAccount,
@@ -41,31 +41,31 @@ const commandBase = {
 		options: [
 			{
 				name: "create",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 				description: "Tạo tài khoản.",
 			},
 			{
 				name: "info",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 				description: "Xem thông tin về tài khoản.",
 				options: [
 					{
 						name: "user",
 						description: "Tài khoản của người bạn muốn xem.",
 						required: false,
-						type: "USER",
+						type: ApplicationCommandOptionType.User,
 					},
 					{
 						name: "account",
 						description: "Số tài khoản của người bạn muốn xem.",
 						required: false,
-						type: "STRING",
+						type: ApplicationCommandOptionType.String,
 					},
 				],
 			},
 			{
 				name: "delete",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 				description: "Xoá tài khoản của bạn.",
 			},
 		],
@@ -102,8 +102,8 @@ const commandBase = {
 
 			return await interaction.editReply({
 				embeds: [
-					new Discord.MessageEmbed()
-						.setColor("WHITE")
+					new EmbedBuilder()
+						.setColor("White")
 						.setTitle(`Thông tin của tài khoản ${account.accountId}`)
 						.setDescription(
 							`Số dư hiện tại: **${account.money.toLocaleString([

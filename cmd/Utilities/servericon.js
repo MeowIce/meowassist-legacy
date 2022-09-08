@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
+const { EmbedBuilder, Discord } = require("discord.js");
 
 /**
  * @typedef CallbackObject
@@ -36,19 +35,11 @@ const commandBase = {
 		description: "Lấy icon của máy chủ.",
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
-		var d = new Date();
-		console.log(
-			interaction.user.tag,
-			"executed command",
-			commandBase.data.name,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
-		const iconMsg = new MessageEmbed()
+	callback: async ({ interaction, guild, user, options }) => {
+		const iconMsg = new EmbedBuilder()
 			.setTitle(`Icon của ${guild.name}`)
 			.setImage(guild.iconURL({ dynamic: true, size: 1024 }))
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setFooter({
 				text: `Lệnh được thực thi bởi ${user.username}`,
 			});

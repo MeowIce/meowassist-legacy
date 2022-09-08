@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, User } = require("discord.js");
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType, EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 const locale = require("moment/locale/vi");
 const config = require("./../../config.json");
@@ -41,25 +40,17 @@ const commandBase = {
 		options: [
 			{
 				name: "location",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "Vị trí...",
 				required: true,
 			},
 		],
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
-		var d = new Date();
-		console.log(
-			interaction.user.tag,
-			"executed command",
-			commandBase.data.name,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
+	callback: async ({ interaction, user, options }) => {
 		let loc = options.getString("location");
 		const cooldown = "60000";
-		if (cooldownSet.has(interaction.user.id)) {
+		if (cooldownSet.has(user.id)) {
 			interaction.reply({
 				content: `Ồ này cậu phải chờ ${cooldown.replace(
 					"000",
@@ -73,25 +64,29 @@ const commandBase = {
 				`http://api.weatherstack.com/current?access_key=${config.weatherKey}&query=${loc}`
 			);
 			let data = res.data;
+<<<<<<< HEAD
 			const embed = new MessageEmbed()
+=======
+			const embed = new EmbedBuilder()
+>>>>>>> 47558dcf9bd03baeed8db41d7c03930a8deaa2ca
 				.setTitle(`Thông tin thời tiết`)
-				.setColor("RANDOM")
+				.setColor("Random")
 				.setThumbnail(`${data.current.weather_icons}`)
-				.addField(`Khu vực`, `${data.location.name}`, true)
-				.addField(`Giờ địa phương`, `${data.location.localtime}`, true)
-				.addField(`Nhiệt độ:`, `${data.current.temperature}°C`, true)
-				.addField(`Cảm thấy như`, `${data.current.feelslike}°C`, true)
-				.addField(`Tốc độ gió`, `${data.current.wind_speed}km/h`, true)
-				.addField(`Hướng gió`, `${data.current.wind_dir}`, true)
-				.addField(`Áp suất không khí`, `${data.current.pressure}mb`, true)
-				.addField(`Lượng mưa`, `${data.current.precip}mm`, true)
-				.addField(`Độ ẩm không khí`, `${data.current.humidity}%`, true)
-				.addField(`Chỉ số tia UV`, `${data.current.uv_index}`, true)
-				.addField(`Góc gió`, `${data.current.wind_degree}°`, true)
-				.addField(`Lượng mây`, `${data.current.cloudcover}%`, true);
-			cooldownSet.add(interaction.user.id);
+				.addFields({ name: `Khu vực`, value: `${data.location.name}`, inline: true })
+				.addFields({ name: `Giờ địa phương`, value: `${data.location.localtime}`, inline: true })
+				.addFields({ name: `Nhiệt độ:`, value: `${data.current.temperature}°C`, inline: true })
+				.addFields({ name: `Cảm thấy như`, value: `${data.current.feelslike}°C`, inline: true })
+				.addFields({ name: `Tốc độ gió`, value: `${data.current.wind_speed}km/h`, inline: true })
+				.addFields({ name: `Hướng gió`, value: `${data.current.wind_dir}`, inline: true })
+				.addFields({ name: `Áp suất không khí`, value: `${data.current.pressure}mb`, inline: true })
+				.addFields({ name: `Lượng mưa`, value: `${data.current.precip}mm`, inline: true })
+				.addFields({ name: `Độ ẩm không khí`, value: `${data.current.humidity}%`, inline: true })
+				.addFields({ name: `Chỉ số tia UV`, value: `${data.current.uv_index}`, inline: true })
+				.addFields({ name: `Góc gió`, value: `${data.current.wind_degree}°`, inline: true })
+				.addFields({ name: `Lượng mây`, value: `${data.current.cloudcover}%`, inline: true });
+			cooldownSet.add(user.id);
 			setTimeout(() => {
-				cooldownSet.delete(interaction.user.id);
+				cooldownSet.delete(user.id);
 			}, cooldown);
 			interaction.editReply({ embeds: [embed], ephemeral: false });
 		}

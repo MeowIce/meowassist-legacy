@@ -4,9 +4,8 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, version } = require("discord.js");
+const { EmbedBuilder, version, Discord } = require("discord.js");
 const process = require("process");
-const Discord = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
 const os = require("os");
@@ -40,15 +39,7 @@ const commandBase = {
 		description: "Hiển thị trạng thái của bot.",
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
-		var d = new Date();
-		console.log(
-			interaction.user.tag,
-			"executed command",
-			commandBase.data.name,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
+	callback: async ({ interaction, client, guild, user }) => {
 		//OS info
 		const osVer = os.platform() + " " + os.release();
 		//Node ver
@@ -65,9 +56,9 @@ const commandBase = {
 		var sysMemTotal = Math.round(os.totalmem / (1024 * 1024));
 		//Bot version
 		const package = require("../../package.json");
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setTitle(`Trạng thái của ${client.user.username}`)
-			.setColor("RANDOM")
+			.setColor("Random")
 			.setDescription(
 				`\`\`\`yml\nUsername: ${client.user.username}#${client.user.discriminator} [${client.user.id}]\nAPI Latency: ${client.ws.ping}ms\nUptime: ${uptime}\`\`\``
 			)
@@ -83,7 +74,7 @@ const commandBase = {
 				},
 			])
 			.setFooter({
-				text: `Lệnh được thực thi bởi ${interaction.user.username}`,
+				text: `Lệnh được thực thi bởi ${user.username}`,
 			});
 		return interaction.reply({
 			embeds: [embed],

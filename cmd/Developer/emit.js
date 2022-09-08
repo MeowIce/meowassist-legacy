@@ -4,6 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
+const { ApplicationCommandOptionType } = require("discord.js");
 const Discord = require("discord.js");
 const EVENTS = {
 	"guild-member-add": "guildMemberAdd",
@@ -40,12 +41,12 @@ const commandBase = {
 		options: [
 			{
 				name: "guild-member-add",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 				description: "guildMemberAdd event.",
 			},
 			{
 				name: "guild-member-remove",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 				description: "guildMemberRemove event.",
 			},
 		],
@@ -59,7 +60,7 @@ const commandBase = {
 			client.emit(EVENTS[subcommand], member);
 			var d = new Date();
 			console.log(
-				interaction.user.tag,
+				user.tag,
 				"executed command",
 				commandBase.data.name,
 				"at",
@@ -71,7 +72,7 @@ const commandBase = {
 			});
 		} else {
 			console.log(
-				interaction.user.tag,
+				user.tag,
 				"tried to execute",
 				commandBase.data.name,
 				"but failed because he has no permission."

@@ -1,10 +1,18 @@
 /*
  * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
- * Tệp này là một phần của dự án MeowAssist. 
+ * Tệp này là một phần của dự án MeowAssist.
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { EmbedBuilder, Discord, ApplicationCommandOptionType, ActionRowBuilder, SelectMenuBuilder, SelectMenuComponent } = require("discord.js");
+const {
+	EmbedBuilder,
+	ApplicationCommandOptionType,
+	ActionRowBuilder,
+	SelectMenuBuilder,
+	SelectMenuComponent,
+	ComponentType,
+} = require("discord.js");
+const Discord = require("discord.js");
 const config = require("../../config.json");
 const fs = require("fs");
 const path = require("path");
@@ -60,6 +68,8 @@ const readCommandsInGroup = (group) => {
 	const commands = [];
 
 	const files = fs.readdirSync(path.join(__dirname, `../../cmd/${group}`));
+	console.log(path.join(__dirname, `../../cmd/${group}`));
+	console.log(files);
 
 	for (const file of files) {
 		/**
@@ -205,15 +215,13 @@ const commandBase = {
 
 		await interaction.editReply({
 			embeds: [embed],
-			components: [
-				new ActionRowBuilder({ components: [selectionMenu] }),
-			],
+			components: [new ActionRowBuilder({ components: [selectionMenu] })],
 		});
 
 		const collector = message.createMessageComponentCollector({
 			filter: (i) => i.user.id === user.id,
 			time: 1000 * 60 * 5,
-			componentType: "SELECT_MENU",
+			componentType: ComponentType.SelectMenu,
 		});
 
 		collector.on("collect", async (i) => {
@@ -250,7 +258,9 @@ const commandBase = {
 				await message.edit({
 					components: [
 						new ActionRowBuilder({
-							components: [selectionMenu.setDisabled(true)],
+							components: [
+								SelectMenuBuilder.from(selectionMenu).setDisabled(true),
+							],
 						}),
 					],
 				});
@@ -263,7 +273,9 @@ const commandBase = {
 					],
 					components: [
 						new ActionRowBuilder({
-							components: [selectionMenu.setDisabled(true)],
+							components: [
+								SelectMenuBuilder.from(selectionMenu).setDisabled(true),
+							],
 						}),
 					],
 				});

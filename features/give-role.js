@@ -38,10 +38,10 @@ module.exports = async (client) => {
 	await loadCache();
 
 	const checkRoles = async () => {
-		const now = new Date().getMinutes();
+		const now = new Date().getTime();
 
 		const results = cache.filter((e) => {
-			return e.expires < now && e.hasRole === true;
+			return e.expires <= now && e.hasRole === true;
 		});
 
 		if (!results.size) return;
@@ -52,7 +52,8 @@ module.exports = async (client) => {
 			 */
 			const { userId, roleId, hasRole, expires } = result;
 
-			const guild = client.guilds.cache.get(config.ownerServer);
+			// const guild = client.guilds.cache.get(config.ownerServer);
+			const guild = client.guilds.cache.get("955458891662110751");
 			if (!guild) return;
 
 			const member = guild.members.cache.get(userId);
@@ -88,6 +89,8 @@ module.exports = async (client) => {
  * @param {number} time
  */
 const addRole = async (member, role, time) => {
+	const date = new Date();
+
 	await giveRoleSchema.findOneAndUpdate(
 		{
 			userId: member.user.id,
@@ -95,7 +98,7 @@ const addRole = async (member, role, time) => {
 		{
 			userId: member.user.id,
 			roleId: role.id,
-			expires: new Date().getMinutes() + time,
+			expires: date.setMinutes(date.getMinutes() + time),
 			hasRole: true,
 		},
 		{
@@ -106,7 +109,7 @@ const addRole = async (member, role, time) => {
 	cache.set(member.user.id, {
 		userId: member.user.id,
 		roleId: role.id,
-		expires: new Date().getMinutes() + time,
+		expires: date.setMinutes(date.getMinutes() + time),
 		hasRole: true,
 	});
 };

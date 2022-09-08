@@ -69,6 +69,7 @@ const commandBase = {
 				embeds: [embed],
 				ephemeral: false,
 			});
+			return
 		}
 	},
 };

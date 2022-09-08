@@ -4,8 +4,8 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const Discord = require("discord.js");
 const child = require("child_process");
+const { ApplicationCommandOptionType, Discord } = require("discord.js");
 
 /**
  * @typedef CallbackObject
@@ -37,7 +37,7 @@ const commandBase = {
         options: [
             {
                 name: "exec",
-                type: "STRING",
+                type: ApplicationCommandOptionType.String,
                 description: "Lệnh để chạy...",
                 required: true
             }
@@ -45,7 +45,7 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	owners: true,
-	callback: async ({ interaction, client, options }) => {
+	callback: async ({ interaction, options }) => {
         const execute = options.getString("exec");
         child.exec(execute, (err, res) => {
             if (err) return console.log(err);

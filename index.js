@@ -5,9 +5,10 @@
  */
 
 
-const discord = require("discord.js");
+//const discord = require("discord.js");
+const { Client, GatewayIntentBits } = require('discord.js');
 const config = require("./config.json");
-const client = new discord.Client({ intents: 32767 });
+const client = new Client({ intents: 32767 });
 const loader = require("./loader");
 const handler = require("./handler");
 const mongoose = require("mongoose");

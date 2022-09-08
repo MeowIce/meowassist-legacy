@@ -1,4 +1,4 @@
-const { MessageEmbed, Discord } = require("discord.js");
+const { EmbedBuilder, Discord } = require("discord.js");
 
 /**
  * @typedef CallbackObject
@@ -29,9 +29,9 @@ const commandBase = {
 		description: "Thông tin về quyền riêng tư...",
 	},
 	wholeCommand: true,
-	callback: async function ({ interaction, client }) {
-        const embed = new MessageEmbed()
-            .setColor("RED")
+	callback: async function ({ interaction }) {
+        const embed = new EmbedBuilder()
+            .setColor("Red")
             .setTitle("Thông tin về quyền riêng tư và bảo mật dữ liệu")
             .setDescription("Chúng tôi - những người phát triển bot **KHÔNG** lưu trữ bất kỳ thông tin cá nhân nào về bạn như số điện thoại, Email, hay tin nhắn của bạn trên Discord. Tất cả những dữ liệu công khai như Username, ảnh đại diện profile, ID,v.v sẽ bị xóa sau khi hệ thống khởi động lại. Chúng tôi tuân theo tất cả Điều khoản dịch vụ và Nguyên tắc cộng đồng của Discord.")
 

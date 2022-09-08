@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType } = require("discord.js");
 const { setNick, getBoolean } = require("../../features/nickname");
 const config = require("../../config.json");
 const cooldownSet = new Set();
@@ -41,12 +41,12 @@ const commandBase = {
 			{
 				name: "set",
 				description: "Để đặt nickname của bạn.",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 				options: [
 					{
 						name: "nickname",
 						description: "Biệt danh bạn muốn đổi.",
-						type: "STRING",
+						type: ApplicationCommandOptionType.String,
 						required: true,
 					},
 				],
@@ -54,7 +54,7 @@ const commandBase = {
 			{
 				name: "clear",
 				description: "Xoá nickname của bạn.",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 			},
 		],
 	},
@@ -63,7 +63,7 @@ const commandBase = {
 		const nickname = options.getString("nickname");
 		const subcommand = options.getSubcommand();
 		if (subcommand === "set") {
-			if (cooldownSet.has(interaction.user.id)) {
+			if (cooldownSet.has(user.id)) {
 				interaction.reply({
 					content: `Ồ này cậu phải chờ 30 phút mới được sử dụng tiếp !`,
 					ephemeral: true,
@@ -96,13 +96,13 @@ const commandBase = {
 					content: result.error,
 				});
 			}
-			cooldownSet.add(interaction.user.id);
+			cooldownSet.add(user.id);
 			setTimeout(() => {
-				cooldownSet.delete(interaction.user.id);
+				cooldownSet.delete(user.id);
 			}, cooldown);
 			}
 		} else if (subcommand === "clear") {
-			if (cooldownSet.has(interaction.user.id)) {
+			if (cooldownSet.has(user.id)) {
 				interaction.reply({
 					content: `Ồ này cậu phải chờ 30 phút mới được sử dụng tiếp !`,
 					ephemeral: true,
@@ -122,9 +122,9 @@ const commandBase = {
 			await interaction.reply({
 				content: "Đã xoá nickname của bạn !",
 			});
-			cooldownSet.add(interaction.user.id);
+			cooldownSet.add(user.id);
 			setTimeout(() => {
-				cooldownSet.delete(interaction.user.id);
+				cooldownSet.delete(user.id);
 			}, cooldown);
 			}
 		};

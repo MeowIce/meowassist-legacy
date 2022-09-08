@@ -4,8 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
+const { EmbedBuilder, Discord } = require("discord.js");
 const config = require("./../../config.json");
 const fetch = require("axios");
 const cooldownSet = new Set();
@@ -38,18 +37,10 @@ const commandBase = {
 		description: "Random memes.",
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
-		var d = new Date();
-		console.log(
-			interaction.user.tag,
-			"executed command",
-			commandBase.data.name,
-			"at",
-			`${d.getDate()}/${d.getMonth()}/${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-		);
+	callback: async ({ interaction, user, options }) => {
 		const cooldown = "60000";
-		if (cooldownSet.has(interaction.user.id)) {
-			await interaction.reply({
+		if (cooldownSet.has(user.id)) {
+			interaction.reply({
 				content: `Ồ này cậu phải chờ ${cooldown.replace(
 					"000",
 					""
@@ -62,17 +53,17 @@ const commandBase = {
 				`https://api.ultrax-yt.com/v1/random/meme?key=${config.ultraX_key}`
 			);
 			let data = res.data;
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setTitle(`Random memes trên Reddit`)
-				.addField(`Tiêu đề`, `${data.title}`)
-				.setColor("RANDOM")
+				.addFields({ name: "Tiêu đề", value: `${data.title}`, inline: true})
+				 .setColor("Random")
 				.setImage(`${data.image}`)
-				.addField(`Lượt upvotes`, `${data.up_votes}`, true)
-				.addField(`Lượt downvotes`, `${data.down_votes}`, true)
+				.addFields({ name: "Lượt upvotes", value: `${data.up_votes}`, inline: true})
+				.addFields({ name: "Lượt downvotes", value: `${data.down_votes}`, inline: true})
 				.setDescription(`[Link bài post](${data.url})`);
-			cooldownSet.add(interaction.user.id);
+			cooldownSet.add(user.id);
 			setTimeout(() => {
-				cooldownSet.delete(interaction.user.id);
+				cooldownSet.delete(user.id);
 			}, parseInt(cooldown));
 			await interaction.editReply({
 				embeds: [embed],

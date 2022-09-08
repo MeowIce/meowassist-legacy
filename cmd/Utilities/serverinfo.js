@@ -3,7 +3,7 @@
  * Tệp này là một phần của dự án MeowAssist. 
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
-const { MessageEmbed, Discord } = require("discord.js");
+const { EmbedBuilder, Discord } = require("discord.js");
 
 /**
  * @typedef CallbackObject
@@ -35,22 +35,22 @@ const commandBase = {
 	},
 	wholeCommand: true,
 	callback: async function ({ interaction, client, guild, member }) {
-        let isPartnered = interaction.guild.partnered;
-        if (isPartnered == true) isPartnered = "Đúng"
-        else isPartnered = "Sai"
-        let isVerified = interaction.guild.verified;
-        if (isVerified == true) isVerified = "Đúng"
-        else isVerified = "Sai"
-        const embed = new MessageEmbed()
-            .setColor("RANDOM")
-            .setTitle(`Thông tin máy chủ cho ${interaction.guild.name}`)
-            .addField(`👑 Chủ server`, `<@${interaction.guild.ownerId}>`, true)
-            .addField(`🧍 Tổng số thành viên`, `${interaction.guild.memberCount}`, true)
-            .addField(`😃 Tổng số Emoji(s)`, `${interaction.guild.emojis.cache.size}`, true)
-            .addField(`🪐 Tổng số Role(s)`, `${interaction.guild.roles.cache.size}`, true)
-            .addField(`🤝 Có partner với Discord`, `${isPartnered}`, true)
-            .addField(`✌ Tổng số Sticker(s)`, `${interaction.guild.stickers.cache.size}`, true)
-            .addField(`✅ Máy chủ đã được xác minh`, `${isVerified}`, true)
+        let isPartnered = guild.partnered;
+        if (isPartnered == true) isPartnered = "Có"
+        else isPartnered = "Không"
+        let isVerified = guild.verified;
+        if (isVerified == true) isVerified = "Có"
+        else isVerified = "Không"
+        const embed = new EmbedBuilder()
+            .setColor("Random")
+            .setTitle(`Thông tin của máy chủ ${guild.name}`)
+            .addFields({ name: "👑 Chủ server", value: `<@${guild.ownerId}>`, inline: true})
+            .addFields({ name: "🧍 Tổng số thành viên", value: `${guild.memberCount}`, inline: true})
+            .addFields({ name: "😃 Tổng số Emoji(s)", value: `${guild.emojis.cache.size}`, inline: true})
+            .addFields({ name: "🪐 Tổng số Role(s)", value: `${guild.roles.cache.size}`, inline: true})
+            .addFields({ name: "✌ Tổng số Sticker(s)", value: `${guild.stickers.cache.size}`, inline: true})
+            .addFields({ name: "✅ Máy chủ đã được xác minh", value: `${isVerified}`, inline: true})
+            .addFields({ name: "🤝 Có partner với Discord", value: `${isPartnered}`, inline: true})
 
         return interaction.reply({
             embeds: [embed],

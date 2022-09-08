@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const { MessageEmbed, Discord } = require("discord.js");
+const { EmbedBuilder, Discord, ApplicationCommandOptionType } = require("discord.js");
 const fetch = require("axios");
 
 /**
@@ -37,14 +37,14 @@ const commandBase = {
 		options: [
 			{
 				name: "address",
-				type: "STRING",
+				type: ApplicationCommandOptionType.String,
 				description: "Địa chỉ server Minecraft Java...",
 				required: true,
 			},
 		],
 	},
 	wholeCommand: true,
-	callback: async ({ interaction, client, guild, member, user, options }) => {
+	callback: async ({ interaction, options }) => {
 		interaction.deferReply();
 		const address = options.getString("address");
 		let res = await fetch(`https://api.mcsrvstat.us/2/${address}`);
@@ -59,30 +59,18 @@ const commandBase = {
 		if (cnameinsrv == false) cnameinsrv = "Không có"
 		else cnameinsrv = "Có"
 
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setTitle(`Trạng thái của ${address}`)
-			.setColor("RANDOM")
-			.addField(`IP`, data.ip?.toString() || "Không biết", true)
-			.addField(`Port`, data.port?.toString() || "Không biết", true)
-			.addField(`Có SRV`, `${hasSRV}`, true)
-			.addField(
-				`Có IP trong SRV`,
-				ipinsrv,
-				true
-			)
-			.addField(
-				`Có CNAME trong SRV`,
-				cnameinsrv,
-				true
-			)
-			.addField(
-				`Phiên bản máy chủ`,
-				data.version?.toString() || "Không biết",
-				true
-			)
-			.addField(`Online`, data.online?.toString() || "Không biết", true)
-			.addField(`Hostname`, data.hostname?.toString() || "Không biết", true)
-			.addField(`Protocol ID`, data.protocol?.toString() || "Không biết", true);
+			.setColor("Random")
+			.addFields({ name: `IP`, value: data.ip?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Port`, value: data.port?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Có SRV`, value: `${hasSRV}`, inline: true })
+			.addFields({ name: `Có IP trong SRV`, value: ipinsrv, inline: true })
+			.addFields({ name: `Có CNAME trong SRV`, value: cnameinsrv, inline: true })
+			.addFields({ name: `Phiên bản máy chủ`, value: data.version?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Online`, value: data.online?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Hostname`, value: data.hostname?.toString() || "Không biết", inline: true })
+			.addFields({ name: `Protocol ID`, value: data.protocol?.toString() || "Không biết", inline: true });
 
 		interaction
 			.editReply({

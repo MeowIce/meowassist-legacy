@@ -4,7 +4,7 @@
  * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
  */
 
-const Discord = require("discord.js");
+const { Discord, ApplicationCommandOptionType, ApplicationCommand } = require("discord.js");
 const { BauCua } = require("../../features/bau-cua");
 const baucua = new BauCua();
 
@@ -38,19 +38,19 @@ const commandBase = {
 		options: [
 			{
 				name: "start",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 				description: "Bắt đầu ván Bầu Cua mới.",
 			},
 			{
 				name: "bet",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 				description: "Đặt cược...",
 				options: [
 					{
 						name: "choice",
 						description: "Linh vật bạn muốn đặt cược...",
 						required: true,
-						type: "STRING",
+						type: ApplicationCommandOptionType.String,
 						choices: [
 							{
 								name: "Nai",
@@ -80,7 +80,7 @@ const commandBase = {
 					},
 					{
 						name: "money",
-						type: "NUMBER",
+						type: ApplicationCommandOptionType.Number,
 						description:
 							"Số tiền bạn muốn đặt cược (phải từ 5.000 MeowCoin trở lên).",
 						required: true,
@@ -91,12 +91,12 @@ const commandBase = {
 			{
 				name: "roll",
 				description: "Lăn xúc xắc.",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 			},
 			{
 				name: "end",
 				description: "Kết thúc ván Bầu Cua.",
-				type: "SUB_COMMAND",
+				type: ApplicationCommandOptionType.Subcommand,
 			},
 		],
 	},

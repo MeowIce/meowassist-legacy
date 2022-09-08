@@ -68,8 +68,6 @@ const readCommandsInGroup = (group) => {
 	const commands = [];
 
 	const files = fs.readdirSync(path.join(__dirname, `../../cmd/${group}`));
-	console.log(path.join(__dirname, `../../cmd/${group}`));
-	console.log(files);
 
 	for (const file of files) {
 		/**

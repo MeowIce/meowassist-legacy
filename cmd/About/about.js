@@ -41,7 +41,7 @@ const commandBase = {
 	callback: async function ({ interaction, client }) {
 		const config = require("../../config.json");
 		const embed = new EmbedBuilder()
-			.setTitle("Thông tin về bot...")
+			.setTitle("Thông tin về chúng tôi...")
 			.setColor("Random")
 			.setFields([
 				{
@@ -54,18 +54,14 @@ const commandBase = {
 				},
 				{
 					name: `Tester:`,
-					value: `<@775939295298322453>`
+					value: `<@${config.tester}>`,
 				},
 				{
 					name: `Ngày tạo bot:`,
 					value: `<t:${moment(client.user.createdTimestamp)
 						.tz("Asia/Ho_Chi_Minh")
 						.unix()}:R>`,
-				},
-				{
-					name: `Bạn muốn mời bot vào server bạn ?`,
-					value: `[Click ~](https://bit.ly/3Rxo4cm)`,
-				},
+				}
 			])
 			.setFooter({
 				text: `(C) Copyright 2022 MeowIce - All rights reserved.`,

@@ -77,12 +77,12 @@ const commandBase = {
 					ephemeral: true,
 				});
 
-			if (interaction.channel.id !== config.nickRequestChannel) {
-				return await interaction.reply({
-					content: `Bạn vui lòng vào kênh <#${config.nickRequestChannel}> để đổi nickname !`,
-					ephemeral: true,
-				});
-			}
+			// if (interaction.channel.id !== config.nickRequestChannel) {
+			// 	return await interaction.reply({
+			// 		content: `Bạn vui lòng vào kênh <#${config.nickRequestChannel}> để đổi nickname !`,
+			// 		ephemeral: true,
+			// 	});
+			// }
 
 			const result = await setNick(member, nickname);
 

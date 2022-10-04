@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { Discord } = require("discord.js");
 const nicknameToggleSchema = require("../schemas/nickname-toggle-schema");
 let nicknameToggleCache = true;
 const config = require("../config.json");
@@ -31,8 +31,9 @@ module.exports = async (client) => {
  *
  * @param {Discord.GuildMember} member
  * @param {string} nickname
+ * @param {Discord.Guild} guild
  */
-const setNick = (member, nickname) => {
+const setNick = async (member, nickname, guilds, client) => {
 	const returnData = {
 		result: true,
 		error: "Nickname của bạn đã được chấp thuận !",
@@ -93,9 +94,32 @@ const setNick = (member, nickname) => {
 
 		return returnData;
 	}
+	
+/**
+ *
+ * @param {Discord.Client} client
+ */
 
+	// Check for cursed nicks...
+	// Cái này em chưa debug xong, haiz, đang bị lỗi cái undefined ở line 109.
+	// Anh sửa sao cho nó CHỦ ĐỘNG chạy thay vì phải dùng /nick nha :3
+	// iu
+	// fix được em cho 500k cowoncies :3
+	console.log(client.guilds)
+	const fetchMember = await client.guilds.members.cache.fetch().then(fetchedMem => {
+		const renames = Array.from(fetchedMem.filter(m => m.user.username.includes(nonLatinExp, websiteExp, specialCharsExp)));
+		if (!renames.length) return;
+		renames.forEach(m => {
+			const newNick = m.user.username
+			.replaceAll(nonLatinExp, '')
+			.replaceAll(websiteExp, '')
+			.replaceAll(specialCharsExp, '');
+		m.setNickname(newNick)
+			.catch(console.error);
+		})
+	});
 	// Check for fake nicknames.
-	const fakeNames = /^(Aoi|MeowIce|IcyTea|Biserka|Andro)/i
+	const fakeNames = /^(Aoi|MeowIce|IcyTea|Andro)/i
 	if (nickname.match(fakeNames)) {
 		returnData.result = false;
 		returnData.error = "Không được đặt nickname trùng với tên của Staff server.";

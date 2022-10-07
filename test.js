@@ -1,6 +1,6 @@
 const Filter = require("bad-words");
 const filter = new Filter({
-	list: require("vietnamese-badwords").array,
+	list: ["địt"],
 });
 
 const name = "máy tính";

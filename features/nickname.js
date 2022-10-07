@@ -5,7 +5,9 @@ const config = require("../config.json");
 
 // Regular expressions
 const nonLatinExp =
-	/^(([aeiouy]\u0308)|[\u0300-\u036f\u0489])|[\u0000-\u007F]+|[\x00-\x7F]+|[âäëîïœûüÿçÄÊËÎÏŒÛÜŸÇ]+|[bʍǝɹʇʎnᴉodɐspɟƃɥɾʞlzxɔʌquɯꝹMƎᖈ⊥⅄ՈIOԀ∀SᗡℲ⅁Hſﻼ⅂ZXƆΛ𐐒NW⇂ᘔƐ𝗁𝖲𝟿ረ𝟾𝟼𝟶]+|[pwɘɿɈγυioqɒƨbʇϱʜįʞlzxɔvdnmϘWƎЯTYUIOꟼAƧႧꟻӘHႱﻼ⅃ZXƆV𐐒ИM⥜𝖲Ꮛᖸटმ٢৪♇𝙾]+|[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]|[^\x00-\x7F]|[ ]/gi;
+	// /^(([aeiouy]\u0308)|[\u0300-\u036f\u0489])|[\u0000-\u007F]+|[\x00-\x7F]+|[âäëîïœûüÿçÄÊËÎÏŒÛÜŸÇ]+|[bʍǝɹʇʎnᴉodɐspɟƃɥɾʞlzxɔʌquɯꝹMƎᖈ⊥⅄ՈIOԀ∀SᗡℲ⅁Hſﻼ⅂ZXƆΛ𐐒NW⇂ᘔƐ𝗁𝖲𝟿ረ𝟾𝟼𝟶]+|[pwɘɿɈγυioqɒƨbʇϱʜįʞlzxɔvdnmϘWƎЯTYUIOꟼAƧႧꟻӘHႱﻼ⅃ZXƆV𐐒ИM⥜𝖲Ꮛᖸटმ٢৪♇𝙾]+|[^\x00-\x7F]|[ ]/gi;
+	/[^\u0000-\u007F]+/g;
+// /^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\ ]+$/g;
 const websiteExp =
 	/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,}|(?:www\.|(?!www))[a-zA-Z0-9][(.)][^\s]{2,}|(?:www\.|(?!www))[a-zA-Z0-9[(][^\s][)]{2,}|(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][(][^\s][)]){2,}|(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][[][^\s][]]){2,}|(?:www\.|(?!www))[a-zA-Z0-9][[.]][^\s]{2,})/gi;
 const specialCharsExp =
@@ -27,29 +29,18 @@ module.exports = async (client) => {
 	await loadCache();
 
 	client.on("guildMemberUpdate", async (oldMember, newMember) => {
-		// const fetchMember = await guild.members.cache.fetch().then((fetchedMem) => {
-		// 	const renames = Array.from(
-		// 		fetchedMem.filter((m) =>
-		// 			m.user.username.includes(nonLatinExp, websiteExp, specialCharsExp)
-		// 		)
-		// 	);
-		// 	if (!renames.length) return;
-		// 	renames.forEach((m) => {
-		// 		const newNick = m.user.username
-		// 			.replaceAll(nonLatinExp, "")
-		// 			.replaceAll(websiteExp, "")
-		// 			.replaceAll(specialCharsExp, "");
-		// 		m.setNickname(newNick).catch(console.error);
-		// 	});
-		// });
-
 		const nickname = newMember.nickname;
+		if (!nickname) return;
 
-		if (
-			nickname.match(nonLatinExp) ||
-			nickname.match(websiteExp) ||
-			nickname.match(specialCharsExp)
-		) {
+		const nonLatinMatch = (nickname.match(nonLatinExp) || []).length;
+		const websiteMatch = (nickname.match(websiteExp) || []).length;
+		const specialCharsMatch = (nickname.match(specialCharsExp) || []).length;
+
+		const average = (nonLatinMatch + websiteMatch + specialCharsMatch) / 3;
+
+		const percentage = (average / nickname.length) * 100;
+
+		if (percentage < 75) {
 			const newNick = nickname
 				.replace(nonLatinExp, "")
 				.replace(websiteExp, "")
@@ -92,7 +83,7 @@ const setNick = async (member, nickname, guild, client) => {
 	}
 
 	// Check for latin chars
-	const latinMatches = nickname.match(nonLatinExp);
+	const latinMatches = nickname.match(nonLatinExp) || [];
 	const percentage = (latinMatches.length / nickname.length) * 100;
 
 	if (percentage > 75) {
@@ -104,9 +95,8 @@ const setNick = async (member, nickname, guild, client) => {
 	}
 
 	// Check for bad words
-	const badWords =
-		/(cặc|lồn|địt|buồi|cứt|vãi|đít|đụ|đéo|đệch|má|mày|mòe|shit|fuck|penis|dick|d1ck|nigga|n1gga|sex|segg|seggs|chịch|chich|trash|asshole|ass|motherfucker|fucker|sucker|sucks|suck)/gi;
-	if (nickname.match(badWords)) {
+	const badWords = require("../bad-words-regex");
+	if (nickname.match(badWords) && nickname.match(badWords).length) {
 		returnData.result = false;
 		returnData.error =
 			"Không được đặt nickname có từ ngũ thô tục, kích động, nhạy cảm.";

@@ -83,7 +83,7 @@ const setNick = async (member, nickname, guild, client) => {
 	}
 
 	// Check for latin chars
-	const latinMatches = nickname.match(nonLatinExp);
+	const latinMatches = nickname.match(nonLatinExp) || [];
 	const percentage = (latinMatches.length / nickname.length) * 100;
 
 	if (percentage > 75) {
@@ -96,7 +96,7 @@ const setNick = async (member, nickname, guild, client) => {
 
 	// Check for bad words
 	const badWords = require("../bad-words-regex");
-	if (nickname.match(badWords)) {
+	if (nickname.match(badWords) && nickname.match(badWords).length) {
 		returnData.result = false;
 		returnData.error =
 			"Không được đặt nickname có từ ngũ thô tục, kích động, nhạy cảm.";

@@ -1,4 +1,4 @@
-const { Discord } = require("discord.js");
+const Discord = require("discord.js");
 const nicknameToggleSchema = require("../schemas/nickname-toggle-schema");
 let nicknameToggleCache = true;
 const config = require("../config.json");
@@ -25,6 +25,43 @@ async function loadCache() {
  */
 module.exports = async (client) => {
 	await loadCache();
+
+	client.on("guildMemberUpdate", async (oldMember, newMember) => {
+		// const fetchMember = await guild.members.cache.fetch().then((fetchedMem) => {
+		// 	const renames = Array.from(
+		// 		fetchedMem.filter((m) =>
+		// 			m.user.username.includes(nonLatinExp, websiteExp, specialCharsExp)
+		// 		)
+		// 	);
+		// 	if (!renames.length) return;
+		// 	renames.forEach((m) => {
+		// 		const newNick = m.user.username
+		// 			.replaceAll(nonLatinExp, "")
+		// 			.replaceAll(websiteExp, "")
+		// 			.replaceAll(specialCharsExp, "");
+		// 		m.setNickname(newNick).catch(console.error);
+		// 	});
+		// });
+
+		const nickname = newMember.nickname;
+
+		if (
+			nickname.match(nonLatinExp) ||
+			nickname.match(websiteExp) ||
+			nickname.match(specialCharsExp)
+		) {
+			const newNick = nickname
+				.replace(nonLatinExp, "")
+				.replace(websiteExp, "")
+				.replace(specialCharsExp, "");
+
+			try {
+				newMember.setNickname(newNick);
+			} catch (e) {
+				console.log(e);
+			}
+		}
+	});
 };
 
 /**
@@ -32,8 +69,9 @@ module.exports = async (client) => {
  * @param {Discord.GuildMember} member
  * @param {string} nickname
  * @param {Discord.Guild} guild
+ * @param {Discord.Client} client
  */
-const setNick = async (member, nickname, guilds, client) => {
+const setNick = async (member, nickname, guild, client) => {
 	const returnData = {
 		result: true,
 		error: "Nickname của bạn đã được chấp thuận !",
@@ -66,10 +104,12 @@ const setNick = async (member, nickname, guilds, client) => {
 	}
 
 	// Check for bad words
-	const badWords = /(cặc|lồn|địt|buồi|cứt|vãi|đít|đụ|đéo|đệch|má|mày|mòe|shit|fuck|penis|dick|d1ck|nigga|n1gga|sex|segg|seggs|chịch|chich|trash|asshole|ass|motherfucker|fucker|sucker|sucks|suck)/gi
+	const badWords =
+		/(cặc|lồn|địt|buồi|cứt|vãi|đít|đụ|đéo|đệch|má|mày|mòe|shit|fuck|penis|dick|d1ck|nigga|n1gga|sex|segg|seggs|chịch|chich|trash|asshole|ass|motherfucker|fucker|sucker|sucks|suck)/gi;
 	if (nickname.match(badWords)) {
 		returnData.result = false;
-		returnData.error = "Không được đặt nickname có từ ngũ thô tục, kích động, nhạy cảm.";
+		returnData.error =
+			"Không được đặt nickname có từ ngũ thô tục, kích động, nhạy cảm.";
 
 		return returnData;
 	}
@@ -94,35 +134,12 @@ const setNick = async (member, nickname, guilds, client) => {
 
 		return returnData;
 	}
-	
-/**
- *
- * @param {Discord.Client} client
- */
-
-	// Check for cursed nicks...
-	// Cái này em chưa debug xong, haiz, đang bị lỗi cái undefined ở line 109.
-	// Anh sửa sao cho nó CHỦ ĐỘNG chạy thay vì phải dùng /nick nha :3
-	// iu
-	// fix được em cho 500k cowoncies :3
-	console.log(client.guilds)
-	const fetchMember = await client.guilds.members.cache.fetch().then(fetchedMem => {
-		const renames = Array.from(fetchedMem.filter(m => m.user.username.includes(nonLatinExp, websiteExp, specialCharsExp)));
-		if (!renames.length) return;
-		renames.forEach(m => {
-			const newNick = m.user.username
-			.replaceAll(nonLatinExp, '')
-			.replaceAll(websiteExp, '')
-			.replaceAll(specialCharsExp, '');
-		m.setNickname(newNick)
-			.catch(console.error);
-		})
-	});
 	// Check for fake nicknames.
-	const fakeNames = /^(Aoi|MeowIce|IcyTea|Andro)/i
+	const fakeNames = /^(Aoi|MeowIce|IcyTea|Andro)/i;
 	if (nickname.match(fakeNames)) {
 		returnData.result = false;
-		returnData.error = "Không được đặt nickname trùng với tên của Staff server.";
+		returnData.error =
+			"Không được đặt nickname trùng với tên của Staff server.";
 
 		return returnData;
 	}

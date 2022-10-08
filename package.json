@@ -20,7 +20,6 @@
 		"os": "^0.1.2",
 		"path": "^0.12.7",
 		"youtube-metadata-from-url": "^1.0.3",
-		"youtubei": "^1.0.0-rc.5",
 		"ytdl-core": "^4.11.2"
 	},
 	"devDependencies": {

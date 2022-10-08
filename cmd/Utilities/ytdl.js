@@ -61,18 +61,18 @@ const { createWriteStream } = require("fs");
             .replaceAll("/\/", "")
             .replaceAll(".", "")
             console.log(patch)
-            stream.pipe(createWriteStream(__dirname + `/../../ytdl/${patch}.mp3`)).on('finish', () => {
+            stream.pipe(createWriteStream(__dirname + `/../../ytdl/${patch}.mp3`)).on('finish', async () => {
                 try {
-                const file = new AttachmentBuilder(__dirname + `/../../ytdl/${patch}.mp3`, { name: `${patch}.mp3`})
-                interaction.editReply({
-                    files: [{
-                        attachment: file.attachment
-                    }], 
-                })
-            }
-            catch (e) {
-                console.log(e)
-            };
+                    const file = new AttachmentBuilder(__dirname + `/../../ytdl/${patch}.mp3`, { name: `${patch}.mp3` });
+                    interaction.editReply({
+                        files: [{
+                            attachment: file.attachment
+                        }],
+                    });
+                }
+                catch (e) {
+                    console.log(e);
+                };
             });
         }
         catch (e) {

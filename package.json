@@ -1,13 +1,12 @@
 {
 	"name": "meowassist",
-	"version": "1.1.0-20221008002-UNSTABLE",
+	"version": "1.1.0-20221008004-UNSTABLE",
 	"description": "Một bot để hỗ trợ MeowHouse.",
 	"dependencies": {
 		"@iamtraction/google-translate": "^1.1.2",
 		"axios": "^0.27.2",
 		"bad-words": "^3.0.4",
 		"child_process": "^1.0.2",
-		"discord-ytdl-core": "^5.0.4",
 		"discord.js": "^14.5.0",
 		"ffmpeg": "^0.0.4",
 		"ffmpeg-static": "^5.1.0",

@@ -47,7 +47,7 @@ const { createWriteStream } = require("fs");
         let stream;
         const URL = options.getString("url");
         try {
-            stream = ytdl(URL, { encoderArg: ['-af', dynaudnorm=f=200], fmt: 'mp3', opusEncoded: false });
+            stream = ytdl(URL, { encoderArg: ['-af', dynaudnorm=f=200], fmt: 'mp3', opusEncoded: false, dlChunkSize: "20", quality: "highestaudio" });
             metadata = await YT.metadata(URL);
         }
         catch (e) {
@@ -56,9 +56,9 @@ const { createWriteStream } = require("fs");
 
         try {
             interaction.deferReply()
-            let patch = metadata.title
+            let patch = await metadata.title
             .replaceAll("/", "")
-            .replaceAll("/\/", "")
+            .replaceAll("\\", "")
             .replaceAll(".", "")
             console.log(patch)
             stream.pipe(createWriteStream(__dirname + `/../../ytdl/${patch}.mp3`)).on('finish', async () => {

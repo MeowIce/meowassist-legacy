@@ -1,10 +1,7 @@
-//const { Client } = require("youtubei");
 const YT = require("youtube-metadata-from-url");
-const ytdl = require("discord-ytdl-core");
+const ytdl = require("ytdl-core");
 const { Discord, EmbedBuilder, ApplicationCommandOptionType, AttachmentBuilder } = require("discord.js");
 const { createWriteStream } = require("fs");
-//const fetch = require("axios");
-//const YT = new Client();
 /**
  * @typedef CallbackObject
  * @property {Discord.CommandInteraction} interaction
@@ -47,7 +44,7 @@ const { createWriteStream } = require("fs");
         let stream;
         const URL = options.getString("url");
         try {
-            stream = ytdl(URL, { encoderArg: ['-af', dynaudnorm=f=200], fmt: 'mp3', opusEncoded: false, dlChunkSize: "20", quality: "highestaudio" });
+            stream = ytdl(URL, { encoderArg: ['-af', dynaudnorm=f=200], fmt: 'mp3', opusEncoded: false, quality: "lowestaudio" });
             metadata = await YT.metadata(URL);
         }
         catch (e) {
@@ -63,6 +60,7 @@ const { createWriteStream } = require("fs");
             console.log(patch)
             stream.pipe(createWriteStream(__dirname + `/../../ytdl/${patch}.mp3`)).on('finish', async () => {
                 try {
+
                     const file = new AttachmentBuilder(__dirname + `/../../ytdl/${patch}.mp3`, { name: `${patch}.mp3` });
                     interaction.editReply({
                         files: [{
@@ -72,14 +70,14 @@ const { createWriteStream } = require("fs");
                 }
                 catch (e) {
                     console.log(e);
+                    interaction.editReply({
+                        content: "Không thể gửi file do file quá nặng hoặc lỗi mạng !"
+                    });
                 };
             });
         }
         catch (e) {
             console.log(e)
-            interaction.editReply({
-                content: "Không thể gửi file do file quá nặng hoặc lỗi mạng !"
-            });
         };
 
     },

@@ -2,6 +2,7 @@ const YT = require("youtube-metadata-from-url");
 const ytdl = require("ytdl-core");
 const { Discord, EmbedBuilder, ApplicationCommandOptionType, AttachmentBuilder } = require("discord.js");
 const { createWriteStream } = require("fs");
+const child = require("child_process");
 /**
  * @typedef CallbackObject
  * @property {Discord.CommandInteraction} interaction
@@ -57,10 +58,9 @@ const { createWriteStream } = require("fs");
             .replaceAll("/", "")
             .replaceAll("\\", "")
             .replaceAll(".", "")
-            console.log(patch)
+            .replaceAll("|", "")
             stream.pipe(createWriteStream(__dirname + `/../../ytdl/${patch}.mp3`)).on('finish', async () => {
                 try {
-
                     const file = new AttachmentBuilder(__dirname + `/../../ytdl/${patch}.mp3`, { name: `${patch}.mp3` });
                     interaction.editReply({
                         files: [{

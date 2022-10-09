@@ -1,8 +1,14 @@
+/*
+ * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
+ * Tệp này là một phần của dự án MeowAssist.
+ * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
+ */
+
 const YT = require("youtube-metadata-from-url");
 const ytdl = require("ytdl-core");
 const { Discord, EmbedBuilder, ApplicationCommandOptionType, AttachmentBuilder } = require("discord.js");
 const { createWriteStream } = require("fs");
-const child = require("child_process");
+
 /**
  * @typedef CallbackObject
  * @property {Discord.CommandInteraction} interaction
@@ -29,12 +35,12 @@ const child = require("child_process");
  const commandBase = {
 	data: {
 		name: "ytdl",
-		description: "Download YouTube Videos...",
+		description: "Tải file MP3 từ YouTube.",
 		options: [
 			{
 				name: "url",
 				type: ApplicationCommandOptionType.String,
-				description: "Link...",
+				description: "đường dẫn đến video...",
 				required: true,
 			},
 		],

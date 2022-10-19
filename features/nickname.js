@@ -28,26 +28,28 @@ async function loadCache() {
 module.exports = async (client) => {
 	await loadCache();
 
-	client.on("guildMemberUpdate", async (oldMember, newMember) => {
-		const nickname = newMember.nickname;
-		if (!nickname) return;
+	client.on("userUpdate", async (oldUser, newUser) => {
+		const username = newUser.username;
+		console.log("New username", username);
+		if (!username) return;
 
-		const nonLatinMatch = (nickname.match(nonLatinExp) || []).length;
-		const websiteMatch = (nickname.match(websiteExp) || []).length;
-		const specialCharsMatch = (nickname.match(specialCharsExp) || []).length;
+		const nonLatinMatch = (username.match(nonLatinExp) || []).length;
+		const websiteMatch = (username.match(websiteExp) || []).length;
+		const specialCharsMatch = (username.match(specialCharsExp) || []).length;
 
 		const average = (nonLatinMatch + websiteMatch + specialCharsMatch) / 3;
 
-		const percentage = (average / nickname.length) * 100;
+		const percentage = (average / username.length) * 100;
 
 		if (percentage < 75) {
-			const newNick = nickname
+			const newNick = username
 				.replace(nonLatinExp, "")
 				.replace(websiteExp, "")
 				.replace(specialCharsExp, "");
+			console.log("New nick", newNick);
 
 			try {
-				newMember.setNickname(newNick);
+				newUser.setNickname(newNick);
 			} catch (e) {
 				console.log(e);
 			}

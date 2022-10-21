@@ -1,6 +1,7 @@
 # WARNING: Hãy chạy file này lúc khởi động chính thức. KHÔNG được chạy nó khi đang code/debug lỗi.
 # File này sẽ handle exit code 1 or 2 đến từ lệnh shutdown.js và reload.js.
 
+rm -rf ytdl/*.*
 node .
 if [ $? == "2" ]; then
     while true; do

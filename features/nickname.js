@@ -28,7 +28,38 @@ async function loadCache() {
 module.exports = async (client) => {
 	await loadCache();
 
-	client.on("guildMemberUpdate", async (oldMember, newMember) => {
+	client.on("userUpdate", async (oldUser, newUser) => {
+		const username = newUser.username;
+		console.log("New username", username);
+		if (!username) return;
+		const guild = client.guilds.cache.get(config.ownerServer);
+		if (!guild) return;
+		const member = guild.members.cache.get(newUser.id);
+		if (!member) return;
+
+		const nonLatinMatch = (username.match(nonLatinExp) || []).length;
+		const websiteMatch = (username.match(websiteExp) || []).length;
+		const specialCharsMatch = (username.match(specialCharsExp) || []).length;
+
+		const average = (nonLatinMatch + websiteMatch + specialCharsMatch) / 3;
+
+		const percentage = (average / username.length) * 100;
+
+		if (percentage < 75) {
+			const newNick = username
+				.replace(nonLatinExp, "")
+				.replace(websiteExp, "")
+				.replace(specialCharsExp, "");
+
+			try {
+				await member.setNickname(newNick.length ? newNick : "Blank username");
+			} catch (e) {
+				console.log(e);
+			}
+		}
+	});
+
+	client.on("guildMemberUpdate", async (_, newMember) => {
 		const nickname = newMember.nickname;
 		if (!nickname) return;
 
@@ -37,7 +68,6 @@ module.exports = async (client) => {
 		const specialCharsMatch = (nickname.match(specialCharsExp) || []).length;
 
 		const average = (nonLatinMatch + websiteMatch + specialCharsMatch) / 3;
-
 		const percentage = (average / nickname.length) * 100;
 
 		if (percentage < 75) {
@@ -47,9 +77,9 @@ module.exports = async (client) => {
 				.replace(specialCharsExp, "");
 
 			try {
-				newMember.setNickname(newNick);
-			} catch (e) {
-				console.log(e);
+				await newMember.setNickname(newNick);
+			} catch {
+				return;
 			}
 		}
 	});

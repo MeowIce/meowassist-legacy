@@ -32,9 +32,9 @@ module.exports = async (client) => {
 		const username = newUser.username;
 		console.log("New username", username);
 		if (!username) return;
-		const guild = client.guilds.cache.get(config.ownerServer);
+		const guild = client.guilds.cache.get("955458891662110751");
+		if (!guild) return;
 		const member = guild.members.cache.get(newUser.id);
-
 		if (!member) return;
 
 		const nonLatinMatch = (username.match(nonLatinExp) || []).length;
@@ -52,7 +52,7 @@ module.exports = async (client) => {
 				.replace(specialCharsExp, "");
 
 			try {
-				member.setNickname(newNick);
+				await member.setNickname(newNick.length ? newNick : "Blank username");
 			} catch (e) {
 				console.log(e);
 			}
@@ -77,7 +77,7 @@ module.exports = async (client) => {
 				.replace(specialCharsExp, "");
 
 			try {
-				newMember.setNickname(newNick);
+				await newMember.setNickname(newNick);
 			} catch {
 				return;
 			}

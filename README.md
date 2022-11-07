@@ -11,7 +11,7 @@ Phiên bản Beta 1.1 bao gồm các nâng cấp và sửa đổi cho MeowAssist
 ## Những vấn đề đã biết:
 
 + Một số chức năng có thể  không hoạt động bình thường.
-+ Lệnh `/help` không hoạt động với Selection Menu.
++ Memory leak.
 
 ## Bản quyền
 

@@ -6,9 +6,27 @@
 
 
 //const discord = require("discord.js");
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits ,Options } = require('discord.js');
 const config = require("./config.json");
-const client = new Client({ intents: 32767 });
+const client = new Client({
+	intents: 32767, 
+	makeCache: Options.cacheWithLimits({
+		...Options.DefaultMakeCacheSettings,
+		MessageManager: 100,
+		ReactionManager: 10,
+		GuildMemberManager: {
+			maxSize: 250,
+			keepOverLimit: member => member.id === client.user.id,
+		}
+	}),
+	sweepers: {
+		...Options.DefaultSweeperSettings,
+		messages: {
+			interval: 3600,
+			lifetime: 1800,
+			maxSize: 100,
+		},
+	}});
 const loader = require("./loader");
 const handler = require("./handler");
 const mongoose = require("mongoose");

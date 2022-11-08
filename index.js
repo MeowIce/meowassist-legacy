@@ -12,19 +12,19 @@ const client = new Client({
 	intents: 32767, 
 	makeCache: Options.cacheWithLimits({
 		...Options.DefaultMakeCacheSettings,
-		MessageManager: 100,
-		ReactionManager: 10,
+		MessageManager: 20,
+		ReactionManager: 5,
 		GuildMemberManager: {
-			maxSize: 250,
+			maxSize: 100,
 			keepOverLimit: member => member.id === client.user.id,
 		}
 	}),
 	sweepers: {
 		...Options.DefaultSweeperSettings,
 		messages: {
-			interval: 3600,
-			lifetime: 1800,
-			maxSize: 100,
+			interval: 900,
+			lifetime: 900,
+			maxSize: 10,
 		},
 	}});
 const loader = require("./loader");

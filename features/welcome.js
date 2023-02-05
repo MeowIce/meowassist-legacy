@@ -78,9 +78,6 @@ module.exports = async (client) => {
 		if (!CACHE) return;
 
 		const { user, guild } = member;
-		const memberCount = guild.members.cache.filter(
-			(member) => !member.user.bot
-		).size;
 
 		const invitesBefore = guildInvites.get(guild.id);
 		const invitesAfter = await getInviteCounts(guild);
@@ -98,7 +95,6 @@ module.exports = async (client) => {
 				)
 					.tz("Asia/Ho_Chi_Minh")
 					.unix()}:R>*.
-<:MH_stonk_up:842742458839728128> Chúng ta đã có **${memberCount}** thành viên trong server.
 .・。.・゜✭・.・✫・゜・。.˙。・゜・✫・˙・✭`;
 
 				/**

@@ -71,7 +71,7 @@ Xin chào ${targetUser} đã đến với MeowHouse ! <:MH_waving:84276253385306
             
 > <#766518745635225620> **kênh chat chính ở đây nèk ^^**
             
-<:MH_ngaingung2:986844286496698438> Mong bạn có một khoảng thời gian vui vẻ tại Nhà Mèo nhe !
+<:MH_ngaingung:864167914775773194> Mong bạn có một khoảng thời gian vui vẻ tại Nhà Mèo nhe !
 #meowhouseloveu
             
 ⌎⊱⊶⊷⊶⊷⊶⊷⊶⊷⇲⊰⌏`,

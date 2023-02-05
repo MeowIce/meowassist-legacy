@@ -1,0 +1,16 @@
+{
+    "_PLS_NOTE": "Fill in mongoUrl, welcomeChannel(ID), nickRequestChannel(ID), testServers(ID), weatherKey and ultraX_key APIs before use !",
+	"token": "",
+	"owners": ["666824403216105483"],
+	"collab": ["754982406393430098"],
+	"tester": ["775939295298322453"],
+	"ownerServer": "708718758616760339",
+	"mongoUrl": "",
+	"welcomeChannel": "",
+	"nickRequestChannel": ",
+	"registerCommandsGlobally": true,
+	"testServers": [""],
+	"dailyRewardsMoney": 50000,
+	"weatherKey": "",
+	"ultraX_key": ""
+}

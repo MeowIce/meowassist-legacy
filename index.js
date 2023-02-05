@@ -15,7 +15,7 @@ const client = new Client({
 		MessageManager: 20,
 		ReactionManager: 5,
 		GuildMemberManager: {
-			maxSize: 100,
+			maxSize: 50,
 			keepOverLimit: member => member.id === client.user.id,
 		}
 	}),
@@ -23,7 +23,7 @@ const client = new Client({
 		...Options.DefaultSweeperSettings,
 		messages: {
 			interval: 900,
-			lifetime: 900,
+			lifetime: 1800,
 			maxSize: 10,
 		},
 	}});

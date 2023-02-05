@@ -52,8 +52,8 @@ module.exports = async (client) => {
 			 */
 			const { userId, roleId, hasRole, expires } = result;
 
-			const guild = client.guilds.cache.get(config.ownerServer);
-			// const guild = client.guilds.cache.get("955458891662110751");
+			//const guild = client.guilds.cache.get(config.ownerServer);
+			const guild = client.guilds.cache.get(config.testServers);
 			if (!guild) return;
 
 			const member = guild.members.cache.get(userId);
@@ -98,7 +98,7 @@ const addRole = async (member, role, time) => {
 		{
 			userId: member.user.id,
 			roleId: role.id,
-			expires: date.setMinutes(date.getMinutes() + time),
+			expires: date.setSeconds(date.getSeconds() + time),
 			hasRole: true,
 		},
 		{
@@ -109,7 +109,7 @@ const addRole = async (member, role, time) => {
 	cache.set(member.user.id, {
 		userId: member.user.id,
 		roleId: role.id,
-		expires: date.setMinutes(date.getMinutes() + time),
+		expires: date.setSeconds(date.getSeconds() + time),
 		hasRole: true,
 	});
 };

@@ -45,7 +45,7 @@ const commandBase = {
 			{
 				name: "time",
 				type: ApplicationCommandOptionType.Number,
-				description: "Thời gian thêm role cho người dùng đó (phút).",
+				description: "Thời gian thêm role cho người dùng đó (giây).",
 				required: true,
 			},
 		],

@@ -1,10 +1,10 @@
 {
 	"name": "meowassist",
-	"version": "1.1.0-20230205001-userdebug",
+	"version": "1.1.0-20230227001-userdebug",
 	"description": "Một bot để hỗ trợ MeowHouse.",
 	"dependencies": {
 		"@iamtraction/google-translate": "^2.0.1",
-		"axios": "^1.3.2",
+		"axios": "^1.3.4",
 		"bad-words": "^3.0.4",
 		"child_process": "^1.0.2",
 		"discord.js": "^14.7.1",
@@ -14,8 +14,8 @@
 		"http-utils": "^0.0.99",
 		"moment": "^2.29.4",
 		"moment-duration-format": "^2.3.2",
-		"moment-timezone": "^0.5.40",
-		"mongoose": "^6.9.0",
+		"moment-timezone": "^0.5.41",
+		"mongoose": "^6.10.0",
 		"ms": "^2.1.3",
 		"os": "^0.1.2",
 		"path": "^0.12.7",

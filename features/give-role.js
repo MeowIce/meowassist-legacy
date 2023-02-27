@@ -52,8 +52,8 @@ module.exports = async (client) => {
 			 */
 			const { userId, roleId, hasRole, expires } = result;
 
-			//const guild = client.guilds.cache.get(config.ownerServer);
-			const guild = client.guilds.cache.get(config.testServers);
+			const guild = client.guilds.cache.get(config.ownerServer);
+			//const guild = client.guilds.cache.get(config.testServers);
 			if (!guild) return;
 
 			const member = guild.members.cache.get(userId);

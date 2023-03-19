@@ -1,5 +1,5 @@
 {
-    "_PLS_NOTE": "Fill in mongoUrl, welcomeChannel(ID), nickRequestChannel(ID), testServers(ID), weatherKey and ultraX_key APIs before use !",
+    "_PLS_NOTE": "Fill in mongoUrl, welcomeChannel(ID), nickRequestChannel(ID), testServer(ID), weatherKey and ultraX_key APIs before use !",
 	"token": "",
 	"owners": ["666824403216105483"],
 	"collab": ["754982406393430098"],
@@ -9,7 +9,7 @@
 	"welcomeChannel": "",
 	"nickRequestChannel": ",
 	"registerCommandsGlobally": true,
-	"testServers": [""],
+	"testServer": "",
 	"dailyRewardsMoney": 50000,
 	"weatherKey": "",
 	"ultraX_key": ""

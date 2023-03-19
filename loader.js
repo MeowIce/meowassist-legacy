@@ -68,7 +68,7 @@ module.exports = async (client) => {
 	if (config.registerCommandsGlobally === true) {
 		await client.application.commands.set([...commands, ...contextMenu]);
 	} else {
-		for (const guildId of config.testServers) {
+		for (const guildId of config.testServer) {
 			await client.guilds.cache
 				.get(guildId)
 				.commands.set([...commands, ...contextMenu]);

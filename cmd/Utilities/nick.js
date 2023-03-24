@@ -5,7 +5,7 @@
  */
 
 const { Discord, ApplicationCommandOptionType } = require("discord.js");
-const { setNick, getBoolean } = require("../../features/nickname");
+const { setNick } = require("../../features/nickname");
 const config = require("../../config.json");
 const cooldownSet = new Set();
 const cooldown = "1800000";
@@ -51,11 +51,6 @@ const commandBase = {
 					},
 				],
 			},
-			{
-				name: "clear",
-				description: "Xoá nickname của bạn.",
-				type: ApplicationCommandOptionType.Subcommand,
-			},
 		],
 	},
 	wholeCommand: true,
@@ -70,13 +65,6 @@ const commandBase = {
 				});
 			}
 			else {
-			if (!getBoolean())
-				return await interaction.reply({
-					content:
-						"Tính năng `Đổi biệt danh` đã bị tắt ! Hãy bật nó lên lại để sử dụng !",
-					ephemeral: true,
-				});
-
 			if (interaction.channel.id !== config.nickRequestChannel) {
 				return await interaction.reply({
 					content: `Bạn vui lòng vào kênh <#${config.nickRequestChannel}> để đổi nickname !`,
@@ -100,33 +88,7 @@ const commandBase = {
 			setTimeout(() => {
 				cooldownSet.delete(user.id);
 			}, cooldown);
-			}
-		} else if (subcommand === "clear") {
-			if (cooldownSet.has(user.id)) {
-				interaction.reply({
-					content: `Ồ này cậu phải chờ 30 phút mới được sử dụng tiếp !`,
-					ephemeral: true,
-				});
-			}
-			else {
-			try {
-				await member.setNickname("");
-			} catch (e) {
-				return await interaction.reply({
-					ephemeral: true,
-					content:
-						"Đã có lỗi khi xoá nickname của bạn, vui lòng liên hệ Staff đễ được hỗ trợ !",
-				});
-			}
-
-			await interaction.reply({
-				content: "Đã xoá nickname của bạn !",
-			});
-			cooldownSet.add(user.id);
-			setTimeout(() => {
-				cooldownSet.delete(user.id);
-			}, cooldown);
-			}
+			};
 		};
 	},
 };

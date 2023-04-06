@@ -51,19 +51,20 @@ module.exports = async (client) => {
 	 *
 	 * @param {string} dir
 	 */
-	const readContextMenu = async (dir) => {
-		const groups = fs.readdirSync(path.join(__dirname, dir));
-		for (const group of groups) {
-			const contextMenuInGroups = fs.readdirSync(
-				path.join(__dirname, dir, group)
-			);
-			for (const file of contextMenuInGroups) {
-				const command = require(path.join(__dirname, dir, group, file));
-				contextMenu.push(command.data);
-				commandHandler.contextMenuRegister(command);
-			}
-		}
-	};
+	// It never read...
+	// const readContextMenu = async (dir) => {
+	// 	const groups = fs.readdirSync(path.join(__dirname, dir));
+	// 	for (const group of groups) {
+	// 		const contextMenuInGroups = fs.readdirSync(
+	// 			path.join(__dirname, dir, group)
+	// 		);
+	// 		for (const file of contextMenuInGroups) {
+	// 			const command = require(path.join(__dirname, dir, group, file));
+	// 			contextMenu.push(command.data);
+	// 			commandHandler.contextMenuRegister(command);
+	// 		}
+	// 	}
+	// };
 	await readCmd("./cmd");
 	if (config.registerCommandsGlobally === true) {
 		await client.application.commands.set([...commands, ...contextMenu]);

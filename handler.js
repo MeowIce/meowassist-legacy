@@ -256,7 +256,15 @@ const getCmd = (command, groupName) => {
 };
 module.exports.getCmd = getCmd;
 module.exports.sweepCmds = sweepCmds;
+async function sweepCmds() {
+	for (const key in allCmd) {
+	  if (allCmd.hasOwnProperty(key)) {
+		delete allCmd[key];
+	  }
+	}
+  }
 const getAllCmd = () => {
 	return allCmd;
 };
+  
 module.exports.getAllCmd = getAllCmd;

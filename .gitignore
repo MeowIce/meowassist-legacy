@@ -3,3 +3,4 @@ node_modules/
 .clinic/
 config.json
 *.zip
+ytdl/

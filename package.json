@@ -1,6 +1,6 @@
 {
 	"name": "meowassist",
-	"version": "1.1.0-20230326002-userdebug",
+	"version": "1.1.0-20230406001-stable",
 	"description": "Một bot để hỗ trợ MeowHouse.",
 	"dependencies": {
 		"@iamtraction/google-translate": "^2.0.1",
@@ -8,8 +8,6 @@
 		"bad-words": "^3.0.4",
 		"child_process": "^1.0.2",
 		"discord.js": "^14.7.1",
-		"ffmpeg": "^0.0.4",
-		"ffmpeg-static": "^5.1.0",
 		"fs": "^0.0.1-security",
 		"http-utils": "^0.0.99",
 		"moment": "^2.29.4",
@@ -18,9 +16,7 @@
 		"mongoose": "^6.10.0",
 		"ms": "^2.1.3",
 		"os": "^0.1.2",
-		"path": "^0.12.7",
-		"youtube-metadata-from-url": "^1.0.3",
-		"ytdl-core": "^4.11.2"
+		"path": "^0.12.7"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.20"

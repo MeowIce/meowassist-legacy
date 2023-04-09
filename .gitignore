@@ -4,3 +4,5 @@ node_modules/
 config.json
 *.zip
 ytdl/
+features/nickname.js
+features/give-role.js

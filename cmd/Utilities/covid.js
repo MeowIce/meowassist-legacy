@@ -1,9 +1,3 @@
-/*
- * Copyright (C) MeowIce - Mọi quyền được bảo lưu.
- * Tệp này là một phần của dự án MeowAssist.
- * Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
- */
-
 const { Discord, EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 const locale = require("moment/locale/vi");

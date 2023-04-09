@@ -2,7 +2,6 @@
 ## Thông báo
 
 Bot đã được đưa vào chế độ bảo trì, thế nên:
-+ Chỉ những bugs quan trọng mới được fix.
 + Không còn tính năng mới sẽ được thêm vào.
 + Packages sẽ không được update.
 + Không nâng cấp thư viện DiscordJS.
@@ -25,11 +24,9 @@ Phiên bản 1.1 bao gồm các nâng cấp và sửa đổi cho MeowAssist. B�
 
 ## Bản quyền
 
-Copyright (C) MeowIce - All Rights Reserved
+Copyright (C) MeowIce 2023 - All Rights Reserved
 
 Tệp này là một phần của dự án MeowAssist. 
 
-Nghiêm cấm sao chép trái phép các mã nguồn, tệp tin và thư mục của chương trình này nếu chưa có sự cho phép của chủ sở hữu chương trình - MeowIce.
-
-Đây là chương trình độc quyền.
+Bạn có thể sao chép, tùy chỉnh và sử dụng code của dự án này theo ý thích của bạn. Tuy nhiên, bạn không có quyền nhận đó là code của bạn. Hãy ghi credit để tôn trọng tác giả.
 
